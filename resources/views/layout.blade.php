@@ -12,7 +12,7 @@
 
 
     <link rel="shortcut icon"
-        href="https://www.pngkey.com/png/detail/360-3601772_your-logo-here-your-company-logo-here-png.png"
+        href="https://chillphim.top/uploads/logo/Gold%20Modern%20Business%20Logo6802.png"
         type="image/x-icon" />
     <meta name="revisit-after" content="1 days" />
     <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
