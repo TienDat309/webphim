@@ -18,14 +18,14 @@
           <div class="clearfix wrap-content">
             
              <div class="halim-movie-wrapper">
-                <div class="title-block">
+                {{-- <div class="title-block">
                    <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-id="38424">
                       <div class="halim-pulse-ring"></div>
                    </div>
                    <div class="title-wrapper" style="font-weight: bold;">
                       Bookmark
                    </div>
-                </div>
+                </div> --}}
                 <div class="movie_info col-xs-12">
                    <div class="movie-poster col-md-3">
                       <img class="movie-thumb" src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://1.bp.blogspot.com/-fL7o9nefEPc/YOk_YIB6QRI/AAAAAAAAJn8/hahCLlgRq4AFc8O4YeKhpb5zncixXAF0wCLcBGAsYHQ/s320/images.jpg" alt="GÓA PHỤ ĐEN">
