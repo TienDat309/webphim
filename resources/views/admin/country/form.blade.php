@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('slug', 'Đường dẫn slug', []) !!}
-                            {!! Form::text('slug', isset($category) ? $category->slug : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
+                            {!! Form::text('slug', isset($country) ? $country->slug : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
                             'id'=>'convert_slug']) !!}
                         </div>
                         <div class="form-group">
