@@ -16,7 +16,7 @@
                     @if (!isset($movie))
                         {!! Form::open(['route' => 'movie.store','method'=>'POST', 'enctype'=>'multipart/form-data']) !!}
                     @else
-                        {!! Form::open(['route' => ['movie.update',$movie->id],'method'=>'PUT']) !!}
+                        {!! Form::open(['route' => ['movie.update',$movie->id],'method'=>'PUT', 'enctype'=>'multipart/form-data']) !!}
                     @endif
                         <div class="form-group">
                             {!! Form::label('title', 'Tiêu đề', []) !!}
@@ -51,6 +51,9 @@
                         <div class="form-group">
                             {!! Form::label('Image', 'Hình ảnh', []) !!}
                             {!! Form::file('image', ['class'=>'form-control-file']) !!}
+                            @if(isset($movie))
+                                <img width="15%" src="{{asset('uploads/movie/'.$movie->image)}}">
+                            @endif
                         </div>
                     @if (!isset($movie))
                         {!! Form::submit('Thêm mới', ['class'=>'btn btn-success']) !!}
@@ -65,9 +68,13 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tiêu đề</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Mô tả</th>
                         <th scope="col">Đường dẫn slug</th>
                         <th scope="col">Hiển thị</th>
+                        <th scope="col">Danh mục</th>
+                        <th scope="col">Quốc gia</th>
+                        <th scope="col">Thể loại</th>
                         {{-- <th scope="col">Manage</th> --}}
                     </tr>
                 </thead>
@@ -76,6 +83,7 @@
                     <tr>
                         <th scope="row">{{$key}}</th>
                         <td>{{$cate->title}}</td>
+                        <td><img width="50%" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
                         <td>{{$cate->description}}</td>
                         <td>{{$cate->slug}}</td>
                         <td>
@@ -85,6 +93,9 @@
                                 Không
                             @endif
                         </td>
+                        <td>{{$cate->category->title}}</td>
+                        <td>{{$cate->country->title}}</td>
+                        <td>{{$cate->genre->title}}</td>
                         <td>
                             {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
                                 {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
