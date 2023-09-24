@@ -55,9 +55,9 @@
                         {{-- <th scope="col">Quản lý</th> --}}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="order_position">
                     @foreach ($list as $key => $cate)
-                    <tr>
+                    <tr id="{{$cate->id}}">
                         <th scope="row">{{$key}}</th>
                         <td>{{$cate->title}}</td>
                         <td>{{$cate->description}}</td>

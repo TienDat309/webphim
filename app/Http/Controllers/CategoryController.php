@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $list = Category::all();
+        $list = Category::orderBy('position','ASC')->get();
         return view('admin.category.form', compact('list'));
     }
 
@@ -66,7 +66,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        $list = Category::all();
+        $list = Category::orderBy('position','ASC')->get();
         return view('admin.category.form', compact('list','category'));
     }
 
@@ -99,5 +99,21 @@ class CategoryController extends Controller
     {
         Category::find($id)->delete();
         return redirect()->back();
+    }
+
+    public function resorting(Request $request)
+    {
+        $data = $request->all();
+
+        try {
+            foreach ($data['array_id'] as $key => $value) {
+                $category = Category::find($value);
+                $category->position = $key;
+                $category->save();
+            }
+        } catch (\Exception $e) {
+            // Ghi lại lỗi hoặc in ra màn hình để xem có thông báo lỗi gì xuất hiện.
+            dd($e->getMessage());
+        }
     }
 }

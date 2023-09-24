@@ -83,8 +83,8 @@
                     <tr>
                         <th scope="row">{{$key}}</th>
                         <td>{{$cate->title}}</td>
-                        <td><img width="50%" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
-                        <td>{{$cate->description}}</td>
+                        <td><img width="60%" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
+                        <td style="text-align: justify">{{$cate->description}}</td>
                         <td>{{$cate->slug}}</td>
                         <td>
                             @if($cate->status)
@@ -100,7 +100,7 @@
                             {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
                                 {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                             {!! Form::close() !!}
-                            <a href="{{route('movie.edit', $cate->id)}}" class="btn btn-warning">Sửa</a>
+                            <a href="{{route('movie.edit', $cate->id)}}" style="margin-top: 5px" class="btn btn-warning">Sửa</a>
                         </td>
                     </tr>
                     @endforeach

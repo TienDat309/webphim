@@ -13,6 +13,7 @@
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -87,6 +88,7 @@
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script type="text/javascript">
  
         function ChangeToSlug()
@@ -123,5 +125,27 @@
             }
     
         </script>
-</body>
+        <script type="text/javascript">
+            $('.order_position').sortable({
+                placeholder: 'ui-state-highlight',
+                update: function(event, ui){
+                    var array_id = [];
+                    $('.order_position tr').each(function(){
+                        array_id.push($(this).attr('id'));
+                    })
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{route('resorting')}}",
+                        method: "POST",
+                        data:{array_id:array_id},
+                        success: function(data){
+                            alert('Thứ tự đã được sắp xếp');
+                        }
+                    })
+                }
+            })
+        </script>
+    </body>
 </html>
