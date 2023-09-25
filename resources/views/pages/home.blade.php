@@ -9,12 +9,12 @@
     <div class="col-xs-12 carausel-sliderWidget">
         <section id="halim-advanced-widget-4">
             <div class="section-heading">
-                <a href="danhmuc.php" title="Phim Chiếu Rạp">
-                    <span class="h-text">Phim Chiếu Rạp</span>
+                <a href="danhmuc.php" title="Phim Hot">
+                    <span class="h-text">Phim Hot</span>
                 </a>
                 <ul class="heading-nav pull-right hidden-xs">
                     <li class="section-btn halim_ajax_get_post" data-catid="4" data-showpost="12"
-                        data-widgetid="halim-advanced-widget-4" data-layout="6col"><span data-text="Chiếu Rạp"></span>
+                        data-widgetid="halim-advanced-widget-4" data-layout="6col"><span data-text="Hot"></span>
                     </li>
                 </ul>
             </div>
