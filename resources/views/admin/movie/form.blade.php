@@ -8,7 +8,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <span>Quản lý phim</span>
                     <a href="{{ route('movie.index') }}" class="btn btn-success btn-md">Liệt kê phim</a>
-                </div>       
+                </div>
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -28,6 +28,11 @@
                         'id'=>'slug','onkeyup'=>'ChangeToSlug()']) !!}
                     </div>
                     <div class="form-group">
+                        {!! Form::label('Tên tiếng anh', 'Tên tiếng anh', []) !!}
+                        {!! Form::text('name_eng', isset($movie) ? $movie->name_eng : '',
+                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
+                    </div>
+                    <div class="form-group">
                         {!! Form::label('slug', 'Đường dẫn slug', []) !!}
                         {!! Form::text('slug', isset($movie) ? $movie->slug: '',
                         ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
@@ -35,9 +40,9 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('description', 'Mô tả', []) !!}
-                        {!! Form::textarea('description', isset($movie) ? $movie->description : '',
-                        ['style'=>'resize:none','class'=>'form-control','placeholder'=>'Nhập vào dữ
-                        liệu...','id'=>'description']) !!}
+                        {!! Form::textarea('description', isset($movie) ? $movie->description :
+                        '',['style'=>'resize:none','class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
+                        'id'=>'description']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('Active', 'Hiển thị', []) !!}
@@ -57,6 +62,11 @@
                     <div class="form-group">
                         {!! Form::label('Genre', 'Thể loại', []) !!}
                         {!! Form::select('genre_id', $genre , isset($movie) ? $movie->genre : '',
+                        ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('Hot', 'Phim hot', []) !!}
+                        {!! Form::select('phim_hot', ['1'=>'Có', '0'=>'Không'], isset($movie) ? $movie->phim_hot : '',
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">

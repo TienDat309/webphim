@@ -10,6 +10,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tiêu đề</th>
+                        <th scope="col">Phim hot</th>
                         <th scope="col">Hình ảnh</th>
                         <th scope="col">Mô tả</th>
                         <th scope="col">Đường dẫn slug</th>
@@ -25,6 +26,13 @@
                     <tr>
                         <th scope="row">{{$key}}</th>
                         <td>{{$cate->title}}</td>
+                        <td>
+                            @if($cate->phim_hot==0)
+                                Không
+                            @else
+                                Có
+                            @endif
+                        </td>
                         <td><img width="60%" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
                         <td style="text-align: justify">{{$cate->description}}</td>
                         <td>{{$cate->slug}}</td>
