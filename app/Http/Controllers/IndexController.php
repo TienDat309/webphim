@@ -8,6 +8,7 @@ use App\Models\Genre;
 use App\Models\Country;
 use App\Models\Movie;
 use App\Models\Episode;
+use DB;
 
 class IndexController extends Controller
 {
@@ -48,7 +49,8 @@ class IndexController extends Controller
         $genre = Genre::orderBy('id','DESC')->get();   
         $country = Country::orderBy('id','DESC')->get();  
         $movie = Movie::with('category','genre','country')->where('slug',$slug)->where('status',1)->first();
-        return view('pages.movie', compact('category','genre','country','movie'));
+        $related = Movie::with('category','genre','country')->where('category_id',$movie->category->id)->orderby(DB::raw('RAND()'))->whereNotIn('slug',[$slug])->get();//phim liên quan 
+        return view('pages.movie', compact('category','genre','country','movie','related'));
     }
     public function watch(){
         return view('pages.watch');
