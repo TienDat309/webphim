@@ -11,6 +11,8 @@
                         <th scope="col">#</th>
                         <th scope="col">Tiêu đề</th>
                         <th scope="col">Phim hot</th>
+                        <th scope="col">Định dạng</th>
+                        <th scope="col">Phụ đề</th>
                         <th scope="col">Hình ảnh</th>
                         <th scope="col">Mô tả</th>
                         <th scope="col">Đường dẫn slug</th>
@@ -31,6 +33,26 @@
                                 Không
                             @else
                                 Có
+                            @endif
+                        </td>
+                        <td>
+                            @if($cate->resolution==0)
+                                HD
+                            @elseif($cate->resolution==1)
+                                SD
+                            @elseif($cate->resolution==2)
+                                HDCam
+                            @elseif($cate->resolution==3)
+                                Cam
+                            @else
+                                FullHD
+                            @endif
+                        </td>
+                        <td>
+                            @if($cate->subtitle==0)
+                                Phụ đề
+                            @else
+                                Thuyết minh
                             @endif
                         </td>
                         <td><img width="60%" src="{{asset('uploads/movie/'.$cate->image)}}"></td>

@@ -30,7 +30,7 @@
                <div class="movie_info col-xs-12">
                   <div class="movie-poster col-md-3">
                      <img class="movie-thumb"
-                        src="https://images2-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&gadget=a&no_expand=1&refresh=604800&url=https://1.bp.blogspot.com/-fL7o9nefEPc/YOk_YIB6QRI/AAAAAAAAJn8/hahCLlgRq4AFc8O4YeKhpb5zncixXAF0wCLcBGAsYHQ/s320/images.jpg"
+                        src="{{ asset('uploads/movie/'.$movie->image)}}"
                         alt="GÓA PHỤ ĐEN">
                      <div class="bwa-content">
                         <div class="loader"></div>
@@ -45,8 +45,27 @@
                         {{$movie->title}}</h1>
                      <h2 class="movie-title title-2" style="font-size: 12px;">{{$movie->name_eng}}</h2>
                      <ul class="list-info-group">
-                        <li class="list-info-group-item"><span>Trạng Thái</span> : <span class="quality">HD</span><span
-                              class="episode">Vietsub</span></li>
+                        <li class="list-info-group-item"><span>Trạng Thái</span> : <span class="quality">
+                           @if($movie->resolution==0)
+                           HD
+                           @elseif($movie->resolution==1)
+                                 SD
+                           @elseif($movie->resolution==2)
+                                 HDCam
+                           @elseif($movie->resolution==3)
+                                 Cam
+                           @else
+                                 FullHD
+                           @endif   
+                        </span><span
+                              class="episode"> 
+                           @if($movie->subtitle==0)
+                                 Phụ đề
+                           @else
+                                 Thuyết Minh
+                           @endif
+                        </span>
+                     </li>
                         <li class="list-info-group-item"><span>Thời lượng</span> : 
                            133 Phút</li>
                         <li class="list-info-group-item"><span>Thể loại</span> : 
@@ -89,8 +108,27 @@
                         <figure><img class="lazy img-responsive"
                                 src="{{asset('uploads/movie/'.$hot->image)}}"
                                 title="{{$hot->title}}"></figure>
-                        <span class="status">HD</span><span class="episode"><i class="fa fa-play"
-                                aria-hidden="true"></i>Vietsub</span>
+                        <span class="status">
+                           @if($hot->resolution==0)
+                           HD
+                           @elseif($hot->resolution==1)
+                                 SD
+                           @elseif($hot->resolution==2)
+                                 HDCam
+                           @elseif($hot->resolution==3)
+                                 Cam
+                           @else
+                                 FullHD
+                           @endif   
+                        </span>
+                        <span class="episode"><i class="fa fa-play"
+                                aria-hidden="true"></i>
+                          @if($hot->subtitle==0)
+                                Phụ đề
+                          @else
+                                Thuyết Minh
+                          @endif      
+                        </span>
                         <div class="icon_overlay"></div>
                         <div class="halim-post-title-box">
                             <div class="halim-post-title ">

@@ -45,6 +45,8 @@ class MovieController extends Controller
         $data = $request->all();
         $movie = new Movie();
         $movie->title = $data['title'];
+        $movie->resolution = $data['resolution'];
+        $movie->subtitle = $data['subtitle'];
         $movie->name_eng = $data['name_eng'];
         $movie->phim_hot = $data['phim_hot'];
         $movie->slug = $data['slug'];
@@ -105,6 +107,8 @@ class MovieController extends Controller
         $data = $request->all();
         $movie = Movie::find($id);
         $movie->title = $data['title'];
+        $movie->subtitle = $data['subtitle'];
+        $movie->resolution = $data['resolution'];
         $movie->name_eng = $data['name_eng'];
         $movie->phim_hot = $data['phim_hot'];
         $movie->slug = $data['slug'];
@@ -117,7 +121,7 @@ class MovieController extends Controller
         //them hinh ảnh
         $get_image = $request->file('image');
         if($get_image){
-            if(!empty($movie->image))
+            if(file_exists('uploads/movie/'.$movie->image))
             {
                 unlink('uploads/movie/'.$movie->image);
             } 
@@ -140,7 +144,7 @@ class MovieController extends Controller
     public function destroy($id)
     {
        $movie = Movie::find($id);
-       if(!empty($movie->image)){
+       if(file_exists('uploads/movie/'.$movie->image)){
         unlink('uploads/movie/'.$movie->image);
        } 
        $movie->delete();
