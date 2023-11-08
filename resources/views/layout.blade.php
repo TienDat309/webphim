@@ -45,7 +45,7 @@
     </style>
     <style>
     #header .site-title {
-        background: url(https://motphimtv.vip/motphimtv.png) no-repeat top left;
+        background: url(https://motphimtv.vip/motphimtv.png ) no-repeat top left ;
         background-size: contain;
         text-indent: -9999px;
     }
@@ -132,9 +132,18 @@
                                 @endforeach
                                 </ul>
                             </li>
-                                @foreach ($category as $key => $cate)
-                                    <li class="mega"><a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a></li>
-                                @endforeach
+                            <li class="mega dropdown">
+                                <a title="Năm Phim" href="#" data-toggle="dropdown" class="dropdown-toggle"
+                                    aria-haspopup="true">Năm<span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    @for($year=1995; $year <= 2023; $year++)
+                                    <li><a title="{{$year}}" href="{{url('nam/'.$year)}}">{{$year}}</a></li>   
+                                    @endfor
+                                </ul>
+                            </li>
+                            @foreach ($category as $key => $cate)
+                                <li class="mega"><a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a></li>
+                            @endforeach
                             
                         </ul>
                     </div>

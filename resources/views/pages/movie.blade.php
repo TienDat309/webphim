@@ -67,7 +67,7 @@
                         </span>
                      </li>
                         <li class="list-info-group-item"><span>Thời lượng</span> : 
-                           133 Phút</li>
+                           {{$movie->time_movie}}</li>
                         <li class="list-info-group-item"><span>Thể loại</span> : 
                            <a href="{{route('genre',[$movie->genre->slug])}}" rel="category tag">{{$movie->genre->title}}</a>
                         <li class="list-info-group-item"><span>Danh mục phim</span> : 

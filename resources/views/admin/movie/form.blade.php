@@ -22,10 +22,16 @@
                     'enctype'=>'multipart/form-data']) !!}
                     @endif
                     <div class="form-group">
-                        {!! Form::label('title', 'Tiêu đề', []) !!}
+                        {!! Form::label('title', 'Tên phim', []) !!}
                         {!! Form::text('title', isset($movie) ? $movie->title : '',
                         ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
                         'id'=>'slug','onkeyup'=>'ChangeToSlug()']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('time_movie', 'Thời lượng', []) !!}
+                        {!! Form::text('time_movie', isset($movie) ? $movie->time_movie : '',
+                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...'
+                        ]) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('Tên tiếng anh', 'Tên tiếng anh', []) !!}
@@ -51,12 +57,14 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('resolution', 'Định dạng', []) !!}
-                        {!! Form::select('resolution', ['0'=>'HD', '1'=>'SD', '2'=>'HDCam', '3'=>'Cam', '4'=>'FullHD'], isset($movie) ? $movie->resolution : '',
+                        {!! Form::select('resolution', ['0'=>'HD', '1'=>'SD', '2'=>'HDCam', '3'=>'Cam', '4'=>'FullHD'],
+                        isset($movie) ? $movie->resolution : '',
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('subtitle', 'Phụ đề', []) !!}
-                        {!! Form::select('subtitle', ['0'=>'Phụ đề', '1'=>'Thuyết minh'], isset($movie) ? $movie->subtitle : '',
+                        {!! Form::select('subtitle', ['0'=>'Phụ đề', '1'=>'Thuyết minh'], isset($movie) ?
+                        $movie->subtitle : '',
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
