@@ -7,6 +7,7 @@ use App\Models\Movie;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Genre;
+use Carbon\Carbon; // xử lý thời gian (ngày tạo, cập nhật phim)
 
 class MovieController extends Controller
 {
@@ -55,6 +56,8 @@ class MovieController extends Controller
         $movie->category_id = $data['category_id'];
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
+        $movie->datecreated = Carbon::now('Asia/Ho_Chi_Minh');
+        $movie->updateday = Carbon::now('Asia/Ho_Chi_Minh');
 
         //them hinh ảnh
         $get_image = $request->file('image');
@@ -117,6 +120,7 @@ class MovieController extends Controller
         $movie->category_id = $data['category_id'];
         $movie->genre_id = $data['genre_id'];
         $movie->country_id = $data['country_id'];
+        $movie->updateday = Carbon::now('Asia/Ho_Chi_Minh');
 
         //them hinh ảnh
         $get_image = $request->file('image');
