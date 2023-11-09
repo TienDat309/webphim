@@ -10,6 +10,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tên phim</th>
+                        <th scope="col">Tags</th>
                         <th scope="col">Thời lượng</th>
                         <th scope="col">Hình ảnh</th>
                         <th scope="col">Mô tả</th>
@@ -33,6 +34,8 @@
                         <th scope="row">{{$key}}</th>
 
                         <td>{{$cate->title}}</td>
+
+                        <td>{{$cate->tags}}</td>
 
                         <td>{{$cate->time_movie}}</td>
 

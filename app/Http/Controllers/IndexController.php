@@ -29,23 +29,31 @@ class IndexController extends Controller
         return view('pages.category', compact('category','genre','country','cate_slug','movie'));
     }
     public function year($year){
-        $category = Category::orderBy('position','DESC')->where('status',1)->get();
+        $category = Category::orderBy('position','ASC')->where('status',1)->get();
         $genre = Genre::orderBy('id','DESC')->get();   
         $country = Country::orderBy('id','DESC')->get(); 
         $year = $year; 
         $movie = Movie::where('year',$year)->orderBy('updateday', 'DESC')->paginate(20);
         return view('pages.year', compact('category','genre','country','year','movie'));
     }
-    public function genre($slug){
-        $category = Category::orderBy('position','DESC')->where('status',1)->get();
+    public function tag($tag){
+        $category = Category::orderBy('position','ASC')->where('status',1)->get();
         $genre = Genre::orderBy('id','DESC')->get();   
+        $country = Country::orderBy('id','DESC')->get();
+        $tag = $tag; 
+        $movie = Movie::where('tags','LIKE','%'.$tag.'%')->orderBy('updateday', 'DESC')->paginate(20);
+        return view('pages.tag', compact('category','genre','country','tag','movie'));
+    }
+    public function genre($slug){
+        $category = Category::orderBy('position','ASC')->where('status',1)->get();
+        $genre = Genre::orderBy('id','ASC')->get();   
         $country = Country::orderBy('id','DESC')->get();    
         $genre_slug = Genre::where('slug',$slug)->first();  
         $movie = Movie::where('genre_id',$genre_slug->id)->orderBy('updateday', 'DESC')->paginate(20);
         return view('pages.genre', compact('category','genre','country','genre_slug','movie'));
     }
     public function country($slug){
-        $category = Category::orderBy('position','DESC')->where('status',1)->get();
+        $category = Category::orderBy('position','ASC')->where('status',1)->get();
         $genre = Genre::orderBy('id','DESC')->get();   
         $country = Country::orderBy('id','DESC')->get();  
         $country_slug = Country::where('slug',$slug)->first(); 
@@ -53,7 +61,7 @@ class IndexController extends Controller
         return view('pages.country', compact('category','genre','country','country_slug','movie'));
     }
     public function movie($slug){
-        $category = Category::orderBy('position','DESC')->where('status',1)->get();
+        $category = Category::orderBy('position','ASC')->where('status',1)->get();
         $genre = Genre::orderBy('id','DESC')->get();   
         $country = Country::orderBy('id','DESC')->get();  
         $movie = Movie::with('category','genre','country')->where('slug',$slug)->where('status',1)->first();

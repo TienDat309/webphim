@@ -87,8 +87,29 @@
             </div>
             <div class="entry-content htmlwrap clearfix">
                <div class="video-item halim-entry-box">
-                  <article id="post-38424" class="item-content">
+                  <article id="post-38424" class="item-content" style="text-align: justify">
                      {{$movie->description}}
+                  </article>
+               </div>
+            </div>
+            <!--Tags phim-->
+            <div class="section-bar clearfix">
+               <h2 class="section-title"><span style="color:#ffed4d">Tags phim</span></h2>
+            </div>
+            <div class="entry-content htmlwrap clearfix">
+               <div class="video-item halim-entry-box">
+                  <article id="post-38424" class="item-content" style="text-align: justify">
+                     @if ($movie->tags!=NULL)
+                        @php
+                           $tags = array();
+                           $tags = explode(',', $movie->tags);
+                        @endphp
+                        @foreach ($tags as $key => $tag)
+                           <a href="{{url('tag/'.$tag)}}">{{$tag}}</a>
+                        @endforeach
+                     @else
+                     {{$movie->title}}
+                     @endif
                   </article>
                </div>
             </div>
@@ -100,7 +121,6 @@
                <h3 class="section-title"><span>CÓ THỂ BẠN MUỐN XEM</span></h3>
             </div>
             <div id="halim_related_movies-2" class="owl-carousel owl-theme related-film">
-
                @foreach ($related as $key => $hot)
             <article class="thumb grid-item post-38498">
                 <div class="halim-item">
