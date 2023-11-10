@@ -25,6 +25,7 @@
                         <th scope="col">Ngày tạo</th>
                         <th scope="col">Ngày cập nhật</th>
                         <th scope="col">Năm phim</th>
+                        <th scope="col">Lượt xem hàng đầu</th>
                         <th scope="col">Quản lý</th>
                     </tr>
                 </thead>
@@ -43,7 +44,7 @@
 
                         <td style="text-align: justify">{{$cate->description}}</td>
 
-                        
+
                         <td>
                             @if($cate->phim_hot==0)
                             Không
@@ -51,7 +52,7 @@
                             Có
                             @endif
                         </td>
-                        
+
                         <td>
                             @if($cate->resolution==0)
                             HD
@@ -65,7 +66,7 @@
                             FullHD
                             @endif
                         </td>
-                        
+
                         <td>
                             @if($cate->subtitle==0)
                             Phụ đề
@@ -75,12 +76,12 @@
                         </td>
 
                         <td>{{$cate->slug}}</td>
-                        
+
                         <td>
                             @if($cate->status)
-                                Có
+                            Có
                             @else
-                                Không
+                            Không
                             @endif
                         </td>
 
@@ -90,13 +91,20 @@
                         <td>{{$cate->datecreated}}</td>
                         <td>{{$cate->updateday}}</td>
                         <td>
-                            {!! Form::selectYear('year', 1995, 2023, isset($cate->year) ? $cate->year : '',['class'=>'select-year','id'=>$cate->id])!!}
+                            {!! Form::selectYear('year', 1995, 2023, isset($cate->year) ? $cate->year :
+                            '',['class'=>'select-year','id'=>$cate->id])!!}
                         </td>
                         <td>
-                            {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
-                                {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
+                            {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ? $cate->topview :
+                            '',['class'=>'select-topview','id'=>$cate->id]) !!}
+                        </td>
+                        <td>
+                            {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return
+                            confirm("Bạn có chắc chắn xóa")']) !!}
+                            {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                             {!! Form::close() !!}
-                            <a href="{{route('movie.edit', $cate->id)}}" style="margin-top: 5px" class="btn btn-warning">Sửa</a>
+                            <a href="{{route('movie.edit', $cate->id)}}" style="margin-top: 5px"
+                                class="btn btn-warning">Sửa</a>
                         </td>
                     </tr>
                     @endforeach

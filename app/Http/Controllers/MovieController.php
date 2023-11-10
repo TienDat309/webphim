@@ -29,6 +29,85 @@ class MovieController extends Controller
         $movie->save();
     }
 
+    public function update_topview(Request $request)
+    {
+        $data = $request->all();
+        $movie = Movie::find($data['id_phim']);
+        $movie->topview = $data['topview'];
+        $movie->save();
+    }
+
+    public function filter_topview(Request $request)
+    {
+        $data = $request->all();
+        $movie = Movie::where('topview',$data['value'])->orderBy('updateday','DESC')->take(15)->get();
+        $output = '';
+        foreach($movie as $key => $mov){
+            if($mov->resolution==0){
+                $text = 'HD';
+            }elseif($mov->resolution==1){
+                $text = 'SD';
+            }elseif($mov->resolution==2){
+                $text = 'HDCam';
+            }elseif($mov->resolution==3){
+                $text = 'Cam';
+            }else{
+                $text = 'FullHD';
+            }
+            $output.='<div class="item">
+                        <a href="'.url('phim/'.$mov->slug).'" title="'.$mov->title.'">
+                            <div class="item-link">
+                                <img src="'.url('uploads/movie/'.$mov->image).'" class="lazy post-thumb" alt="'.$mov->title.'" title="'.$mov->title.'" />
+                                <span class="is_trailer">'.$text.'</span>
+                            </div>
+                            <p class="title">'.$mov->title.'</p>
+                            </a>
+                            <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
+                            <div style="float: left;">
+                            <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
+                            <span style="width: 0%"></span>
+                            </span>
+                        </div>
+                    </div>';
+        }
+        echo $output;
+    }
+
+    public function filter_default(Request $request)
+    {
+        $data = $request->all();
+        $movie = Movie::where('topview',0)->orderBy('updateday','DESC')->take(15)->get();
+        $output = '';
+        foreach($movie as $key => $mov){
+            if($mov->resolution==0){
+                $text = 'HD';
+            }elseif($mov->resolution==1){
+                $text = 'SD';
+            }elseif($mov->resolution==2){
+                $text = 'HDCam';
+            }elseif($mov->resolution==3){
+                $text = 'Cam';
+            }else{
+                $text = 'FullHD';
+            }
+            $output.='<div class="item">
+                        <a href="'.url('phim/'.$mov->slug).'" title="'.$mov->title.'">
+                            <div class="item-link">
+                                <img src="'.url('uploads/movie/'.$mov->image).'" class="lazy post-thumb" alt="'.$mov->title.'" title="'.$mov->title.'" />
+                                <span class="is_trailer">'.$text.'</span>
+                            </div>
+                            <p class="title">'.$mov->title.'</p>
+                            </a>
+                            <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
+                            <div style="float: left;">
+                            <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
+                            <span style="width: 0%"></span>
+                            </span>
+                        </div>
+                    </div>';
+        }
+        echo $output;
+    }
     /**
      * Show the form for creating a new resource.
      *
