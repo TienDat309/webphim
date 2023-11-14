@@ -66,14 +66,18 @@
                            @endif
                         </span>
                      </li>
-                        <li class="list-info-group-item"><span>Thời lượng</span> : 
-                           {{$movie->time_movie}}</li>
+                     <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->time_movie}}</li>
+                        @if ($movie->season!=0)
+                           <li class="list-info-group-item"><span>Season</span> : {{$movie->season}}</li>
+                        @endif
                         <li class="list-info-group-item"><span>Thể loại</span> : 
                            <a href="{{route('genre',[$movie->genre->slug])}}" rel="category tag">{{$movie->genre->title}}</a>
                         <li class="list-info-group-item"><span>Danh mục phim</span> : 
                            <a href="{{route('category',[$movie->category->slug])}}" rel="category tag">{{$movie->category->title}}</a>
                         <li class="list-info-group-item"><span>Quốc gia</span> : 
                            <a href="{{route('country',[$movie->country->slug])}}" rel="tag">{{$movie->country->title}}</a></li>
+                        <li class="list-info-group-item"><span>Năm phim</span> : 
+                           {{$movie->year}}
                      </ul>
                      <div class="movie-trailer hidden"></div>
                   </div>

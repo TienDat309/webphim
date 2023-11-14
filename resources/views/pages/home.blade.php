@@ -66,9 +66,9 @@
                             @endif
                         </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
                             @if($hot->subtitle==0)
-                            Phụ đề
+                                Phụ đề 
                             @else
-                            Thuyết Minh
+                                Thuyết Minh
                             @endif
                         </span>
                         <div class="icon_overlay"></div>
@@ -106,27 +106,28 @@
                 @foreach ($cate_home->movie->take(10) as $key => $mov)
                 <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                     <div class="halim-item">
-                        <a class="halim-thumb" href="chitiet.php">
+                        <a class="halim-thumb" href="{{route('movie',$mov->slug)}}">
                             <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$mov->image)}}"
                                     title="{{$mov->title}}">
                             </figure>
                             <span class="status">
                                 @if($mov->resolution==0)
-                                HD
+                                    HD
                                 @elseif($mov->resolution==1)
-                                SD
+                                    SD                             
                                 @elseif($mov->resolution==2)
-                                HDCam
+                                    HDCam                       
                                 @elseif($mov->resolution==3)
-                                Cam
+                                    Cam                     
                                 @else
-                                FullHD
+                                    FullHD                       
                                 @endif
-                            </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
+                            </span>
+                            <span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
                                 @if($mov->subtitle==0)
-                                Phụ đề
+                                    Phụ đề 
                                 @else
-                                Thuyết Minh
+                                    Thuyết Minh
                                 @endif
                             </span>
                             <div class="icon_overlay"></div>

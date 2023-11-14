@@ -74,17 +74,17 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('Category', 'Danh mục', []) !!}
-                        {!! Form::select('category_id', $category , isset($movie) ? $movie->category : '',
+                        {!! Form::select('category_id', $category , isset($movie) ? $movie->category_id: '',
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('Country', 'Quốc gia', []) !!}
-                        {!! Form::select('country_id', $country, isset($movie) ? $movie->country : '',
+                        {!! Form::select('country_id', $country, isset($movie) ? $movie->country_id : '',
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('Genre', 'Thể loại', []) !!}
-                        {!! Form::select('genre_id', $genre , isset($movie) ? $movie->genre : '',
+                        {!! Form::select('genre_id', $genre , isset($movie) ? $movie->genre_id : '',
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">

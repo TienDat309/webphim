@@ -51,7 +51,7 @@ class IndexController extends Controller
     public function genre($slug){
         $category = Category::orderBy('position','ASC')->where('status',1)->get();
         $genre = Genre::orderBy('id','ASC')->get();   
-        $country = Country::orderBy('id','DESC')->get();
+        $country = Country::orderBy('id','ASC')->get();
         $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('updateday', 'DESC')->take(15)->get();
         $genre_slug = Genre::where('slug',$slug)->first();  
         $movie = Movie::where('genre_id',$genre_slug->id)->orderBy('updateday', 'DESC')->paginate(20);
@@ -60,7 +60,7 @@ class IndexController extends Controller
     public function country($slug){
         $category = Category::orderBy('position','ASC')->where('status',1)->get();
         $genre = Genre::orderBy('id','ASC')->get();   
-        $country = Country::orderBy('id','DESC')->get();  
+        $country = Country::orderBy('id','ASC')->get();  
         $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('updateday', 'DESC')->take(15)->get();
         $country_slug = Country::where('slug',$slug)->first(); 
         $movie = Movie::where('country_id',$country_slug->id)->orderBy('updateday', 'DESC')->paginate(20);

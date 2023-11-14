@@ -111,6 +111,24 @@
     </script>
 
     <script type="text/javascript">
+        $('.select-season').change(function(){
+            var season = $(this).find(':selected').val();
+            var id_phim = $(this).attr('id');
+            $.ajax({
+                url:"{{url('/update-season-phim')}}",
+                method:"GET",
+                data:{
+                    season:season,
+                    id_phim:id_phim
+                },
+                success:function(){
+                    alert('Thay đổi phim season ' + season + ' thành công');
+                }
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
         $('.select-topview').change(function(){
             var topview = $(this).find(':selected').val();
             var id_phim = $(this).attr('id');
