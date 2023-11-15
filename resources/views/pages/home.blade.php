@@ -54,21 +54,23 @@
                                 title="{{$hot->title}}"></figure>
                         <span class="status">
                             @if($hot->resolution==0)
-                            HD
-                            @elseif($hot->resolution==1)
-                            SD
-                            @elseif($hot->resolution==2)
-                            HDCam
-                            @elseif($hot->resolution==3)
-                            Cam
-                            @else
-                            FullHD
-                            @endif
+                                HD
+                                @elseif($hot->resolution==1)
+                                SD
+                                @elseif($hot->resolution==2)
+                                HDCam
+                                @elseif($hot->resolution==3)
+                                Cam
+                                @elseif($hot->resolution==4)
+                                FullHD
+                                @else
+                                Trailer
+                                @endif
                         </span><span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
                             @if($hot->subtitle==0)
-                                Phụ đề 
+                            Phụ đề
                             @else
-                                Thuyết Minh
+                            Thuyết Minh
                             @endif
                         </span>
                         <div class="icon_overlay"></div>
@@ -112,22 +114,24 @@
                             </figure>
                             <span class="status">
                                 @if($mov->resolution==0)
-                                    HD
+                                HD
                                 @elseif($mov->resolution==1)
-                                    SD                             
+                                SD
                                 @elseif($mov->resolution==2)
-                                    HDCam                       
+                                HDCam
                                 @elseif($mov->resolution==3)
-                                    Cam                     
+                                Cam
+                                @elseif($mov->resolution==4)
+                                FullHD
                                 @else
-                                    FullHD                       
+                                Trailer
                                 @endif
                             </span>
                             <span class="episode"><i class="fa fa-play" aria-hidden="true"></i>
                                 @if($mov->subtitle==0)
-                                    Phụ đề 
+                                Phụ đề
                                 @else
-                                    Thuyết Minh
+                                Thuyết Minh
                                 @endif
                             </span>
                             <div class="icon_overlay"></div>

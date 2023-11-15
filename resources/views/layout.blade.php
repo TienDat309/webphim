@@ -189,7 +189,16 @@
     <script type='text/javascript' src='{{asset('js/bootstrap.min.js?ver=5.7.2')}}' id='bootstrap-js'></script>
     <script type='text/javascript' src='{{asset('js/owl.carousel.min.js?ver=5.7.2')}}' id='carousel-js'></script>
     <script type='text/javascript' src='{{asset('js/halimtheme-core.min.js?ver=1626273138')}}' id='halim-init-js'></script>
+    <!--scroll trailer-->
+    <script type="text/javascript">
+        $(".watch_trailer").click(function(e) {
+            e.preventDefault();
+            var aid = $(this).attr("href");
+            $('html, body').animate({scrollTop: $(aid).offset().top},'slow'); 
+        });
+    </script>
 
+    <!--lấy ra topview ngày tuần tháng-->
     <script type="text/javascript">
     $(document).ready(function(){
         //lấy ra topview ngày phim

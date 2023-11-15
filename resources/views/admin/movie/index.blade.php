@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Tên phim</th>
+                        <th scope="col">Tên phim (English)</th>
                         <th scope="col">Từ khóa</th>
                         <th scope="col">Độ phân giải</th>
                         <th scope="col">Phụ đề</th>
@@ -35,7 +35,8 @@
                     <tr>
                         <th scope="row">{{$key}}</th>
 
-                        <td>{{$cate->title}}</td>
+                        <td>{{$cate->title}} ({{$cate->name_eng}})</td>
+
 
                         <td>
                             @if($cate->tags!=NULL)
@@ -54,8 +55,10 @@
                             HDCam
                             @elseif($cate->resolution==3)
                             Cam
-                            @else
+                            @elseif($cate->resolution==4)
                             FullHD
+                            @else
+                            Trailer
                             @endif
                         </td>
 

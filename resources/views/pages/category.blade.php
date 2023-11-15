@@ -30,16 +30,18 @@
                      </figure>
                      <span class="status">
                         @if($mov->resolution==0)
-                           HD
+                        HD
                         @elseif($mov->resolution==1)
-                           SD
+                        SD
                         @elseif($mov->resolution==2)
-                           HDCam
+                        HDCam
                         @elseif($mov->resolution==3)
-                           Cam
+                        Cam
+                        @elseif($mov->resolution==4)
+                        FullHD
                         @else
-                           FullHD
-                        @endif   
+                        Trailer
+                        @endif
                      </span><span class="episode"><i class="fa fa-play"
                            aria-hidden="true"></i>
                        @if($mov->subtitle==0)

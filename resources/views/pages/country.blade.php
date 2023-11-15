@@ -5,8 +5,8 @@
       <div class="panel-heading">
          <div class="row">
             <div class="col-xs-6">
-               <div class="yoast_breadcrumb hidden-xs"><span><span><a href="">{{$country_slug->title}}</a> » <span
-                           class="breadcrumb_last" aria-current="page">2023</span></span></span></div>
+               <div class="yoast_breadcrumb hidden-xs"><span><span><a href="">{{$country_slug->title}}</a> » 
+                  <span class="breadcrumb_last" aria-current="page">2023</span></span></span></div>
             </div>
          </div>
       </div>
@@ -14,7 +14,7 @@
          <div class="ajax"></div>
       </div>
    </div>
-   <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
+   <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8"> 
       <section>
          <div class="section-bar clearfix">
             <h1 class="section-title"><span>{{$country_slug->title}}</span></h1>
@@ -30,15 +30,17 @@
                      </figure>
                      <span class="status">
                         @if($mov->resolution==0)
-                           HD
+                        HD
                         @elseif($mov->resolution==1)
-                           SD
+                        SD
                         @elseif($mov->resolution==2)
-                           HDCam
+                        HDCam
                         @elseif($mov->resolution==3)
-                           Cam
+                        Cam
+                        @elseif($mov->resolution==4)
+                        FullHD
                         @else
-                           FullHD
+                        Trailer
                         @endif
                      </span>
                      <span class="episode"><i class="fa fa-play"
