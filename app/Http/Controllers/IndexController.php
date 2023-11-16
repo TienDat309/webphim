@@ -12,6 +12,20 @@ use DB;
 
 class IndexController extends Controller
 {
+    public function search(){
+        if(isset($_GET['search'])){
+            $search = $_GET['search'];
+            $category = Category::orderBy('position','ASC')->where('status',1)->get();
+            $genre = Genre::orderBy('id','ASC')->get();   
+            $country = Country::orderBy('id','ASC')->get();
+            $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('updateday', 'DESC')->take(10)->get();
+            $phimhot_trailer = Movie::where('resolution',5)->where('status',1)->orderBy('updateday', 'DESC')->take(10)->get();
+            $movie = Movie::where('title','LIKE','%'.$search.'%')->orderBy('updateday', 'DESC')->paginate(20);
+            return view('pages.search', compact('category','genre','country','search','movie','phimhot_sidebar','phimhot_trailer'));
+        }else{
+            return redirect()->to('/');
+        }
+    }
     public function home(){
         $phimhot = Movie::where('phim_hot',1)->where('status',1)->orderBy('updateday', 'DESC')->get();
         $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('updateday', 'DESC')->take(10)->get();

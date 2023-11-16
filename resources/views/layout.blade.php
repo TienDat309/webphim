@@ -60,22 +60,22 @@
                     <p class="site-title"><a class="logo" href="" title="phim hay ">Phim Hay</p>
                     </a>
                 </div>
+
                 <div class="col-md-5 col-sm-6 halim-search-form hidden-xs">
                     <div class="header-nav">
                         <div class="col-xs-12">
-                            <form id="search-form-pc" name="halimForm" role="search" action="" method="GET">
                                 <div class="form-group">
-                                    <div class="input-group col-xs-12">
-                                        <input id="search" type="text" name="s" class="form-control"
+                                    <form action="{{route('search')}}" method="GET">
+                                        <input id="timkiem" type="text" name="search" class="form-control"
                                             placeholder="Tìm kiếm..." autocomplete="off" required>
-                                        <i class="animate-spin hl-spin4 hidden"></i>
-                                    </div>
+                                    </form>
                                 </div>
-                            </form>
-                            <ul class="ui-autocomplete ajax-results hidden"></ul>
+                                <ul class="list-group" id="result" style="position: absolute; z-index: 9999; background: #1b2d3c; width:94%; padding:5px">   
+                                </ul>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-4 hidden-xs">
                     <div id="get-bookmark" class="box-shadow"><i class="hl-bookmark"></i><span> Bookmarks</span><span
                             class="count">0</span></div>
@@ -188,7 +188,36 @@
 
     <script type='text/javascript' src='{{asset('js/bootstrap.min.js?ver=5.7.2')}}' id='bootstrap-js'></script>
     <script type='text/javascript' src='{{asset('js/owl.carousel.min.js?ver=5.7.2')}}' id='carousel-js'></script>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="C7pW92mB"></script>
+    
     <script type='text/javascript' src='{{asset('js/halimtheme-core.min.js?ver=1626273138')}}' id='halim-init-js'></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#timkiem').keyup(function(){
+                $('#result').html('');
+                var search = $('#timkiem').val();
+                if(search!=''){
+                    var expression = new RegExp(search, "i");
+                    $.getJSON('/json/movie.json',function(data){
+                        $.each(data, function(key, value){
+                            if(value.title.search(expression) != -1){
+                                $('#result').append('<li class="list-group-item" style="cursor:pointer; padding:5px; border-bottom:1px dashed #363636 "><img width="50" height="50" src="uploads/movie/'+value.image+'"><span style="margin-left: 10px;">'+value.title+' ('+value.name_eng+')</span></li>');
+                            }
+                        });
+                    })
+                }
+            })
+            // $('#result').on('click','li', function(){
+            //     var click_text = $(this).text().split('');
+            //     $('#timkiem').val($.trim(click_text.join('')));
+            //     $("#result").html('');
+            // });
+        })
+    </script>
+
     <!--scroll trailer-->
     <script type="text/javascript">
         $(".watch_trailer").click(function(e) {

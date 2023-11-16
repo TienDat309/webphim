@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\Country;
 use App\Models\Genre;
 use Carbon\Carbon; // xử lý thời gian (ngày tạo, cập nhật phim)
+use Strogare;
+use File;
 
 class MovieController extends Controller
 {
@@ -19,6 +21,14 @@ class MovieController extends Controller
     public function index()
     {
         $list = Movie::with('category','country','genre')->orderBy('id', 'DESC')->get();
+        //tìm kiếm phim
+        $path = public_path()."/json/";
+        if(!is_dir($path)) //is_dir rỗng -> path không tồn tại
+        { 
+            mkdir($path,0777,true); //mkdir tạo folder trong path/ 0777->toàn quyền thêm sửa xóa
+        }
+        File::put($path.'movie.json',json_encode($list));//lấy tất cả film trong data
+
         return view('admin.movie.index',compact('list'));
     }
     public function update_year(Request $request)

@@ -11,7 +11,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Tên phim (English)</th>
                         <th scope="col">Từ khóa</th>
-                        <th scope="col">Độ phân giải</th>
+                        <th scope="col">Định dạng</th>
                         <th scope="col">Phụ đề</th>
                         <th scope="col">Hình ảnh</th>
                         <th scope="col">Phim hot</th>
