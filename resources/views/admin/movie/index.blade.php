@@ -22,6 +22,7 @@
                         <th scope="col">Danh mục</th>
                         <th scope="col">Thể loại</th>
                         <th scope="col">Quốc gia</th>
+                        <th scope="col">Số tập phim</th>
                         <th scope="col">Ngày tạo</th>
                         <th scope="col">Ngày cập nhật</th>
                         <th scope="col">View theo</th>
@@ -101,8 +102,15 @@
                         </td>
 
                         <td>{{$cate->category->title}}</td>
-                        <td>{{$cate->genre->title}}</td>
+                        
+                        <td>
+                            @foreach ($cate->movie_genre as $gen)
+                            <span class="badge badge-info">{{$gen->title}}</span>   
+                            @endforeach
+                        </td>
+                        
                         <td>{{$cate->country->title}}</td>
+                        <td>{{$cate->episode_movie}}</td>
                         <td>{{$cate->datecreated}}</td>
                         <td>{{$cate->updateday}}</td>
                         <td>
@@ -118,9 +126,8 @@
                             '',['class'=>'select-season','id'=>$cate->id])!!}
                         </td>
                         <td>
-                            {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return
-                            confirm("Bạn có chắc chắn xóa")']) !!}
-                            {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
+                            {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
+                                {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                             {!! Form::close() !!}
                             <a href="{{route('movie.edit', $cate->id)}}" style="margin-top: 5px"
                                 class="btn btn-warning">Sửa</a>

@@ -41,14 +41,15 @@
                         @else
                         Trailer
                         @endif
-                     </span><span class="episode"><i class="fa fa-play"
+                     </span>
+                     <span class="episode"><i class="fa fa-play"
                            aria-hidden="true"></i>
                            @if($mov->subtitle==0)
-                              Phụ đề
+                              Phụ đề - Tập 1/{{$mov->episode_movie}}
                            @else
-                              Thuyết Minh
+                              Thuyết Minh - Tập 1/{{$mov->episode_movie}}
                            @endif
-                        </span>
+                     </span>
                      <div class="icon_overlay"></div>
                      <div class="halim-post-title-box">
                         <div class="halim-post-title ">

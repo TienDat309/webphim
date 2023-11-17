@@ -57,7 +57,7 @@
         <div class="container">
             <div class="row" id="headwrap">
                 <div class="col-md-3 col-sm-6 slogan">
-                    <p class="site-title"><a class="logo" href="" title="phim hay ">Phim Hay</p>
+                    <p class="site-title"><a class="logo" href="{{route('homepage')}}" title="phim hay ">Phim Hay</p>
                     </a>
                 </div>
 
@@ -76,13 +76,13 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 hidden-xs">
+                {{-- <div class="col-md-4 hidden-xs">
                     <div id="get-bookmark" class="box-shadow"><i class="hl-bookmark"></i><span> Bookmarks</span><span
                             class="count">0</span></div>
                     <div id="bookmark-list" class="hidden bookmark-list-on-pc">
                         <ul style="margin: 0;"></ul>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </header>
@@ -204,7 +204,7 @@
                     $.getJSON('/json/movie.json',function(data){
                         $.each(data, function(key, value){
                             if(value.title.search(expression) != -1){
-                                $('#result').append('<li class="list-group-item" style="cursor:pointer; padding:5px; border-bottom:1px dashed #363636 "><img width="50" height="50" src="uploads/movie/'+value.image+'"><span style="margin-left: 10px;">'+value.title+' ('+value.name_eng+')</span></li>');
+                                $('#result').append('<li class="list-group-item" style="cursor:pointer; padding:5px; border-bottom:1px dashed #363636 "><img width="50" height="50" src="uploads/movie/'+value.image+'"><span style="margin-left: 10px;">'+value.title+'</span></li>');
                             }
                         });
                     })

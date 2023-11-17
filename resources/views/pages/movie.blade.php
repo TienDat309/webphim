@@ -5,11 +5,16 @@
       <div class="panel-heading">
          <div class="row">
             <div class="col-xs-6">
-               <div class="yoast_breadcrumb hidden-xs"><span><span><a
-                           href="{{route('category',$movie->category->slug)}}">{{$movie->category->title}}</a> »
-                        <span><a href="{{route('country',$movie->country->slug)}}">{{$movie->country->title}}</a> »
+               <div class="yoast_breadcrumb hidden-xs">
+                  <span>
+                     <span>
+                        <a href="{{route('category',$movie->category->slug)}}">{{$movie->category->title}}</a> »
+                        <span>
+                           <a href="{{route('country',$movie->country->slug)}}">{{$movie->country->title}}</a> »
+
                            <span class="breadcrumb_last"
-                              aria-current="page">{{$movie->title}}</span></span></span></span></div>
+                              aria-current="page">{{$movie->title}}</span></span></span></span>
+               </div>
             </div>
          </div>
       </div>
@@ -34,10 +39,13 @@
                   <div class="movie-poster col-md-3">
                      <img src="{{ asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->tilte}}">
                      @if ($movie->resolution!=5)
-                        <a href="{{route('watch')}}"  style="width:50%; height:35px; font-size:15px" class="btn btn-danger">Xem Phim</a>
-                        <a href="#watch_trailer"   style="height:35px; font-size:14.5px" class="btn btn-primary watch_trailer">Xem Trailer</a>
+                     <a href="{{route('watch')}}" style="width:50%; height:35px; font-size:15px"
+                        class="btn btn-danger">Xem Phim</a>
+                     <a href="#watch_trailer" style="height:35px; font-size:14.5px"
+                        class="btn btn-primary watch_trailer">Xem Trailer</a>
                      @else
-                        <a href="#watch_trailer"  style="display:block" class="btn btn-primary watch_trailer">Xem Trailer</a>           
+                     <a href="#watch_trailer" style="display:block" class="btn btn-primary watch_trailer">Xem
+                        Trailer</a>
                      @endif
                   </div>
                   <div class="film-poster col-md-9">
@@ -47,19 +55,19 @@
                      <h2 class="movie-title title-2" style="font-size: 12px;">{{$movie->name_eng}}</h2>
                      <ul class="list-info-group">
                         <li class="list-info-group-item"><span>Trạng Thái</span> : <span class="quality">
-                           @if($movie->resolution==0)
-                           HD
-                           @elseif($movie->resolution==1)
-                           SD
-                           @elseif($movie->resolution==2)
-                           HDCam
-                           @elseif($movie->resolution==3)
-                           Cam
-                           @elseif($movie->resolution==4)
-                           FullHD
-                           @else
-                           Trailer
-                           @endif
+                              @if($movie->resolution==0)
+                              HD
+                              @elseif($movie->resolution==1)
+                              SD
+                              @elseif($movie->resolution==2)
+                              HDCam
+                              @elseif($movie->resolution==3)
+                              Cam
+                              @elseif($movie->resolution==4)
+                              FullHD
+                              @else
+                              Trailer
+                              @endif
                            </span>
                            @if ($movie->resolution!=5)
                            <span class="episode">
@@ -68,16 +76,21 @@
                               @else
                               Thuyết Minh
                               @endif
-                           </span>                       
+                           </span>
                            @endif
                         </li>
                         <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->time_movie}}</li>
+
+                        <li class="list-info-group-item"><span>Tập phim</span> : {{$movie->episode_movie}}/{{$movie->episode_movie}} - Đang cập nhật</li>
+
                         @if ($movie->season!=0)
                         <li class="list-info-group-item"><span>Season</span> : {{$movie->season}}</li>
                         @endif
+
                         <li class="list-info-group-item"><span>Thể loại</span> :
-                           <a href="{{route('genre',[$movie->genre->slug])}}"
-                              rel="category tag">{{$movie->genre->title}}</a>
+                           @foreach ($movie->movie_genre as $gen)
+                           <a href="{{route('genre',[$gen->slug])}}" rel="category tag">{{$gen->title}}</a>
+                           @endforeach
                         <li class="list-info-group-item"><span>Danh mục phim</span> :
                            <a href="{{route('category',[$movie->category->slug])}}"
                               rel="category tag">{{$movie->category->title}}</a>
@@ -133,11 +146,12 @@
             <div class="entry-content htmlwrap clearfix">
                <div class="video-item halim-entry-box">
                   @php
-                     $current_url = Request::url();
+                  $current_url = Request::url();
                   @endphp
                   <article id="post-38424" class="item-content" style="text-align: justify; background-color:white">
-                     <div class="fb-comments" data-colorscheme="light" data-href="{{$current_url}}" data-width="100%" data-numposts="10"></div>
-                 </article>
+                     <div class="fb-comments" data-colorscheme="light" data-href="{{$current_url}}" data-width="100%"
+                        data-numposts="10"></div>
+                  </article>
                </div>
             </div>
             <!--Trailer phim-->
@@ -146,10 +160,9 @@
             </div>
             <div class="entry-content htmlwrap clearfix">
                <div class="video-item halim-entry-box">
-                  <article id="watch_trailer"  class="item-content" style="text-align: justify">
-                     <iframe width="100%" height="400"
-                        src="https://www.youtube.com/embed/{{$movie->trailer}}" title="YouTube video player"
-                        frameborder="0"
+                  <article id="watch_trailer" class="item-content" style="text-align: justify">
+                     <iframe width="100%" height="400" src="https://www.youtube.com/embed/{{$movie->trailer}}"
+                        title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
                   </article>
