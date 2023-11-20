@@ -73,7 +73,7 @@
                             {!! Form::open(['method'=>'DELETE','route'=>['genre.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
                                 {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                             {!! Form::close() !!}
-                            <a href="{{route('genre.edit', $cate->id)}}" class="btn btn-warning">Sửa</a>
+                            <a href="{{route('genre.edit', $cate->id)}}" class="btn btn-warning" style="margin-top: 5px">Sửa</a>
                         </td>
                     </tr>
                     @endforeach

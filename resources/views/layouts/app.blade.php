@@ -92,6 +92,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $('.select-movie').change(function(){
+            var id = $(this).val();
+            $.ajax({
+                url:"{{route('select-movie')}}",
+                method:"GET",
+                data:{
+                    id:id,
+                },
+                success:function(data){
+                    $('#show_movie').html(data);
+                }
+            });
+        })
+    </script>
+
     <script type="text/javascript">
         $('.select-year').change(function(){
             var year = $(this).find(':selected').val();

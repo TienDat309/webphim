@@ -104,8 +104,14 @@ class IndexController extends Controller
         $related = Movie::with('category','genre','country')->where('category_id',$movie->category->id)->orderby(DB::raw('RAND()'))->whereNotIn('slug',[$slug])->get();//phim liên quan 
         return view('pages.movie', compact('category','genre','country','movie','related','phimhot_sidebar','phimhot_trailer'));
     }
-    public function watch(){
-        return view('pages.watch');
+    public function watch($slug){
+        $category = Category::orderBy('position','ASC')->where('status',1)->get();
+        $genre = Genre::orderBy('id','DESC')->get();   
+        $country = Country::orderBy('id','DESC')->get();
+        $phimhot_sidebar = Movie::where('phim_hot',1)->where('status',1)->orderBy('updateday', 'DESC')->take(10)->get();
+        $phimhot_trailer = Movie::where('resolution',5)->where('status',1)->orderBy('updateday', 'DESC')->take(10)->get();
+        $movie = Movie::with('category','genre','country','movie_genre','episode')->where('slug',$slug)->where('status',1)->first();
+        return view('pages.watch', compact('category','genre','country','movie','phimhot_sidebar','phimhot_trailer'));
     }
     public function episode(){
         return view('pages.episode');

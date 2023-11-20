@@ -39,7 +39,7 @@
                   <div class="movie-poster col-md-3">
                      <img src="{{ asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->tilte}}">
                      @if ($movie->resolution!=5)
-                     <a href="{{route('watch')}}" style="width:50%; height:35px; font-size:15px"
+                     <a href="{{route('watch',[$movie->slug])}}" style="width:50%; height:35px; font-size:15px"
                         class="btn btn-danger">Xem Phim</a>
                      <a href="#watch_trailer" style="height:35px; font-size:14.5px"
                         class="btn btn-primary watch_trailer">Xem Trailer</a>
@@ -148,7 +148,7 @@
                   @php
                   $current_url = Request::url();
                   @endphp
-                  <article id="post-38424" class="item-content" style="text-align: justify; background-color:white">
+                  <article id="post-38424" class="item-content" style="text-align: justify; background-color:rgba(255, 255, 255, 0.955)">
                      <div class="fb-comments" data-colorscheme="light" data-href="{{$current_url}}" data-width="100%"
                         data-numposts="10"></div>
                   </article>
