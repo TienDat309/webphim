@@ -8,6 +8,7 @@ use App\Models\Movie_Genre;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Genre;
+use App\Models\Episode;
 use Carbon\Carbon; // xử lý thời gian (ngày tạo, cập nhật phim)
 use Strogare;
 use File;
@@ -169,9 +170,11 @@ class MovieController extends Controller
         $movie->description = $data['description'];
         $movie->status = $data['status'];
         $movie->category_id = $data['category_id'];
+        $movie->belongmovie = $data['belongmovie'];
         $movie->country_id = $data['country_id'];
         $movie->datecreated = Carbon::now('Asia/Ho_Chi_Minh');
         $movie->updateday = Carbon::now('Asia/Ho_Chi_Minh');
+        //thêm nhìu thể loại phim
         foreach ($data['genre'] as $key => $gen)
             $movie->genre_id = $gen[0];
             
@@ -246,7 +249,7 @@ class MovieController extends Controller
         $movie->description = $data['description'];
         $movie->status = $data['status'];
         $movie->category_id = $data['category_id'];
-        // $movie->genre_id = $data['genre_id'];
+        $movie->belongmovie = $data['belongmovie'];
         $movie->country_id = $data['country_id'];
         $movie->updateday = Carbon::now('Asia/Ho_Chi_Minh');
         foreach ($data['genre'] as $key => $gen)
@@ -288,7 +291,11 @@ class MovieController extends Controller
        } 
        //xóa thể loại
        Movie_Genre::whereIn('movie_id',[$movie->id])->delete();
+
+       //xóa tập phim
+       Episode::whereIn('movie_id',[$movie->id])->delete();
        $movie->delete();
+
        return redirect()->back();
     }
 }

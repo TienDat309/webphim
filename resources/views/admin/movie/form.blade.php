@@ -89,6 +89,11 @@
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
+                        {!! Form::label('belongmovie', 'Thuộc phim', []) !!}
+                        {!! Form::select('belongmovie', ['phimle'=>'Phim lẻ', 'phimbo'=>'Phim bộ'] , isset($movie) ? $movie->belongmovie: '',
+                        ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="form-group">
                         {!! Form::label('Country', 'Quốc gia', []) !!}
                         {!! Form::select('country_id', $country, isset($movie) ? $movie->country_id : '',
                         ['class'=>'form-control']) !!}

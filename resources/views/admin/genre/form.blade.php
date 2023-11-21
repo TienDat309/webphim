@@ -19,7 +19,7 @@
                         {!! Form::open(['route' => ['genre.update',$genre->id],'method'=>'PUT']) !!}
                     @endif
                         <div class="form-group">
-                            {!! Form::label('title', 'Tiêu đề', []) !!}
+                            {!! Form::label('title', 'Tên thể loại', []) !!}
                             {!! Form::text('title', isset($genre) ? $genre->title : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
                             'id'=>'slug','onkeyup'=>'ChangeToSlug()']) !!}
                         </div>
@@ -48,7 +48,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Tiêu đề</th>
+                        <th scope="col">Tên thể loại</th>
                         <th scope="col">Mô tả</th>
                         <th scope="col">Đường dẫn slug</th>
                         <th scope="col">Hiển thị</th>

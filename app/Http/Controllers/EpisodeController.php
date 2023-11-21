@@ -69,7 +69,9 @@ class EpisodeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $list_movie = Movie::orderBy('id','DESC')->pluck('title','id');
+        $episode = Episode::find($id);
+        return view('admin.episode.form',compact('episode','list_movie'));
     }
 
     /**
@@ -81,7 +83,15 @@ class EpisodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $ep =  Episode::find($id);
+        $ep->movie_id = $data['movie_id'];
+        $ep->linkphim = $data['link'];
+        $ep->episode = $data['episode'];
+        $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $ep->save();
+        return redirect()->to('episode');
     }
 
     /**
@@ -92,16 +102,25 @@ class EpisodeController extends Controller
      */
     public function destroy($id)
     {
-        
+        $episode = Episode::find($id)->delete();
+        return redirect()->to('episode');
+
     }
     public function select_movie(){
         $id = $_GET['id'];
         $movie = Movie::find($id);
         $output = '<option>--Chọn tập phim--</option>';
-
-        for($i=1;$i<=$movie->episode_movie;$i++){
-            $output.='<option value="'.$i.'">'.$i.'</option>';
+        if($movie->belongmovie=='phimbo'){
+            for($i=1;$i<=$movie->episode_movie;$i++){
+                $output.='<option value="'.$i.'">'.$i.'</option>';
+            }
+        }else{
+            $output.='<option value="HD">HD</option>
+            <option value="FullHD">FullHD</option> 
+            <option value="Cam">Cam</option>
+            <option value="HDCam">HDCam</option>';
         }
+
         echo $output;
     }
 }

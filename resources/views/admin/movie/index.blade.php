@@ -20,6 +20,7 @@
                         <th scope="col">Mô tả</th>
                         <th scope="col">Hiển thị</th>
                         <th scope="col">Danh mục</th>
+                        <th scope="col">Thuộc phim</th>
                         <th scope="col">Thể loại</th>
                         <th scope="col">Quốc gia</th>
                         <th scope="col">Số tập phim</th>
@@ -71,7 +72,7 @@
                             @endif
                         </td>
 
-                        <td><img width="100%" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
+                        <td><img width="100" src="{{asset('uploads/movie/'.$cate->image)}}"></td>
 
                         <td>
                             @if($cate->phim_hot==0)
@@ -102,6 +103,14 @@
                         </td>
 
                         <td>{{$cate->category->title}}</td>
+                        
+                        <td>
+                            @if($cate->belongmovie=='phimle')
+                            Phim lẻ
+                            @else
+                            Phim bộ
+                            @endif
+                        </td>
                         
                         <td>
                             @foreach ($cate->movie_genre as $gen)

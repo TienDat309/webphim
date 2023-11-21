@@ -24,7 +24,7 @@
                     
                     <div class="form-group">
                         {!! Form::label('Movie', 'Chọn phim', []) !!}
-                        {!! Form::select('movie_id', ['0'=>'Chọn phim','Phim'=>$list_movie], isset($episode) ? $episode->movie_id : '',
+                        {!! Form::select('movie_id', ['0'=>'Chọn phim','Phim mới nhất'=>$list_movie], isset($episode) ? $episode->movie_id : '',
                         ['class'=>'form-control select-movie']) !!}
                     </div>
                     <div class="form-group">
@@ -32,13 +32,19 @@
                         {!! Form::text('link', isset($episode) ? $episode->linkphim : '',
                         ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
                     </div> 
-                    <div class="form-group">
-                        {!! Form::label('episode', 'Tập Phim', []) !!}
-                        <select name="episode" class="form-control" id="show_movie">
-                           
-                        </select>
-                    </div>
-                    @if (!isset($movie))
+                    @if(isset($episode))
+                        <div class="form-group">
+                            {!! Form::label('episode', 'Tập phim', []) !!}
+                            {!! Form::text('episode', isset($episode) ? $episode->episode : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...', isset($episode) ? 'readonly' : '']) !!}
+                        </div>
+                    @else
+                        <div class="form-group">
+                            {!! Form::label('episode', 'Tập phim', []) !!}
+                            <select name="episode" class="form-control" id="show_movie"></select>
+                        </div>
+                    @endif
+
+                    @if (!isset($episode))
                     {!! Form::submit('Thêm tập phim', ['class'=>'btn btn-success']) !!}
                     @else
                     {!! Form::submit('Cập nhật tập phim', ['class'=>'btn btn-success']) !!}
