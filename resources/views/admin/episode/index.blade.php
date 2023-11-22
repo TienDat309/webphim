@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <table class="table">
+            <table class="table table-responsive" id="tablephim">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -16,7 +16,7 @@
                         <th scope="col">Quản lý</th>
                     </tr>
                 </thead>
-                <tbody class="order_position">
+                <tbody>
                     @foreach ($list_episode as $key => $episode)
                             
                     <tr>
@@ -24,7 +24,7 @@
                         <td>{{$episode->movie->title}}</td>
                         <td><img width="100" src="{{asset('uploads/movie/'.$episode->movie->image)}}"></td>
                         <td>{{$episode->episode}}</td>
-                        <td style="width:5%">{!!$episode->linkphim!!}</td>
+                        <td style="width:5%">{{$episode->linkphim}}</td>
                         {{-- <td>
                             @if($episode->status)
                                 Có

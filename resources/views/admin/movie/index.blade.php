@@ -5,11 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <a href="{{route('movie.create')}}" class="btn btn-success m-3">Thêm phim</a>
-            <table class="table" id="tablephim">
+            <table class="table table-responsive" id="tablephim">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tên phim (English)</th>
+                        <th scope="col">Số tập phim</th>
+                        <th scope="col">Tập phim</th>
                         <th scope="col">Từ khóa</th>
                         <th scope="col">Định dạng</th>
                         <th scope="col">Phụ đề</th>
@@ -23,7 +25,6 @@
                         <th scope="col">Thuộc phim</th>
                         <th scope="col">Thể loại</th>
                         <th scope="col">Quốc gia</th>
-                        <th scope="col">Số tập phim</th>
                         <th scope="col">Ngày tạo</th>
                         <th scope="col">Ngày cập nhật</th>
                         <th scope="col">View theo</th>
@@ -37,14 +38,20 @@
                     <tr>
                         <th scope="row">{{$key}}</th>
 
-                        <td>{{$cate->title}} ({{$cate->name_eng}})</td>
-
+                        <td>{{$cate->title}} - ({{$cate->name_eng}})</td>
+                        
+                        <td>{{$cate->episode_count}}/{{$cate->episode_movie}} tập</td>
 
                         <td>
+                            <a href="{{route('add-episode',[$cate->id])}}" class="btn btn-info btn-sm">Thêm tập mới</a>
+                        </td>
+
+                        
+                        <td>
                             @if($cate->tags!=NULL)
-                                {{substr($cate->tags,0,50)}}...
+                            {{substr($cate->tags,0,50)}}...
                             @else
-                                Chưa có từ khóa cho phim
+                            Chưa có từ khóa cho phim
                             @endif    
                         </td>
                         
@@ -119,7 +126,7 @@
                         </td>
                         
                         <td>{{$cate->country->title}}</td>
-                        <td>{{$cate->episode_movie}}</td>
+                        
                         <td>{{$cate->datecreated}}</td>
                         <td>{{$cate->updateday}}</td>
                         <td>
@@ -127,7 +134,7 @@
                             '',['class'=>'select-topview','id'=>$cate->id]) !!}
                         </td>
                         <td>
-                            {!! Form::selectYear('year', 1995, 2023, isset($cate->year) ? $cate->year :
+                            {!! Form::selectYear('year', 2000, 2023, isset($cate->year) ? $cate->year :
                             '',['class'=>'select-year','id'=>$cate->id])!!}
                         </td>
                         <td>

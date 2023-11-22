@@ -22,9 +22,9 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $list = Movie::with('category','country','movie_genre','genre')->orderBy('id', 'DESC')->get();
+        $list = Movie::with('category','country','movie_genre','genre')->withCount('episode')->orderBy('id', 'DESC')->get();
         // return response()->json($list);
-        //tìm kiếm phim
+        //tìm kiếm phim - đếm số tập
         $path = public_path()."/json/";
         if(!is_dir($path)) //is_dir rỗng -> path không tồn tại
         { 

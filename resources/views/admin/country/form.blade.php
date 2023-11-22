@@ -44,7 +44,7 @@
                         {!! Form::close() !!}
                 </div>
             </div>
-            <table class="table">
+            <table class="table" id="tablephim">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -52,7 +52,7 @@
                         <th scope="col">Mô tả</th>
                         <th scope="col">Đường dẫn slug</th>
                         <th scope="col">Hiển thị</th>
-                        {{-- <th scope="col">Manage</th> --}}
+                        <th scope="col">Quản lý</th>
                     </tr>
                 </thead>
                 <tbody>

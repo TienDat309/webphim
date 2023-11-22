@@ -16,7 +16,7 @@ class EpisodeController extends Controller
      */
     public function index()
     {
-        $list_episode = Episode::with('movie')->orderBy('movie_id','DESC')->get();
+        $list_episode = Episode::with('movie')->orderBy('episode','DESC')->get();
         return view('admin.episode.index',compact('list_episode'));
     }
 
@@ -40,14 +40,25 @@ class EpisodeController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $ep = new Episode();
-        $ep->movie_id = $data['movie_id'];
-        $ep->linkphim = $data['link'];
-        $ep->episode = $data['episode'];
-        $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
-        $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
-        $ep->save();
+        $episode_check = Episode::where('episode',$data['episode'])->where('movie_id',$data['movie_id'])->count();
+        if($episode_check>0){
+            return redirect()->back();
+        }else{
+            $ep = new Episode();
+            $ep->movie_id = $data['movie_id'];
+            $ep->linkphim = $data['link'];
+            $ep->episode = $data['episode'];
+            $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+            $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+            $ep->save();
+        }
         return redirect()->back();
+    }
+
+    public function add_episode($id){
+        $movie = Movie::find($id);
+        $list_episode = Episode::with('movie')->where('movie_id',$id)->orderBy('episode','DESC')->get();
+        return view('admin.episode.add_episode',compact('list_episode','movie'));
     }
 
     /**

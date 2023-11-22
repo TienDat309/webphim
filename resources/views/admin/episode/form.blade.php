@@ -43,13 +43,15 @@
                             <select name="episode" class="form-control" id="show_movie"></select>
                         </div>
                     @endif
-
+                    
+                    
                     @if (!isset($episode))
                     {!! Form::submit('Thêm tập phim', ['class'=>'btn btn-success']) !!}
                     @else
                     {!! Form::submit('Cập nhật tập phim', ['class'=>'btn btn-success']) !!}
                     @endif
                     {!! Form::close() !!}
+                    
                 </div>
             </div>
         </div>

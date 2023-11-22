@@ -42,12 +42,12 @@
                         Trailer
                         @endif
                      </span>
-                     <span class="episode"><i class="fa fa-play"
-                           aria-hidden="true"></i>
+                     <span class="episode"></i>
+                        {{$mov->episode_count}}/{{$mov->episode_movie}} -
                            @if($mov->subtitle==0)
-                              Phụ đề - Tập 1/{{$mov->episode_movie}}
+                              Phụ đề
                            @else
-                              Thuyết Minh - Tập 1/{{$mov->episode_movie}}
+                              Thuyết Minh
                            @endif
                      </span>
                      <div class="icon_overlay"></div>

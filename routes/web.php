@@ -45,8 +45,10 @@ Route::resource('genre', GenreController::class);
 Route::resource('country', CountryController::class);
 Route::resource('movie', MovieController::class);
 //thêm tập phim
+Route::get('add-episode/{id}', [EpisodeController::class,'add_episode'])->name('add-episode');
 Route::resource('episode', EpisodeController::class);
 Route::get('select-movie', [EpisodeController::class,'select_movie'])->name('select-movie');
+
 
 
 Route::get('/update-year-phim', [MovieController::class, 'update_year']);

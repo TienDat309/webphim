@@ -43,8 +43,8 @@
                         Trailer
                         @endif
                      </span>
-                     <span class="episode"><i class="fa fa-play"
-                           aria-hidden="true"></i>
+                     <span class="episode"></i>
+                        {{$mov->episode_count}}/{{$mov->episode_movie}} -
                            @if($mov->subtitle==0)
                                  Phụ đề    
                            @else
