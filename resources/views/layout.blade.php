@@ -101,14 +101,15 @@
                         data-toggle="collapse" data-target="#search-form" aria-expanded="false">
                         <span class="hl-search" aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="navbar-toggle collapsed pull-right get-bookmark-on-mobile">
+                    {{-- <button type="button" class="navbar-toggle collapsed pull-right get-bookmark-on-mobile">
                         Bookmarks<i class="hl-bookmark" aria-hidden="true"></i>
                         <span class="count">0</span>
-                    </button>
-                    <button type="button" class="navbar-toggle collapsed pull-right get-locphim-on-mobile">
-                        <a href="javascript:;" id="expand-ajax-filter" style="color: #ffed4d;">Lọc <i
+                    </button> --}}
+                    {{-- <button type="button" class="navbar-toggle collapsed pull-right get-locphim-on-mobile">
+                        <a href="javascript:;" id="expand-ajax-filter" style="color: #ffed4d;">Lọc Phim<i
                                 class="fas fa-filter"></i></a>
-                    </button>
+                    </button> --}}
+
                 </div>
                 <div class="collapse navbar-collapse" id="halim">
                     <div class="menu-menu_1-container">
@@ -147,9 +148,11 @@
                             
                         </ul>
                     </div>
-                    <ul class="nav navbar-nav navbar-left" style="background:#000;">
-                        <li><a href="#" onclick="locphim()" style="color: #ffed4d;">Lọc Phim</a></li>
-                    </ul>
+                    {{-- <ul class="nav navbar-nav navbar-left" style="background:#000;">
+                        <li><a href="{{route('filter')}}" style="color: #ffed4d;">Lọc Phim</a></li>
+                    </ul> --}}
+
+                    
                 </div>
             </nav>
             <div class="collapse navbar-collapse" id="search-form">
@@ -160,14 +163,16 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 
-    <div class="container">
-        <div class="row fullwith-slider"></div>
-    </div>
-    <div class="container">
-        @yield('content')
-    </div>
+<div class="container">
+    <div class="row fullwith-slider"></div>
+</div>
+
+<div class="container">
+    @yield('content')
+</div>
+
     <div class="clearfix"></div>
     <footer id="footer" class="clearfix">
         <div class="container footer-columns">

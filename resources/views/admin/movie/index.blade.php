@@ -27,8 +27,8 @@
                         <th scope="col">Quốc gia</th>
                         <th scope="col">Ngày tạo</th>
                         <th scope="col">Ngày cập nhật</th>
-                        <th scope="col">View theo</th>
-                        <th scope="col">Năm phim</th>
+                        <th scope="col">Lượt xem</th>
+                        <th scope="col">Năm</th>
                         <th scope="col">Season</th>
                         <th scope="col">Quản lý</th>
                     </tr>
@@ -93,9 +93,9 @@
 
                         <td>{{$cate->slug}}</td>
 
-                        <td style="text-align: justify">
+                        <td>
                             @if($cate->description!=NULL)
-                                {{substr($cate->description,0,150)}}...
+                                {{substr($cate->description,0,100)}}...
                             @else
                                 Chưa có mô tả cho phim
                             @endif
@@ -131,11 +131,11 @@
                         <td>{{$cate->updateday}}</td>
                         <td>
                             {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ? $cate->topview :
-                            '',['class'=>'select-topview','id'=>$cate->id]) !!}
+                            '',['class'=>'select-topview','id'=>$cate->id,'placeholder'=>'View']) !!}
                         </td>
                         <td>
                             {!! Form::selectYear('year', 2000, 2023, isset($cate->year) ? $cate->year :
-                            '',['class'=>'select-year','id'=>$cate->id])!!}
+                            '',['class'=>'select-year','id'=>$cate->id,'placeholder'=>'Năm'])!!}
                         </td>
                         <td>
                             {!! Form::selectRange('season', 0, 20, isset($cate->season) ? $cate->season :

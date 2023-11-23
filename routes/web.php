@@ -32,6 +32,8 @@ Route::get('/episode_movie', [IndexController::class, 'episode'])->name('episode
 Route::get('/nam/{year}', [IndexController::class, 'year']);
 Route::get('/tag/{tag}', [IndexController::class, 'tag']);
 Route::get('/search', [IndexController::class, 'search'])->name('search');
+Route::get('/filter', [IndexController::class, 'filter'])->name('filter');
+
 
 
 
