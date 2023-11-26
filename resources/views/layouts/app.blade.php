@@ -94,6 +94,133 @@
     <script type="text/javascript" src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
+        $('.category_choose').change(function(){
+            var category_id = $(this).val();
+            var movie_id = $(this).attr('id');
+            $.ajax({
+                url:"{{route('category-choose')}}",
+                method:"GET",
+                data:{
+                    category_id:category_id,
+                    movie_id:movie_id,
+                },
+                success:function(data){
+                  alert('Thay đổi thành công');
+                }
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $('.country_choose').change(function(){
+            var country_id = $(this).val();
+            var movie_id = $(this).attr('id');
+            $.ajax({
+                url:"{{route('country-choose')}}",
+                method:"GET",
+                data:{
+                    country_id:country_id,
+                    movie_id:movie_id,
+                },
+                success:function(data){
+                alert('Thay đổi thành công');
+                }
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $('.subtitle_choose').change(function(){
+            var subtitle_val = $(this).val();
+            var movie_id = $(this).attr('id');
+            $.ajax({
+                url:"{{route('subtitle-choose')}}",
+                method:"GET",
+                data:{
+                    subtitle_val:subtitle_val,
+                    movie_id:movie_id,
+                },
+                success:function(data){
+                alert('Thay đổi thành công');
+                }
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $('.phim_hot_choose').change(function(){
+            var phim_hot_val = $(this).val();
+            var movie_id = $(this).attr('id');
+            $.ajax({
+                url:"{{route('phim_hot-choose')}}",
+                method:"GET",
+                data:{
+                    phim_hot_val:phim_hot_val,
+                    movie_id:movie_id,
+                },
+                success:function(data){
+                alert('Thay đổi thành công');
+                }
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $('.status_choose').change(function(){
+            var status_val = $(this).val();
+            var movie_id = $(this).attr('id');
+            $.ajax({
+                url:"{{route('status-choose')}}",
+                method:"GET",
+                data:{
+                    status_val:status_val,
+                    movie_id:movie_id,
+                },
+                success:function(data){
+                alert('Thay đổi thành công');
+                }
+            });
+        })
+    </script>
+
+    <script type="text/javascript">
+        $('.belongmovie_choose').change(function(){
+            var belongmovie_val = $(this).val();
+            var movie_id = $(this).attr('id');
+            $.ajax({
+                url:"{{route('belongmovie-choose')}}",
+                method:"GET",
+                data:{
+                    belongmovie_val:belongmovie_val,
+                    movie_id:movie_id,
+                },
+                success:function(data){
+                alert('Thay đổi thành công');
+                }
+            });
+        })
+    </script>
+
+<script type="text/javascript">
+    $('.resolution_choose').change(function(){
+        var resolution_val = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('resolution-choose')}}",
+            method:"GET",
+            data:{
+                resolution_val:resolution_val,
+                movie_id:movie_id,
+            },
+            success:function(data){
+            alert('Thay đổi thành công');
+            }
+        });
+    })
+</script>
+
+
+    <script type="text/javascript">
         $('.select-movie').change(function(){
             var id = $(this).val();
             $.ajax({

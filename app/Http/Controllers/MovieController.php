@@ -20,10 +20,60 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function category_choose(Request $request){
+        $data = $request->all();
+        $movie = Movie::find($data['movie_id']);
+        $movie->category_id = $data['category_id'];
+        $movie->save();
+    }
+
+    public function country_choose(Request $request){
+        $data = $request->all();
+        $movie = Movie::find($data['movie_id']);
+        $movie->country_id = $data['country_id'];
+        $movie->save();
+    }
+
+    public function subtitle_choose(Request $request){
+        $data = $request->all();
+        $movie = Movie::find($data['movie_id']);
+        $movie->subtitle = $data['subtitle_val'];
+        $movie->save();
+    }
+
+    public function phim_hot_choose(Request $request){
+        $data = $request->all();
+        $movie = Movie::find($data['movie_id']);
+        $movie->phim_hot = $data['phim_hot_val'];
+        $movie->save();
+    }
+
+    public function status_choose(Request $request){
+        $data = $request->all();
+        $movie = Movie::find($data['movie_id']);
+        $movie->status = $data['status_val'];
+        $movie->save();
+    }
+
+    public function belongmovie_choose(Request $request){
+        $data = $request->all();
+        $movie = Movie::find($data['movie_id']);
+        $movie->belongmovie = $data['belongmovie_val'];
+        $movie->save();
+    }
+
+    public function resolution_choose(Request $request){
+        $data = $request->all();
+        $movie = Movie::find($data['movie_id']);
+        $movie->resolution = $data['resolution_val'];
+        $movie->save();
+    }
+
     public function index()
     {
         $list = Movie::with('category','country','movie_genre','genre')->withCount('episode')->orderBy('id', 'DESC')->get();
-        // return response()->json($list);
+        $category = Category::pluck('title','id');
+        $country = Country::pluck('title','id');
         //tìm kiếm phim - đếm số tập
         $path = public_path()."/json/";
         if(!is_dir($path)) //is_dir rỗng -> path không tồn tại
@@ -32,7 +82,7 @@ class MovieController extends Controller
         }
         File::put($path.'movie.json',json_encode($list));//lấy tất cả film trong data
 
-        return view('admin.movie.index',compact('list'));
+        return view('admin.movie.index',compact('list','category','country'));
     }
     public function update_year(Request $request)
     {

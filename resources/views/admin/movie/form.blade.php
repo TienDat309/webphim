@@ -72,7 +72,7 @@
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('resolution', 'Định dạng', []) !!}
+                        {!! Form::label('resolution', 'Độ phân giải', []) !!}
                         {!! Form::select('resolution', ['0'=>'HD', '1'=>'SD', '2'=>'HDCam', '3'=>'Cam', '4'=>'FullHD', '5'=>'Trailer'],
                         isset($movie) ? $movie->resolution : '',
                         ['class'=>'form-control']) !!}

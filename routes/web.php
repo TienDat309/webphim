@@ -33,6 +33,7 @@ Route::get('/nam/{year}', [IndexController::class, 'year']);
 Route::get('/tag/{tag}', [IndexController::class, 'tag']);
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 Route::get('/filter', [IndexController::class, 'filter'])->name('filter');
+Route::post('/add-rating', [IndexController::class,'add_rating'])->name('add-rating');
 
 
 
@@ -58,6 +59,18 @@ Route::get('/update-topview-phim', [MovieController::class, 'update_topview']);
 Route::post('/filter-topview-phim', [MovieController::class, 'filter_topview']);
 Route::get('/filter-topview-default', [MovieController::class, 'filter_default']);
 Route::get('/update-season-phim', [MovieController::class, 'update_season']);
+
+
+//thay đổi dữ liệu movie bằng ajax
+Route::get('/category-choose', [MovieController::class, 'category_choose'])->name('category-choose');
+Route::get('/country-choose', [MovieController::class, 'country_choose'])->name('country-choose');
+Route::get('/subtitle-choose', [MovieController::class, 'subtitle_choose'])->name('subtitle-choose');
+Route::get('/phim_hot-choose', [MovieController::class, 'phim_hot_choose'])->name('phim_hot-choose');
+Route::get('/status-choose', [MovieController::class, 'status_choose'])->name('status-choose');
+Route::get('/belongmovie-choose', [MovieController::class, 'belongmovie_choose'])->name('belongmovie-choose');
+Route::get('/resolution-choose', [MovieController::class, 'resolution_choose'])->name('resolution-choose');
+
+
 
 
 

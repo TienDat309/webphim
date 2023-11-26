@@ -9,7 +9,7 @@ use App\Models\Country;
 use App\Models\Movie;
 use App\Models\Episode;
 use App\Models\Movie_Genre;
-
+use App\Models\Rating;
 use DB;
 
 class IndexController extends Controller
@@ -66,7 +66,7 @@ class IndexController extends Controller
         $country = Country::orderBy('id','ASC')->get();   
         $category_home = Category::with(['movie'=>function($q)
         {
-            $q->withCount('episode');
+            $q->withCount('episode')->where('status',1);
         }
         ])->orderBy('id','ASC')->where('status',1)->get();//nested trong laaravel
         return view('pages.home', compact('category','genre','country','category_home','phimhot','phimhot_trailer'));
@@ -141,8 +141,26 @@ class IndexController extends Controller
         //lấy tổng tập phim đã thêm
         $episode_current_list = Episode::with('movie')->where('movie_id',$movie->id)->get();
         $episode_current_list_count = $episode_current_list->count();
-        
-        return view('pages.movie', compact('category','genre','country','movie','related','phimhot_trailer','episode','episode_first','episode_current_list_count'));
+        //đánh giá phim
+        $rating = Rating::where('movie_id',$movie->id)->avg('rating');//average: tổng trung bình
+        $rating = round($rating);//round: làm tròn số 
+        $count_total = Rating::where('movie_id',$movie->id)->count();
+        return view('pages.movie', compact('category','genre','country','movie','related','phimhot_trailer','episode','episode_first','episode_current_list_count','rating','count_total'));
+    }
+    public function add_rating(Request $request){
+        $data = $request->all();
+        $ip_address = $request->ip();
+        $rating_count = Rating::where('movie_id',$data['movie_id'])->where('ip_address',$ip_address)->count();
+        if($rating_count>0){
+            echo 'exit';
+        }else{
+            $rating = new Rating();
+            $rating->movie_id = $data['movie_id'];
+            $rating->rating = $data['index'];
+            $rating->ip_address = $ip_address;
+            $rating->save();
+            echo 'done';
+        };
     }
     public function watch($slug,$tap){
 

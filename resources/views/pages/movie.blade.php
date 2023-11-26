@@ -131,8 +131,30 @@
                               @else
                                  Đang cập nhật
                               @endif
-
                         </li>
+
+                        <!--đánh giá-->
+                        <ul class="list-inline rating"  title="Average Rating">
+                           @for($count=1; $count<=5; $count++)
+                             @php
+                               if($count<=$rating){ 
+                                 $color = 'color:#ffcc00;';
+                               }
+                               else {
+                                 $color = 'color:#ccc;';
+                               }
+                             @endphp
+                             <li title="star_rating" 
+                             id="{{$movie->id}}-{{$count}}" 
+                             data-index="{{$count}}"  
+                             data-movie_id="{{$movie->id}}" 
+                             data-rating="{{$rating}}" 
+                             class="rating" 
+                             style="cursor:pointer; {{$color}} 
+                             font-size:30px;">&#9733;</li>
+                           @endfor
+                        </ul>
+                        <span class="total_rating"> Đánh giá : {{$rating}}/{{$count_total}} lượt</span>
                      </ul>
                      <div class="movie-trailer hidden"></div>
                   </div>
