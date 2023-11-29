@@ -136,10 +136,15 @@ class MovieController extends Controller
                             <p class="title">'.$mov->title.'</p>
                             </a>
                             <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
+                            <div class="viewsCount" style="color: #9d9d9d;">'.$mov->year.'</div>
                             <div style="float: left;">
-                            <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                            <span style="width: 0%"></span>
-                            </span>
+                            <ul class="list-inline rating" title="Average Rating">
+                            ';
+                                for($count=1; $count<=5; $count++){
+                                    $output.='<li title="star_rating" style="font-size:20px; color:#ffcc00; padding:0">&#9733;</li>';
+                                }
+                                $output.='<ul class="list-inline rating" title="Average Rating">
+                           </ul>
                         </div>
                     </div>';
         }
@@ -174,10 +179,15 @@ class MovieController extends Controller
                             <p class="title">'.$mov->title.'</p>
                             </a>
                             <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
+                            <div class="viewsCount" style="color: #9d9d9d;">'.$mov->year.'</div>
                             <div style="float: left;">
-                            <span class="user-rate-image post-large-rate stars-large-vang" style="display: block;/* width: 100%; */">
-                            <span style="width: 0%"></span>
-                            </span>
+                            <ul class="list-inline rating" title="Average Rating">
+                            ';
+                                for($count=1; $count<=5; $count++){
+                                    $output.='<li title="star_rating" style="font-size:20px; color:#ffcc00; padding:0">&#9733;</li>';
+                                }
+                                $output.='<ul class="list-inline rating" title="Average Rating">
+                           </ul>
                         </div>
                     </div>';
         }
@@ -205,7 +215,45 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
+        $data  = $request->validate(
+            [
+                'title' => 'required|unique:movies|max:255',
+                'episode_movie' => 'required',
+                'time_movie' => 'required',
+                'name_eng' => 'required|unique:movies|max:255',
+                'trailer' => 'required',
+                'slug' => 'required',
+                'description' => 'required|max:255',
+                'tags' => 'required|max:255',
+                'status' => 'required',
+                'subtitle' => 'required',
+                'phim_hot' => 'required',
+                'resolution' => 'required',
+                'category_id' => 'required',
+                'belongmovie' => 'required',
+                'country_id' => 'required',
+                'genre_id' => 'required',
+                'country_id' => 'required',
+                'image' => 'required',
+
+            ],
+            [
+                'title.required'=>'Tên phim không được trống.',
+                'title.unique'=>'Tên phim đã có. Xin nhập tên khác.',
+                'time_movie.required'=>'Thời gian phim không được trống.',
+                'name_eng.required'=>'Tên tiếng anh phim không được trống.',
+                'time_movie.required'=>'Thời gian phim không được trống.',
+                'trailer.required'=>'Trailer phim không được trống.',
+                'trailer.unique'=>'Trailer phim đã có. Xin nhập tên khác',
+                'slug.required'=>'Đường dẫn phim không được trống.',
+                'description.required'=>'Mô tả phim không được trống.',
+                'tags.required'=>'Tags phim không được trống.',
+                'episode_movie.required'=>'Số tập phim không được trống.',
+                'genre_id.required'=>'Thể loại phim không được trống.',
+                'image.required'=>'Hình ảnh phim không được trống.',
+            ]
+        );
         $movie = new Movie();
         $movie->title = $data['title'];
         $movie->trailer = $data['trailer'];
@@ -222,8 +270,10 @@ class MovieController extends Controller
         $movie->category_id = $data['category_id'];
         $movie->belongmovie = $data['belongmovie'];
         $movie->country_id = $data['country_id'];
+        $movie->count_views = rand(10,50000);
         $movie->datecreated = Carbon::now('Asia/Ho_Chi_Minh');
         $movie->updateday = Carbon::now('Asia/Ho_Chi_Minh');
+
         //thêm nhìu thể loại phim
         foreach ($data['genre'] as $key => $gen)
             $movie->genre_id = $gen[0];
@@ -242,7 +292,7 @@ class MovieController extends Controller
         $movie->save();
         //thêm nhiều thể loại cho phim
         $movie->movie_genre()->sync($data['genre']);
-
+        toastr()->success('Thêm phim thành công.');
         return redirect()->route('movie.index');
     }
 
@@ -321,6 +371,7 @@ class MovieController extends Controller
         $movie->save();
 
         $movie->movie_genre()->sync($data['genre']);
+        toastr()->success('Cập nhật phim thành công.');
 
         return redirect()->route('movie.index');
 
@@ -345,6 +396,7 @@ class MovieController extends Controller
        //xóa tập phim
        Episode::whereIn('movie_id',[$movie->id])->delete();
        $movie->delete();
+       toastr()->success('Xóa phim thành công.');
 
        return redirect()->back();
     }

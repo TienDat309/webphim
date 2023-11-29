@@ -9,6 +9,15 @@
                     <span>Quản lý phim</span>
                     <a href="{{ route('movie.index') }}" class="btn btn-success btn-md">Liệt kê phim</a>
                 </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -36,7 +45,7 @@
                     <div class="form-group">
                         {!! Form::label('time_movie', 'Thời lượng', []) !!}
                         {!! Form::text('time_movie', isset($movie) ? $movie->time_movie : '',
-                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...'
+                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
                         ]) !!}
                     </div>
                     <div class="form-group">

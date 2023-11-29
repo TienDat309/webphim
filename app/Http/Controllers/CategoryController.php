@@ -36,13 +36,28 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
+        $data  = $request->validate(
+            [
+                'title' => 'required|unique:categories|max:255',
+                'slug' => 'required|max:255',
+                'description' => 'required|max:255',
+                'status' => 'required',
+            ],
+            [
+                'title.unique'=>'Tên danh mục đã có. Xin nhập tên khác.',
+                'title.required'=>'Tên danh mục không được trống.',
+                'slug.required'=>'Đường dẫn danh mục không được trống.',
+                'description.required'=>'Mô tả danh mục không được trống.',
+            ]
+        );
         $category = new Category();
         $category->title = $data['title'];
         $category->slug = $data['slug'];
         $category->description = $data['description'];
         $category->status = $data['status'];
         $category->save();
+        toastr()->success('Thêm danh mục thành công.');
         return redirect()->back();
     }
 
@@ -86,6 +101,7 @@ class CategoryController extends Controller
         $category->description = $data['description'];
         $category->status = $data['status'];
         $category->save();
+        toastr()->success('Cập nhật danh mục thành công.');
         return redirect()->back();
     }
 
@@ -98,6 +114,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::find($id)->delete();
+        toastr()->success('Xóa danh mục thành công.');
         return redirect()->back();
     }
 

@@ -35,13 +35,28 @@ class GenreController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
+        $data  = $request->validate(
+            [
+                'title' => 'required|unique:genres|max:255',
+                'slug' => 'required',
+                'description' => 'required|max:255',
+                'status' => 'required',
+            ],
+            [
+                'title.unique'=>'Tên thể loại đã có. Xin nhập tên khác.',
+                'title.required'=>'Tên thể loại không được trống.',
+                'slug.required'=>'Đường dẫn thể loại không được trống.',
+                'description.required'=>'Mô tả thể loại không được trống.',
+            ]
+        );
         $genre = new Genre();
         $genre->title = $data['title'];
         $genre->slug = $data['slug'];
         $genre->description = $data['description'];
         $genre->status = $data['status'];
         $genre->save();
+        toastr()->success('Thêm thể loại thành công.');
         return redirect()->back();
     }
 
@@ -85,6 +100,7 @@ class GenreController extends Controller
         $genre->description = $data['description'];
         $genre->status = $data['status'];
         $genre->save();
+        toastr()->success('Cập nhật thể loại thành công.');
         return redirect()->back();
     }
 
@@ -97,6 +113,7 @@ class GenreController extends Controller
     public function destroy($id)
     {
         Genre::find($id)->delete();
+        toastr()->success('Xóa thể loại thành công.');
         return redirect()->back();
     }
 }

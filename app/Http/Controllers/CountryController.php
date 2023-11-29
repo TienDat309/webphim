@@ -36,13 +36,28 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        // $data = $request->all();
+        $data  = $request->validate(
+            [
+                'title' => 'required|unique:countries|max:255',
+                'slug' => 'required',
+                'description' => 'required|max:255',
+                'status' => 'required',
+            ],
+            [
+                'title.unique'=>'Tên quốc gia đã có. Xin nhập tên khác.',
+                'title.required'=>'Tên quốc gia không được trống.',
+                'slug.required'=>'Đường dẫn quốc gia không được trống.',
+                'description.required'=>'Mô tả quốc gia không được trống.',
+            ]
+        );
         $country = new Country();
         $country->title = $data['title'];
         $country->slug = $data['slug'];
         $country->description = $data['description'];
         $country->status = $data['status'];
         $country->save();
+        toastr()->success('Thêm quốc gia thành công.');
         return redirect()->back();
     }
 
@@ -86,6 +101,7 @@ class CountryController extends Controller
         $country->description = $data['description'];
         $country->status = $data['status'];
         $country->save();
+        toastr()->success('Cập nhật quốc gia thành công.');
         return redirect()->back();
     }
 
@@ -98,6 +114,7 @@ class CountryController extends Controller
     public function destroy($id)
     {
         Country::find($id)->delete();
+        toastr()->success('Xóa quốc gia thành công.');
         return redirect()->back();
     }
 }

@@ -30,7 +30,7 @@
                     <div class="form-group">
                         {!! Form::label('link', 'Link Phim', []) !!}
                         {!! Form::text('link', isset($episode) ? $episode->linkphim : '',
-                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
+                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...','required'=>'required']) !!}
                     </div> 
                     @if(isset($episode))
                         <div class="form-group">

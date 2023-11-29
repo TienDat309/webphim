@@ -392,7 +392,7 @@ img:hover {
     font-weight: 700;
 }
 .htmlwrap {
-    padding: 15px;
+    padding: 10px;
     border: 1px solid #1d2731;
     margin: 10px 0;
     background: transparent;
@@ -1733,9 +1733,17 @@ tr.title {
     position: absolute;
     bottom: -8px;
 }
+.xemthem{
+    position: absolute;
+    right:0;
+    font-weight: 400;
+    line-height:21px;
+    text-transform: uppercase;
+    padding:9px 25px 9px px 10px;
+}
 .film-poster {
     position: relative;
-    width: 72.2%;
+    width: 65%;
     height: auto;
     overflow: hidden;
     padding: 0;
@@ -1759,7 +1767,7 @@ tr.title {
 }
 .movie-poster {
     position: relative;
-    width: 27.8%;
+    width: 35%;
     padding: 0;
     display: inline-block;
 }
@@ -5277,6 +5285,21 @@ span.ajax-update-eps:hover {
 #halim-change-style .active {
     background: #d01a1a;
 }
+.custom-scrollbar {
+    height: 250px;
+    overflow: auto;
+}
+
+/* Webkit (Chrome, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #11171f;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color:#222d38;
+}
 @media (max-width: 767px) {
     #halim-change-style {
         position: fixed;
@@ -5315,7 +5338,7 @@ ul.list-info-group {
     display: block;
     border-bottom: 1px dashed rgba(146, 146, 146, 0.125);
     padding-bottom: 7px;
-    padding-top: 3px;
+    padding-top: 5px;
 }
 .list-info-group-item span {
     font-weight: 700;

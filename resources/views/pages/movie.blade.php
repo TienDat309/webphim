@@ -36,13 +36,13 @@
                   </div>
                </div> --}}
                <div class="movie_info col-xs-12">
-                  <div class="movie-poster col-md-3">
+                  <div class="movie-poster col-md-9"> 
                      <img src="{{ asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->tilte}}">
                      @if ($movie->resolution!=5)
                         @if($episode_current_list_count>0)
-                        <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_first->episode)}}" style="width:50%; height:35px; font-size:15px"
+                        <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_first->episode)}}" style="width:48%; height:35px; font-size:15px"
                            class="btn btn-danger">Xem Phim</a>
-                        <a href="#watch_trailer" style="height:35px; font-size:14.5px"
+                        <a href="#watch_trailer" style="height:35px; width:48%; font-size:14.5px"
                            class="btn btn-primary watch_trailer">Xem Trailer</a>
                         @endif
                      @else
@@ -55,66 +55,68 @@
                         style="display:block;line-height:35px;margin-bottom: -14px;color: #ffed4d;text-transform: uppercase;font-size: 18px;">
                         {{$movie->title}}</h1>
                      <h2 class="movie-title title-2" style="font-size: 12px;">{{$movie->name_eng}}</h2>
-                     <ul class="list-info-group">
-                        <li class="list-info-group-item"><span>Trạng Thái</span> : <span class="quality">
-                              @if($movie->resolution==0)
-                              HD
-                              @elseif($movie->resolution==1)
-                              SD
-                              @elseif($movie->resolution==2)
-                              HDCam
-                              @elseif($movie->resolution==3)
-                              Cam
-                              @elseif($movie->resolution==4)
-                              FullHD
-                              @else
-                              Trailer
+                     <div class="custom-scrollbar" style="height:283px; overflow: auto;">
+                        <ul class="list-info-group">
+                           <li class="list-info-group-item"><span>Trạng Thái</span> : <span class="quality">
+                                 @if($movie->resolution==0)
+                                 HD
+                                 @elseif($movie->resolution==1)
+                                 SD
+                                 @elseif($movie->resolution==2)
+                                 HDCam
+                                 @elseif($movie->resolution==3)
+                                 Cam
+                                 @elseif($movie->resolution==4)
+                                 FullHD
+                                 @else
+                                 Trailer
+                                 @endif
+                              </span>
+                              @if ($movie->resolution!=5)
+                              <span class="episode">
+                                 @if($movie->subtitle==0)
+                                 Phụ đề
+                                 @else
+                                 Thuyết Minh
+                                 @endif
+                              </span>
                               @endif
-                           </span>
-                           @if ($movie->resolution!=5)
-                           <span class="episode">
-                              @if($movie->subtitle==0)
-                              Phụ đề
+                           </li>
+                           <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->time_movie}}</li>
+
+                           <li class="list-info-group-item"><span>Tập phim</span> : 
+                              @if($movie->belongmovie=='phimbo')
+                                 {{$episode_current_list_count}}/{{$movie->episode_movie}} - 
+                                 @if($episode_current_list_count==$movie->episode_movie)
+                                       Hoàn thành
+                                 @else
+                                       Đang cập nhật
+                                 @endif
                               @else
-                              Thuyết Minh
+                              Phim lẻ
                               @endif
-                           </span>
+
+                           </li>
+
+                           @if ($movie->season!=0)
+                           <li class="list-info-group-item"><span>Season</span> : {{$movie->season}}</li>
                            @endif
-                        </li>
-                        <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->time_movie}}</li>
 
-                        <li class="list-info-group-item"><span>Tập phim</span> : 
-                           @if($movie->belongmovie=='phimbo')
-                              {{$episode_current_list_count}}/{{$movie->episode_movie}} - 
-                              @if($episode_current_list_count==$movie->episode_movie)
-                                    Hoàn thành
-                              @else
-                                    Đang cập nhật
-                              @endif
-                           @else
-                           Phim lẻ
-                           @endif
-
-                        </li>
-
-                        @if ($movie->season!=0)
-                        <li class="list-info-group-item"><span>Season</span> : {{$movie->season}}</li>
-                        @endif
-
-                        <li class="list-info-group-item"><span>Thể loại</span> :
-                           @foreach ($movie->movie_genre as $gen)
-                           <a href="{{route('genre',[$gen->slug])}}" rel="category tag">{{$gen->title}}</a>
-                           @endforeach
-                        <li class="list-info-group-item"><span>Danh mục phim</span> :
-                           <a href="{{route('category',$movie->category->slug)}}"
-                              rel="category tag">{{$movie->category->title}}</a>
-                        <li class="list-info-group-item"><span>Quốc gia</span> :
-                           <a href="{{route('country',$movie->country->slug)}}"
-                              rel="tag">{{$movie->country->title}}</a>
-                        </li>
-                        <li class="list-info-group-item"><span>Năm phim</span> :
-                           {{$movie->year}}
-                  
+                           <li class="list-info-group-item"><span>Thể loại</span> :
+                              @foreach ($movie->movie_genre as $gen)
+                              <a href="{{route('genre',[$gen->slug])}}" rel="category tag">{{$gen->title}}</a>
+                              @endforeach
+                           <li class="list-info-group-item"><span>Danh mục phim</span> :
+                              <a href="{{route('category',$movie->category->slug)}}"
+                                 rel="category tag">{{$movie->category->title}}</a>
+                           <li class="list-info-group-item"><span>Quốc gia</span> :
+                              <a href="{{route('country',$movie->country->slug)}}"
+                                 rel="tag">{{$movie->country->title}}</a>
+                           </li>
+                           <li class="list-info-group-item"><span>Năm phim</span> :
+                              {{$movie->year}}
+                     
+                           </li>
                            <li class="list-info-group-item"><span>Tập phim mới nhất</span> :
 
                               @if($episode_current_list_count>0)
@@ -131,32 +133,41 @@
                               @else
                                  Đang cập nhật
                               @endif
-                        </li>
-
-                        <!--đánh giá-->
-                        <ul class="list-inline rating"  title="Average Rating">
-                           @for($count=1; $count<=5; $count++)
-                             @php
-                               if($count<=$rating){ 
-                                 $color = 'color:#ffcc00;';
-                               }
-                               else {
-                                 $color = 'color:#ccc;';
-                               }
-                             @endphp
-                             <li title="star_rating" 
-                             id="{{$movie->id}}-{{$count}}" 
-                             data-index="{{$count}}"  
-                             data-movie_id="{{$movie->id}}" 
-                             data-rating="{{$rating}}" 
-                             class="rating" 
-                             style="cursor:pointer; {{$color}} 
-                             font-size:30px;">&#9733;</li>
-                           @endfor
+                           </li>
                         </ul>
-                        <span class="total_rating"> Đánh giá : {{$rating}}/{{$count_total}} lượt</span>
-                     </ul>
-                     <div class="movie-trailer hidden"></div>
+                           <!--đánh giá-->
+                        </div>
+                        <div class="entry-content htmlwrap clearfix" style="height: 38px; padding-top:1px; background-color:#11171f">
+                           <ul class="list-inline rating " title="Average Rating" style="font-size: 18px;">
+                              @for($count=1; $count<=5; $count++)
+                              @php
+                                       if($count<=$rating){ 
+                                          $color = 'color:#ffcc00;';
+                                       }
+                                       else {
+                                          $color = 'color:#ccc;';
+                                       }
+                                       @endphp
+                                 <li title="star_rating" 
+                                 id="{{$movie->id}}-{{$count}}" 
+                                 data-index="{{$count}}"  
+                                 data-movie_id="{{$movie->id}}" 
+                                 data-rating="{{$rating}}" 
+                                 class="rating" 
+                                 style="cursor:pointer;{{$color}} font-size:23px;">&#9733;</li>
+                                 @endfor
+                           </ul>
+                        
+                           <div class="total_rating" style="float:left; padding-top:7px; padding-left:15px; font-weight:700; font-size:14px;"> ({{$rating}} / {{$count_total}} lượt)</div>
+                           <span class="movie-trailer">
+                              @php
+                                 $current_url = Request::url();
+                              @endphp
+                              <div style="float:right; width:140px; padding-top: 7px">
+                                 <div class="fb-like" data-href="{{$current_url}}"  data-share="true"></div>
+                              </div>
+                           </span>
+                       </div>
                   </div>
                </div>
             </div>
