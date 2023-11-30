@@ -45,7 +45,7 @@
                             <td>{{$cate->episode_count}}/{{$cate->episode_movie}} tập</td>
 
                             <td>
-                                <a href="{{route('add-episode',[$cate->id])}}" class="btn btn-info btn-sm">Thêm tập mới</a>
+                                <a href="{{route('add-episode',[$cate->id])}}" class="btn btn-info btn-sm">Thêm tập phim</a>
                             </td>
 
 

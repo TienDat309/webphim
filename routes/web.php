@@ -42,18 +42,16 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //route admin
-Route::resource('category', CategoryController::class);
 Route::post('resorting', [CategoryController::class, 'resorting'])->name('resorting');
+Route::resource('category', CategoryController::class);
 Route::resource('genre', GenreController::class);
 Route::resource('country', CountryController::class);
 Route::resource('movie', MovieController::class);
+
 //thêm tập phim
 Route::get('add-episode/{id}', [EpisodeController::class,'add_episode'])->name('add-episode');
 Route::resource('episode', EpisodeController::class);
 Route::get('select-movie', [EpisodeController::class,'select_movie'])->name('select-movie');
-
-
-
 Route::get('/update-year-phim', [MovieController::class, 'update_year']);
 Route::get('/update-topview-phim', [MovieController::class, 'update_topview']);
 Route::post('/filter-topview-phim', [MovieController::class, 'filter_topview']);

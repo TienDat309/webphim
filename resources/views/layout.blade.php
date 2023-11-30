@@ -15,23 +15,24 @@
         href="https://chillphim.top/uploads/logo/Gold%20Modern%20Business%20Logo6802.png"
         type="image/x-icon" />
     <meta name="revisit-after" content="1 days" />
-    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' 
     <title>MotPhimTV</title>
     <meta name="description"
         content="Phim hay 2021 - Xem phim hay nhất, xem phim online miễn phí, phim hot , phim nhanh" />
     <link rel="canonical" href="">
     <link rel="next" href="" />
+
     <meta property="og:locale" content="vi_VN" />
-    <meta property="og:title" content="Phim hay 2020 - Xem phim hay nhất" />
+    <meta property="og:title" content="Phim hay 2023 - Xem phim hay nhất" />
     <meta property="og:description"
-        content="Phim hay 2020 - Xem phim hay nhất, phim hay trung quốc, hàn quốc, việt nam, mỹ, hong kong , chiếu rạp" />
+        content="Phim hay 2023 - Xem phim hay nhất, phim hay trung quốc, hàn quốc, việt nam, mỹ, hong kong , chiếu rạp" />
     <meta property="og:url" content="" />
-    <meta property="og:site_name" content="Phim hay 2021- Xem phim hay nhất" />
+    <meta property="og:site_name" content="Phim hay 2023- Xem phim hay nhất" />
     <meta property="og:image" content="" />
     <meta property="og:image:width" content="300" />
     <meta property="og:image:height" content="55" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel='dns-prefetch' href='//s.w.org' />
     <link rel='stylesheet' id='bootstrap-css' href='{{asset('css/bootstrap.min.css?ver=5.7.2')}}' media='all' />
 
@@ -177,18 +178,24 @@
     <footer id="footer" class="clearfix">
         <div class="container footer-columns">
             <div class="row container">
-                <div class="widget about col-xs-12 col-sm-4 col-md-4">
+                <div class="widget about col-xs-12 col-sm-4 col-md-4 mx-auto">
                     <div class="footer-logo">
                         <img class="img-responsive"
-                            src="https://img.favpng.com/9/23/19/movie-logo-png-favpng-nRr1DmYq3SNYSLN8571CHQTEG.jpg"
-                            alt="Phim hay 2021- Xem phim hay nhất" />
+                            src="/imgs/motphimtv.png" style="height:50px;" alt="Phim hay 2023- Xem phim hay nhất" />
                     </div>
-                    Liên hệ QC: <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                        data-cfemail="e5958d8c888d849ccb868aa58288848c89cb868a88">[email&#160;protected]</a>
+                </div>
+                <div class="widget about col-xs-12 col-sm-4 col-md-8 mx-auto">
+                    <div class="footer-logo" style="padding-top:5px;">
+                        MotPhimTV - Xem phim hay miễn phí chất lượng cao với phụ đề tiếng việt - thuyết minh!</br>
+                        MotPhimTV có nhiều thể loại phim phong phú, đặc sắc, nhiều bộ phim hay nhất - mới nhất!
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
+    <div class="col-xs-12 col-sm-4 col-md-12 mx-auto" style="text-align:center; height:25px; color:#000">
+        Copyrighy @ 2023 By TienDat
+    </div>
     <div id='easy-top'></div>
 
     <script type='text/javascript' src='{{asset('js/bootstrap.min.js?ver=5.7.2')}}' id='bootstrap-js'></script>

@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $list = Category::orderBy('position','ASC')->get();
+        return view('admin.category.index', compact('list'));
     }
 
     /**
@@ -24,8 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $list = Category::orderBy('position','ASC')->get();
-        return view('admin.category.form', compact('list'));
+        return view('admin.category.form');
     }
 
     /**
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         $category->status = $data['status'];
         $category->save();
         toastr()->success('Thêm danh mục thành công.');
-        return redirect()->back();
+        return redirect()->route('category.index');
     }
 
     /**
@@ -102,7 +102,8 @@ class CategoryController extends Controller
         $category->status = $data['status'];
         $category->save();
         toastr()->success('Cập nhật danh mục thành công.');
-        return redirect()->back();
+        return redirect()->route('category.index');
+
     }
 
     /**
@@ -115,7 +116,7 @@ class CategoryController extends Controller
     {
         Category::find($id)->delete();
         toastr()->success('Xóa danh mục thành công.');
-        return redirect()->back();
+        return redirect()->route('category.index');
     }
 
     public function resorting(Request $request)
