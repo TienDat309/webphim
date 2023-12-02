@@ -12,6 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta
       name="keywords"
       content="MotphimTV"
@@ -102,6 +103,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
       });
     </script>
+    
     <!-- //pie-chart -->
     <!-- index page sales reviews visitors pie chart -->
     <!-- requried-jsfiles-for owl -->
@@ -122,6 +124,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   </head>
 
   <body class="cbp-spmenu-push">
+    @if(Auth::check())
     <div class="main-content">
       <div
         class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
@@ -238,8 +241,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                       </li>
                       <li>
                         <a href="{{route('movie.index')}}"
-                          ><i class="fa fa-angle-right"></i>Liệt kê danh sách phim</a
-                        >
+                          ><i class="fa fa-angle-right"></i>Liệt kê danh sách phim</a>
+                      </li>
+                      <li>
+                        <a href="{{route('episode.index')}}"
+                          ><i class="fa fa-angle-right"></i>Liệt kê danh sách tập phim</a>
                       </li>
                     </ul>
                 </li>
@@ -325,13 +331,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <a href="#"><i class="fa fa-suitcase"></i> Profile</a>
                   </li>
                   <li>
-                    <a href="#"><i class="fa fa-sign-out"></i> Logout</a>
+                    {{-- <a href="#"><i class="fa fa-sign-out"></i> Logout</a> --}}
+                    <form action="{{route('logout')}}" method="POST">
+                      @csrf
+                      <i class="fa fa-sign-out"></i><input type="submit" class="btn btn-info btn-sm" value=" Logout"/>
+                    </form>
                   </li>
                 </ul>
               </li>
             </ul>
           </div>
           <div class="clearfix"></div>
+
         </div>
         <div class="clearfix"></div>
       </div>
@@ -342,47 +353,46 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           <div class="col_3">
             <div class="col-md-3 widget widget1">
               <div class="r3_counter_box">
-                <i class="pull-left fa fa-dollar icon-rounded"></i>
-                <div class="stats">
-                  <h5><strong>$452</strong></h5>
-                  <span>Total Revenue</span>
-                </div>
+                <i class="pull-left fa fa-file icon-rounded"></i>
+                <a href="{{route('category.index')}}">
+                  <div class="stats">
+                    <h5><strong>{{$category_total}}</strong></h5>
+                    <span>Danh mục phim</span>
+                  </div>
+                </a>
               </div>
             </div>
             <div class="col-md-3 widget widget1">
               <div class="r3_counter_box">
-                <i class="pull-left fa fa-laptop user1 icon-rounded"></i>
-                <div class="stats">
-                  <h5><strong>$1019</strong></h5>
-                  <span>Online Revenue</span>
-                </div>
+                <i class="pull-left fa fa-child user1 icon-rounded"></i>
+                <a href="{{route('genre.index')}}">
+                  <div class="stats">
+                    <h5><strong>{{$genre_total}}</strong></h5>
+                    <span>Thể loại phim</span>
+                  </div>
+                </a>
               </div>
             </div>
             <div class="col-md-3 widget widget1">
               <div class="r3_counter_box">
-                <i class="pull-left fa fa-money user2 icon-rounded"></i>
-                <div class="stats">
-                  <h5><strong>$1012</strong></h5>
-                  <span>Expenses</span>
-                </div>
+                <i class="pull-left fa fa-globe user2 icon-rounded"></i>
+                <a href="{{route('country.index')}}">
+                  <div class="stats">
+                    <h5><strong>{{$country_total}}</strong></h5>
+                    <span>Quốc gia phim</span>
+                  </div>
+                </a>
               </div>
             </div>
             <div class="col-md-3 widget widget1">
               <div class="r3_counter_box">
-                <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
-                <div class="stats">
-                  <h5><strong>$450</strong></h5>
-                  <span>Expenditure</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 widget">
-              <div class="r3_counter_box">
-                <i class="pull-left fa fa-users dollar2 icon-rounded"></i>
-                <div class="stats">
-                  <h5><strong>1450</strong></h5>
-                  <span>Total Users</span>
-                </div>
+                <i class="pull-left fa fa-film dollar1 icon-rounded"></i>
+                <a href="{{route('movie.index')}}">
+                  <div class="stats">
+                    <h5><strong>{{$movie_total}}</strong></h5>
+                    <span>Phim</span>
+                  </div>
+                </a>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -410,18 +420,81 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           <div class="col-md-12">
             @yield('content')
         </div>
+        <div class="clearfix"></div>
     </div>
-    <div class="clearfix"></div>
+    @else
+    @yield('content_login')
+    {{-- <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-md-6">
+              <div class="card">
+                  <div class="card-header">{{ __('Đăng nhập') }}</div>
+  
+                  <div class="card-body">
+                      <form method="POST" action="{{ route('login') }}">
+                          @csrf
+  
+                          <div class="row mb-3">
+                              <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Tài khoản') }}</label>
+  
+                              <div class="col-md-6">
+                                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+  
+                                  @error('email')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                              </div>
+                          </div>
+  
+                          <div class="row mb-3">
+                              <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Mật khẩu') }}</label>
+  
+                              <div class="col-md-6">
+                                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+  
+                                  @error('password')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                              </div>
+                          </div>
+  
+                          <div class="row mb-3">
+                              <div class="col-md-6 offset-md-4">
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+  
+                                      <label class="form-check-label" for="remember">
+                                          {{ __('Ghi nhớ đăng nhập') }}
+                                      </label>
+                                  </div>
+                              </div>
+                          </div>
+  
+                          <div class="row mb-0">
+                              <div class="col-md-8 offset-md-4">
+                                  <button type="submit" class="btn btn-primary">
+                                      {{ __('Đăng nhập') }}
+                                  </button>
+  
+                                  @if (Route::has('password.request'))
+                                      <a class="btn btn-link" href="{{ route('password.request') }}">
+                                          {{ __('Quên mật khẩu?') }}
+                                      </a>
+                                  @endif
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
       </div>
-      <!--footer-->
-      <div class="footer">
-        <p>
-          &copy; 2023 Glance Design Dashboard. All Rights Reserved | Design by
-          <a href="#" target="_blank">TienDat</a>
-        </p>
-      </div>
-      <!--//footer-->
-    </div>
+    </div> --}}
+    @endif
+    
     <!-- new added graphs chart js-->
     <script src="{{asset('backend/js/Chart.bundle.js')}}"></script>
     <script src="{{asset('backend/js/utils.js')}}"></script>
@@ -872,5 +945,296 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- Bootstrap Core JavaScript -->
     <script src="{{asset('backend/js/bootstrap.js')}}"></script>
     <!-- //Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+      $('.category_choose').change(function(){
+          var category_id = $(this).val();
+          var movie_id = $(this).attr('id');
+          $.ajax({
+              url:"{{route('category-choose')}}",
+              method:"GET",
+              data:{
+                  category_id:category_id,
+                  movie_id:movie_id,
+              },
+              success:function(data){
+                alert('Thay đổi thành công');
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.country_choose').change(function(){
+          var country_id = $(this).val();
+          var movie_id = $(this).attr('id');
+          $.ajax({
+              url:"{{route('country-choose')}}",
+              method:"GET",
+              data:{
+                  country_id:country_id,
+                  movie_id:movie_id,
+              },
+              success:function(data){
+              alert('Thay đổi thành công');
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.subtitle_choose').change(function(){
+          var subtitle_val = $(this).val();
+          var movie_id = $(this).attr('id');
+          $.ajax({
+              url:"{{route('subtitle-choose')}}",
+              method:"GET",
+              data:{
+                  subtitle_val:subtitle_val,
+                  movie_id:movie_id,
+              },
+              success:function(data){
+              alert('Thay đổi thành công');
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.phim_hot_choose').change(function(){
+          var phim_hot_val = $(this).val();
+          var movie_id = $(this).attr('id');
+          $.ajax({
+              url:"{{route('phim_hot-choose')}}",
+              method:"GET",
+              data:{
+                  phim_hot_val:phim_hot_val,
+                  movie_id:movie_id,
+              },
+              success:function(data){
+              alert('Thay đổi thành công');
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.status_choose').change(function(){
+          var status_val = $(this).val();
+          var movie_id = $(this).attr('id');
+          $.ajax({
+              url:"{{route('status-choose')}}",
+              method:"GET",
+              data:{
+                  status_val:status_val,
+                  movie_id:movie_id,
+              },
+              success:function(data){
+              alert('Thay đổi thành công');
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.belongmovie_choose').change(function(){
+          var belongmovie_val = $(this).val();
+          var movie_id = $(this).attr('id');
+          $.ajax({
+              url:"{{route('belongmovie-choose')}}",
+              method:"GET",
+              data:{
+                  belongmovie_val:belongmovie_val,
+                  movie_id:movie_id,
+              },
+              success:function(data){
+              alert('Thay đổi thành công');
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+    $('.resolution_choose').change(function(){
+        var resolution_val = $(this).val();
+        var movie_id = $(this).attr('id');
+        $.ajax({
+            url:"{{route('resolution-choose')}}",
+            method:"GET",
+            data:{
+                resolution_val:resolution_val,
+                movie_id:movie_id,
+            },
+            success:function(data){
+            alert('Thay đổi thành công');
+            }
+        });
+    })
+  </script>
+
+  <script>
+      $('.show_video').click(function(){
+        var movie_id = $(this).data('movie_video_id');
+        var episode_id = $(this).data('video_episode');
+        // alert(movie_id);
+        // alert(episode_id);
+        $.ajax({
+          url:'{{route('watch-video')}}',
+          method:"POST",
+          dataType: "JSON",
+          headers:{
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data:{movie_id:movie_id, episode_id:episode_id},
+          success:function(data){
+            $('#video_title').html(data.video_title);
+            $('#video_desc').html(data.video_desc);
+            $('#video_link').html(data.video_link);
+            $('#videoModal').modal('show');
+          }
+        });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.select-movie').change(function(){
+          var id = $(this).val();
+          $.ajax({
+              url:"{{route('select-movie')}}",
+              method:"GET",
+              data:{
+                  id:id,
+              },
+              success:function(data){
+                  $('#show_movie').html(data);
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.select-year').change(function(){
+          var year = $(this).find(':selected').val();
+          var id_phim = $(this).attr('id');
+          $.ajax({
+              url:"{{url('/update-year-phim')}}",
+              method:"GET",
+              data:{
+                  year:year,
+                  id_phim:id_phim
+              },
+              success:function(){
+                  alert('Thay đổi phim năm ' + year + ' thành công');
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.select-season').change(function(){
+          var season = $(this).find(':selected').val();
+          var id_phim = $(this).attr('id');
+          $.ajax({
+              url:"{{url('/update-season-phim')}}",
+              method:"GET",
+              data:{
+                  season:season,
+                  id_phim:id_phim
+              },
+              success:function(){
+                  alert('Thay đổi phim season ' + season + ' thành công');
+              }
+          });
+      })
+  </script>
+
+  <script type="text/javascript">
+      $('.select-topview').change(function(){
+          var topview = $(this).find(':selected').val();
+          var id_phim = $(this).attr('id');
+          if(topview == 0){
+              var text = 'Ngày';
+          }else if(topview == 1){
+              var text = 'Tuần';
+          }else{
+              var text = 'Tháng';
+          }
+          $.ajax({
+              url:"{{url('/update-topview-phim')}}",
+              method:"GET",
+              data:{
+                  topview:topview,
+                  id_phim:id_phim
+              },
+              success:function(){
+                  alert('Thay đổi phim nhiều lượt xem theo ' + text + ' thành công');
+              }
+          });
+      })
+  </script>
+  
+  <script type="text/javascript">
+  $(document).ready( function () { //dataTables.net-Lọc info
+      $('#tablephim').DataTable();
+  } );
+      function ChangeToSlug()
+          {
+  
+              var slug;
+           
+              //Lấy text từ thẻ input title 
+              slug = document.getElementById("slug").value;
+              slug = slug.toLowerCase();
+              //Đổi ký tự có dấu thành không dấu
+                  slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+                  slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+                  slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+                  slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+                  slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+                  slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+                  slug = slug.replace(/đ/gi, 'd');
+                  //Xóa các ký tự đặt biệt
+                  slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+                  //Đổi khoảng trắng thành ký tự gạch ngang
+                  slug = slug.replace(/ /gi, "-");
+                  //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+                  //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+                  slug = slug.replace(/\-\-\-\-\-/gi, '-');
+                  slug = slug.replace(/\-\-\-\-/gi, '-');
+                  slug = slug.replace(/\-\-\-/gi, '-');
+                  slug = slug.replace(/\-\-/gi, '-');
+                  //Xóa các ký tự gạch ngang ở đầu và cuối
+                  slug = '@' + slug + '@';
+                  slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+                  //In slug ra textbox có id “slug”
+              document.getElementById('convert_slug').value = slug;
+          }
+  
+      </script>
+      <script type="text/javascript">
+          $('.order_position').sortable({
+              placeholder: 'ui-state-highlight',
+              update: function(event, ui){
+                  var array_id = [];
+                  $('.order_position tr').each(function(){
+                      array_id.push($(this).attr('id'));
+                  })
+                  $.ajax({
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      },
+                      url: "{{route('resorting')}}",
+                      method: "POST",
+                      data:{array_id:array_id},
+                      success: function(data){
+                          alert('Thứ tự đã được sắp xếp');
+                      }
+                  })
+              }
+          })
+      </script>
   </body>
 </html>

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Quản lý danh mục</div>
+                <div class="card-header " style="font-size:20px; text-align:center; font-weight:700">THÊM DANH MỤC PHIM</div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -45,9 +45,9 @@
                             {!! Form::select('status', ['1'=>'Có', '0'=>'Không'], isset($category) ? $category->status : '', ['class'=>'form-control']) !!}
                         </div>
                     @if (!isset($category))
-                        {!! Form::submit('Thêm mới', ['class'=>'btn btn-success']) !!}
+                        {!! Form::submit('Thêm mới', ['class'=>'btn btn-info']) !!}
                     @else
-                        {!! Form::submit('Cập nhật', ['class'=>'btn btn-success']) !!}
+                        {!! Form::submit('Cập nhật', ['class'=>'btn btn-info']) !!}
                     @endif
                         {!! Form::close() !!}
                 </div>

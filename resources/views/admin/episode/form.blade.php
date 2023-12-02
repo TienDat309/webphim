@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <a href="{{ route('episode.index') }}" class="btn btn-success btn-md">Liệt kê danh sách tập phim</a>
+                    {{-- <a href="{{ route('episode.index') }}" class="btn btn-success btn-md">Liệt kê danh sách tập phim</a> --}}
                     <span>Quản lý tập phim</span>
                 </div>
                 <div class="card-body">

@@ -67,6 +67,7 @@ Route::get('/phim_hot-choose', [MovieController::class, 'phim_hot_choose'])->nam
 Route::get('/status-choose', [MovieController::class, 'status_choose'])->name('status-choose');
 Route::get('/belongmovie-choose', [MovieController::class, 'belongmovie_choose'])->name('belongmovie-choose');
 Route::get('/resolution-choose', [MovieController::class, 'resolution_choose'])->name('resolution-choose');
+Route::post('/watch-video', [MovieController::class, 'watch_video'])->name('watch-video');
 
 
 

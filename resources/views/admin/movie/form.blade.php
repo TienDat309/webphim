@@ -5,10 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>Quản lý phim</span>
-                    <a href="{{ route('movie.index') }}" class="btn btn-success btn-md">Liệt kê phim</a>
-                </div>
+                <div class="card-header"style="font-size:20px; text-align:center; font-weight:700">THÊM PHIM</div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -68,7 +65,7 @@
                         {!! Form::label('description', 'Mô tả', []) !!}
                         {!! Form::textarea('description', isset($movie) ? $movie->description :
                         '',['style'=>'resize:none','class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
-                        'id'=>'description']) !!}
+                        'id'=>'description' ,'style'=>'text-align:justify']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('tags', 'Tags phim', []) !!}
@@ -130,9 +127,9 @@
                         @endif
                     </div>
                     @if (!isset($movie))
-                    {!! Form::submit('Thêm mới', ['class'=>'btn btn-success']) !!}
+                    {!! Form::submit('Thêm mới', ['class'=>'btn btn-info']) !!}
                     @else
-                    {!! Form::submit('Cập nhật', ['class'=>'btn btn-success']) !!}
+                    {!! Form::submit('Cập nhật', ['class'=>'btn btn-info']) !!}
                     @endif
                     {!! Form::close() !!}
                 </div>

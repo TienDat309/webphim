@@ -15,7 +15,7 @@
         href="https://chillphim.top/uploads/logo/Gold%20Modern%20Business%20Logo6802.png"
         type="image/x-icon" />
     <meta name="revisit-after" content="1 days" />
-    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' 
+    <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'>
     <title>MotPhimTV</title>
     <meta name="description"
         content="Phim hay 2021 - Xem phim hay nhất, xem phim online miễn phí, phim hot , phim nhanh" />
@@ -120,7 +120,7 @@
                                 <a title="Thể Loại" href="#" data-toggle="dropdown" class="dropdown-toggle"
                                     aria-haspopup="true">Thể Loại <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
-                                @foreach ($genre as $key => $gen)
+                                @foreach ($genre_home as $key => $gen)
                                     <li><a title="{{$gen->title}}" href="{{route('genre',$gen->slug)}}">{{$gen->title}}</a></li>
                                 @endforeach
                                 </ul>
@@ -129,7 +129,7 @@
                                 <a title="Quốc Gia" href="#" data-toggle="dropdown" class="dropdown-toggle"
                                     aria-haspopup="true">Quốc Gia <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
-                                @foreach ($country as $key => $count)
+                                @foreach ($country_home as $key => $count)
                                     <li><a title="{{$count->title}}" href="{{route('country',$count->slug)}}">{{$count->title}}</a></li>
                                 @endforeach
                                 </ul>
@@ -143,7 +143,7 @@
                                     @endfor
                                 </ul>
                             </li>
-                            @foreach ($category as $key => $cate)
+                            @foreach ($category_home as $key => $cate)
                                 <li class="mega"><a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a></li>
                             @endforeach
                             
