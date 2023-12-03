@@ -215,45 +215,45 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        $data  = $request->validate(
-            [
-                'title' => 'required|unique:movies|max:255',
-                'episode_movie' => 'required',
-                'time_movie' => 'required',
-                'name_eng' => 'required|unique:movies|max:255',
-                'trailer' => 'required',
-                'slug' => 'required',
-                'description' => 'required|max:255',
-                'tags' => 'required|max:255',
-                'status' => 'required',
-                'subtitle' => 'required',
-                'phim_hot' => 'required',
-                'resolution' => 'required',
-                'category_id' => 'required',
-                'belongmovie' => 'required',
-                'country_id' => 'required',
-                'genre_id' => 'required',
-                'country_id' => 'required',
-                'image' => 'required',
+        $data = $request->all();
+        // $data  = $request->validate(
+        //     [
+        //         'title' => 'required|unique:movies|max:255',
+        //         'episode_movie' => 'required',
+        //         'time_movie' => 'required',
+        //         'name_eng' => 'required|unique:movies|max:255',
+        //         'trailer' => 'required',
+        //         'slug' => 'required',
+        //         'description' => 'required|max:255',
+        //         'tags' => 'required|max:255',
+        //         'status' => 'required',
+        //         'subtitle' => 'required',
+        //         'phim_hot' => 'required',
+        //         'resolution' => 'required',
+        //         'category_id' => 'required',
+        //         'belongmovie' => 'required',
+        //         'country_id' => 'required',
+        //         // 'genre_id' => 'array:movies',
+        //         'country_id' => 'required',
+        //         'image' => 'required',
 
-            ],
-            [
-                'title.required'=>'Tên phim không được trống.',
-                'title.unique'=>'Tên phim đã có. Xin nhập tên khác.',
-                'time_movie.required'=>'Thời gian phim không được trống.',
-                'name_eng.required'=>'Tên tiếng anh phim không được trống.',
-                'time_movie.required'=>'Thời gian phim không được trống.',
-                'trailer.required'=>'Trailer phim không được trống.',
-                'trailer.unique'=>'Trailer phim đã có. Xin nhập tên khác',
-                'slug.required'=>'Đường dẫn phim không được trống.',
-                'description.required'=>'Mô tả phim không được trống.',
-                'tags.required'=>'Tags phim không được trống.',
-                'episode_movie.required'=>'Số tập phim không được trống.',
-                'genre_id.required'=>'Thể loại phim không được trống.',
-                'image.required'=>'Hình ảnh phim không được trống.',
-            ]
-        );
+        //     ],
+        //     [
+        //         'title.required'=>'Tên phim không được trống.',
+        //         'title.unique'=>'Tên phim đã có. Xin nhập tên khác.',
+        //         'time_movie.required'=>'Thời gian phim không được trống.',
+        //         'name_eng.required'=>'Tên tiếng anh phim không được trống.',
+        //         'time_movie.required'=>'Thời gian phim không được trống.',
+        //         'trailer.required'=>'Trailer phim không được trống.',
+        //         'trailer.unique'=>'Trailer phim đã có. Xin nhập tên khác',
+        //         'slug.required'=>'Đường dẫn phim không được trống.',
+        //         'description.required'=>'Mô tả phim không được trống.',
+        //         'tags.required'=>'Tags phim không được trống.',
+        //         'episode_movie.required'=>'Số tập phim không được trống.',
+        //         // 'genre_id.array'=>'Thể loại phim không được trống.',
+        //         'image.required'=>'Hình ảnh phim không được trống.',
+        //     ]
+        // );
         $movie = new Movie();
         $movie->title = $data['title'];
         $movie->trailer = $data['trailer'];

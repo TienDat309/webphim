@@ -28,7 +28,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="{{asset('backend/css/style.css')}}" rel="stylesheet" type="text/css" />
     <!-- font-awesome icons CSS -->
     <link href="{{asset('backend/css/font-awesome.css')}}" rel="stylesheet" />
-    <link href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <!-- //font-awesome icons CSS-->
     <!-- side nav css file -->
     <link
@@ -249,25 +249,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                       </li>
                     </ul>
                 </li>
-                {{-- <li class="treeview">
-                    <a href="#">
-                      <i class="fa fa-video-camera"></i>
-                      <span>Tập phim</span>
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li>
-                        <a href="{{route('episode.create')}}"
-                          ><i class="fa fa-angle-right"></i>Thêm tập phim</a
-                        >
-                      </li>
-                      <li>
-                        <a href="{{route('episode.index')}}"
-                          ><i class="fa fa-angle-right"></i>Liệt kê danh sách tập phim</a
-                        >
-                      </li>
-                    </ul>
-                </li> --}}
+                <li class="treeview {{($segment == 'linkmovie') ? 'active' : ''}}">
+                  <a href="#">
+                    <i class="fa fa-link"></i>
+                    <span>Link phim</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li>
+                      <a href="{{route('linkmovie.create')}}"
+                        ><i class="fa fa-angle-right"></i>Thêm link phim</a
+                      >
+                    </li>
+                    <li>
+                      <a href="{{route('linkmovie.index')}}"
+                        ><i class="fa fa-angle-right"></i>Liệt kê link phim</a>
+                    </li>
+                  </ul>
+              </li>
             </ul>
             <div class="clearfix"></div>
           </div>
@@ -275,7 +274,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           <div class="clearfix"></div>
         </div>
         <div class="header-right">
-          <!--search-box-->
+          {{-- <!--search-box-->
           <div class="search-box">
             <form class="input">
               <input
@@ -296,7 +295,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </svg>
               </label>
             </form>
-          </div>
+          </div> --}}
           <!--//end-search-box-->
           <div class="profile_details">
             <ul>
@@ -312,7 +311,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                       ><img src="images/2.jpg" alt="" />
                     </span>
                     <div class="user-name">
-                      <p>Admin Name</p>
+                      <p>Admin</p>
                       <span>Administrator</span>
                     </div>
                     <i class="fa fa-angle-down lnr"></i>
@@ -403,7 +402,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           </div>
           
           <!-- for amcharts js -->
-          <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
           <script src="{{asset('backend/js/amcharts.js')}}"></script>
           <script src="{{asset('backend/js/serial.js')}}"></script>
           <script src="{{asset('backend/js/export.min.js')}}"></script>
@@ -421,80 +419,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             @yield('content')
         </div>
         <div class="clearfix"></div>
-    </div>
     @else
     @yield('content_login')
-    {{-- <div class="container">
-      <div class="row justify-content-center">
-          <div class="col-md-6">
-              <div class="card">
-                  <div class="card-header">{{ __('Đăng nhập') }}</div>
-  
-                  <div class="card-body">
-                      <form method="POST" action="{{ route('login') }}">
-                          @csrf
-  
-                          <div class="row mb-3">
-                              <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Tài khoản') }}</label>
-  
-                              <div class="col-md-6">
-                                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-  
-                                  @error('email')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                  @enderror
-                              </div>
-                          </div>
-  
-                          <div class="row mb-3">
-                              <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Mật khẩu') }}</label>
-  
-                              <div class="col-md-6">
-                                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-  
-                                  @error('password')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                  @enderror
-                              </div>
-                          </div>
-  
-                          <div class="row mb-3">
-                              <div class="col-md-6 offset-md-4">
-                                  <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-  
-                                      <label class="form-check-label" for="remember">
-                                          {{ __('Ghi nhớ đăng nhập') }}
-                                      </label>
-                                  </div>
-                              </div>
-                          </div>
-  
-                          <div class="row mb-0">
-                              <div class="col-md-8 offset-md-4">
-                                  <button type="submit" class="btn btn-primary">
-                                      {{ __('Đăng nhập') }}
-                                  </button>
-  
-                                  @if (Route::has('password.request'))
-                                      <a class="btn btn-link" href="{{ route('password.request') }}">
-                                          {{ __('Quên mật khẩu?') }}
-                                      </a>
-                                  @endif
-                              </div>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </div> --}}
     @endif
-    
     <!-- new added graphs chart js-->
     <script src="{{asset('backend/js/Chart.bundle.js')}}"></script>
     <script src="{{asset('backend/js/utils.js')}}"></script>
@@ -673,10 +600,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- //Classie -->
     <!-- //for toggle left push menu script -->
     <!--scrolling js-->
-    <script>
-        $(document).ready(function () {
-            $('#tablephim').DataTable();
-        });
     </script>
     <script src="{{asset('backend/js/jquery.nicescroll.js')}}"></script>
     <script src="{{asset('backend/js/scripts.js')}}"></script>
@@ -948,7 +871,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
       $('.category_choose').change(function(){
           var category_id = $(this).val();

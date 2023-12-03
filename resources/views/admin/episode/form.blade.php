@@ -5,10 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    {{-- <a href="{{ route('episode.index') }}" class="btn btn-success btn-md">Liệt kê danh sách tập phim</a> --}}
-                    <span>Quản lý tập phim</span>
-                </div>
+                <div class="card-header d-flex justify-content-between align-items-center" 
+                style="font-size:20px; text-align:center; font-weight:700">Quản lý tập phim</div>
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -23,7 +21,7 @@
                     @endif
                     
                     <div class="form-group">
-                        {!! Form::label('Movie', 'Chọn phim', []) !!}
+                        {!! Form::label('Movie', 'Phim', []) !!}
                         {!! Form::select('movie_id', ['0'=>'Chọn phim','Phim mới nhất'=>$list_movie], isset($episode) ? $episode->movie_id : '',
                         ['class'=>'form-control select-movie']) !!}
                     </div>
@@ -44,6 +42,10 @@
                         </div>
                     @endif
                     
+                    <div class="form-group">
+                        {!! Form::label('linkserver', 'Link server', []) !!}
+                        {!! Form::select('linkserver', $linkmovie , $episode->server ,['class'=>'form-control']) !!}
+                    </div>
                     
                     @if (!isset($episode))
                     {!! Form::submit('Thêm tập phim', ['class'=>'btn btn-success']) !!}

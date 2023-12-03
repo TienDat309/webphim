@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>Quản lý tập phim</span>
+                <div class="card-header d-flex justify-content-between align-items-center"
+                    style="font-size:20px; text-align:center; font-weight:700">Quản lý tập phim</span>
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -22,16 +22,17 @@
                     @endif
                     
                     <div class="form-group">
-                        {!! Form::label('movie_title', 'Link Phim', []) !!}
+                        {!! Form::label('movie_title', 'Phim', []) !!}
                         {!! Form::text('movie_title',isset($movie) ? $movie->title : '',
                         ['class'=>'form-control','readonly']) !!}
                         {!! Form::hidden('movie_id', isset($movie) ? $movie->id : '') !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('link', 'Link Phim', []) !!}
+                        {!! Form::label('link', 'Link phim', []) !!}
                         {!! Form::text('link', isset($episode) ? $episode->linkphim : '',
                         ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...']) !!}
                     </div> 
+
                     @if(isset($episode))
                         <div class="form-group">
                             {!! Form::label('episode', 'Tập phim', []) !!}
@@ -44,8 +45,13 @@
                         </div>
                     @endif
 
+                    <div class="form-group">
+                        {!! Form::label('linkserver', 'Link server', []) !!}
+                        {!! Form::select('linkserver', $linkmovie , '',['class'=>'form-control']) !!}
+                    </div>
+
                     @if (!isset($episode))
-                        {!! Form::submit('Thêm tập phim', ['class'=>'btn btn-success']) !!}
+                        {!! Form::submit('Thêm tập phim', ['class'=>'btn btn-success', 'style'=>'margin-bottom:20px']) !!}
                     @else
                         {!! Form::submit('Cập nhật tập phim', ['class'=>'btn btn-success']) !!}
                     @endif
@@ -59,10 +65,11 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Tiêu phim</th>
+                        <th scope="col">Tên phim</th>
                         <th scope="col">Hình ảnh phim</th>
                         <th scope="col">Tập phim</th>
                         <th scope="col">Link phim</th>
+                        <th scope="col">Server</th>
                         {{-- <th scope="col">Hiển thị</th> --}}
                         <th scope="col">Quản lý</th>
                     </tr>
@@ -76,6 +83,13 @@
                         <td><img width="100" src="{{asset('uploads/movie/'.$episode->movie->image)}}"></td>
                         <td>{{$episode->episode}}</td>
                         <td style="width:5%">{{$episode->linkphim}}</td>
+                        <td>
+                        @foreach ($list_server as $key => $server_link)
+                            @if($episode->server==$server_link->id)
+                                {{$server_link->title}}
+                            @endif
+                        @endforeach
+                        </td>
                         {{-- <td>
                             @if($episode->status)
                                 Có
@@ -87,7 +101,7 @@
                             {!! Form::open(['method'=>'DELETE','route'=>['episode.destroy',$episode->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
                                 {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                             {!! Form::close() !!}
-                            <a href="{{route('episode.edit', $episode->id)}}" class="btn btn-warning" style="margin-top: 5px">Sửa</a>
+                            <a href="{{route('episode.edit', $episode->id)}}" class="btn btn-warning" style="margin-top: 5px; width:56px">Sửa</a>
                         </td>
                     </tr>
                     @endforeach

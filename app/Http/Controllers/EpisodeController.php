@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Episode;
+use App\Models\LinkMovie;
 use Carbon\Carbon;
 
 class EpisodeController extends Controller
@@ -47,6 +48,7 @@ class EpisodeController extends Controller
             $ep = new Episode();
             $ep->movie_id = $data['movie_id'];
             $ep->linkphim = $data['link'];
+            $ep->server = $data['linkserver'];
             $ep->episode = $data['episode'];
             $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
             $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
@@ -57,9 +59,11 @@ class EpisodeController extends Controller
     }
 
     public function add_episode($id){
+        $linkmovie = LinkMovie::orderBy('id','DESC')->pluck('title','id');
+        $list_server = LinkMovie::orderBy('id','DESC')->get();
         $movie = Movie::find($id);
         $list_episode = Episode::with('movie')->where('movie_id',$id)->orderBy('episode','DESC')->get();
-        return view('admin.episode.add_episode',compact('list_episode','movie'));
+        return view('admin.episode.add_episode',compact('list_episode','movie','linkmovie','list_server'));
     }
 
     /**
@@ -81,9 +85,10 @@ class EpisodeController extends Controller
      */
     public function edit($id)
     {
+        $linkmovie = LinkMovie::orderBy('id','DESC')->pluck('title','id');
         $list_movie = Movie::orderBy('id','DESC')->pluck('title','id');
         $episode = Episode::find($id);
-        return view('admin.episode.form',compact('episode','list_movie'));
+        return view('admin.episode.form',compact('episode','list_movie','linkmovie'));
     }
 
     /**
@@ -99,12 +104,13 @@ class EpisodeController extends Controller
         $ep =  Episode::find($id);
         $ep->movie_id = $data['movie_id'];
         $ep->linkphim = $data['link'];
+        $ep->server = $data['linkserver'];
         $ep->episode = $data['episode'];
         $ep->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $ep->save();
         toastr()->success('Cập nhật tập phim thành công.');
-        return redirect()->to('episode');
+        return redirect()->to('add-episode/'.$ep->movie_id);
     }
 
     /**

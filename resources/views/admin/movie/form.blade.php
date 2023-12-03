@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"style="font-size:20px; text-align:center; font-weight:700">THÊM PHIM</div>
+                <div class="card-header" style="font-size:20px; text-align:center; font-weight:700">THÊM PHIM</div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

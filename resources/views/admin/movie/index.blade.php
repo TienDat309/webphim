@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="modal" id="videoModal" tabindex="-1" role="dialog" style="background-color: rgba(255, 255, 255, 0.1)">
+<div class="modal" id="videoModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,7 +29,7 @@
                             <th scope="col">Tên phim (English)</th>
                             <th scope="col">Số tập phim</th>
                             <th scope="col">Tập phim</th>
-                            <th scope="col">Từ khóa</th>
+                            {{-- <th scope="col">Từ khóa</th> --}}
                             <th scope="col">Độ phân giải</th>
                             <th scope="col">Phụ đề</th>
                             <th scope="col">Hình ảnh</th>
@@ -75,13 +75,13 @@
                                 </td>
 
 
-                                <td>
+                                {{-- <td>
                                     @if($cate->tags!=NULL)
                                     {{substr($cate->tags,0,50)}}...
                                     @else
                                     Chưa có từ khóa cho phim
                                     @endif
-                                </td>
+                                </td> --}}
 
                                 <td>
                                     {{-- @if($cate->resolution==0)
