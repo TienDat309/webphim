@@ -256,6 +256,8 @@ class MovieController extends Controller
         // );
         $movie = new Movie();
         $movie->title = $data['title'];
+        $movie->director = $data['director'];
+        $movie->actor = $data['actor'];
         $movie->trailer = $data['trailer'];
         $movie->episode_movie = $data['episode_movie'];
         $movie->tags = $data['tags'];
@@ -270,7 +272,7 @@ class MovieController extends Controller
         $movie->category_id = $data['category_id'];
         $movie->belongmovie = $data['belongmovie'];
         $movie->country_id = $data['country_id'];
-        $movie->count_views = rand(10,50000);
+        $movie->count_views = rand(1,7000);
         $movie->datecreated = Carbon::now('Asia/Ho_Chi_Minh');
         $movie->updateday = Carbon::now('Asia/Ho_Chi_Minh');
 
@@ -337,6 +339,8 @@ class MovieController extends Controller
         $data = $request->all();
         $movie = Movie::find($id);
         $movie->title = $data['title'];
+        $movie->director = $data['director'];
+        $movie->actor = $data['actor'];
         $movie->trailer = $data['trailer'];
         $movie->episode_movie = $data['episode_movie'];
         $movie->tags = $data['tags'];

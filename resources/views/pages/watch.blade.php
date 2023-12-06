@@ -67,11 +67,11 @@
             <div class="clearfix"></div>
             <div class="clearfix"></div>
             <div class="title-block">
-               <a href="javascript:;" data-toggle="tooltip" title="Add to bookmark">
+               {{-- <a href="javascript:;" data-toggle="tooltip" title="Add to bookmark">
                   <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-id="37976">
                      <div class="halim-pulse-ring"></div>
                   </div>
-               </a>
+               </a> --}}
                <div class="title-wrapper-xem full">
                   <h4 class="entry-title"><a href="#" title="{{$movie->title}}" class="tl">{{$movie->title}}</a></h4>
                </div>
@@ -85,55 +85,92 @@
             </div>
             <div id="halim-list-server">
                <ul class="nav nav-tabs" role="tablist">
+
                   @if($movie->resolution==0)
                   <li role="presentation" class="active server-1"><a href="#server-0" aria-controls="server-0"
-                     role="tab" data-toggle="tab"><i class="hl-server"></i> HD</a></li>
+                     role="tab" data-toggle="tab">HD</a></li>
                   @elseif($movie->resolution==1)
                   <li role="presentation" class="active server-1"><a href="#server-0" aria-controls="server-0"
-                     role="tab" data-toggle="tab"><i class="hl-server"></i> SD</a></li>
+                     role="tab" data-toggle="tab">SD</a></li>
                   @elseif($movie->resolution==2)
                   <li role="presentation" class="active server-1"><a href="#server-0" aria-controls="server-0"
-                     role="tab" data-toggle="tab"><i class="hl-server"></i> HDCam</a></li>
+                     role="tab" data-toggle="tab">HDCam</a></li>
                   @elseif($movie->resolution==3)
                   <li role="presentation" class="active server-1"><a href="#server-0" aria-controls="server-0"
-                     role="tab" data-toggle="tab"><i class="hl-server"></i> Cam</a></li>
+                     role="tab" data-toggle="tab">Cam</a></li>
                   @elseif($movie->resolution==4)
                   <li role="presentation" class="active server-1"><a href="#server-0" aria-controls="server-0"
-                     role="tab" data-toggle="tab"><i class="hl-server"></i> FullHD</a></li>
+                     role="tab" data-toggle="tab">FullHD</a></li>
                   @else
                   <li role="presentation" class="active server-1"><a href="#server-0" aria-controls="server-0"
-                     role="tab" data-toggle="tab"><i class="hl-server"></i> Trailer</a></li>
+                     role="tab" data-toggle="tab">Trailer</a></li>
                   @endif
+
+                  @if($movie->subtitle==0)
                   <li role="presentation" class="active server-1"><a href="#server-0" aria-controls="server-0"
-                        role="tab" data-toggle="tab"><i class="hl-server"></i> Vietsub</a></li>
+                        role="tab" data-toggle="tab">Vietsub</a></li>
+                  @else
+                  <li role="presentation" class="active server-1"><a href="#server-0" aria-controls="server-0"
+                     role="tab" data-toggle="tab">Thuyết minh</a></li>
+                  @endif
+
                </ul>
                <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active server-1" id="server-0">
                      <div class="halim-server">
                         <ul class="halim-list-eps">
 
-                           @foreach ($movie->episode as $key => $episode_movie)
-                           <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_movie->episode)}}">
-                              <li class="halim-episode">
-                                 <span
-                                    class="halim-btn halim-btn-2 {{$tapphim==$episode_movie->episode ? 'active' : ''}} halim-info-1-1 box-shadow" data-post-id="37976"
-                                    data-server="1" data-episode="1" data-position="first" data-embed="0"
-                                    data-title="Xem phim {{$movie->title}} - Tập {{$episode_movie->episode}} - {{$movie->name_eng}} - Vietsub + Thuyết Minh"
-                                    data-h1="{{$movie->title}} - tập {{$episode_movie->episode}}">{{$episode_movie->episode}}
-                                 </span>
-                              </li>
-                           </a>  
+                           @foreach ($server as $key => $ser)
+                              @foreach ($episode_movie as $key => $ser_mov)
+                                 @if($ser_mov->server==$ser->id)
+                                 <!--Server phim-->
+                                    <li class="halim-episode">
+                                       <span
+                                          class="halim-btn halim-btn-2 halim-info-1-1 box-shadow">{{$ser->title}}
+                                       </span>
+                                    </li>
+                                    <!--Tập phim-->
+                                    <ul class="halim-list-eps">
+                                       @foreach ($episode_list as $key => $epi)
+                                          @if($epi->server == $ser->id)
+                                             <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$epi->episode.'/server-'.$epi->server)}}">
+                                                <li class="halim-episode">
+                                                   <span
+                                                      class="halim-btn halim-btn-2 {{$tapphim==$epi->episode && $server_active=='server-'.$ser->id ? 'active' : ''}} halim-info-1-1 box-shadow"
+                                                      title="Xem phim {{$movie->title}} - Tập {{$epi->episode}} - {{$movie->name_eng}} - Vietsub + Thuyết Minh"
+                                                      data-h1="{{$movie->title}} - tập {{$epi->episode}}">{{$epi->episode}}
+                                                   </span>
+                                                </li>
+                                             </a> 
+                                          @endif
+                                       @endforeach
+                                    </ul>
+                                 @endif
+                              @endforeach
                            @endforeach
       
                         </ul>
+                        
                         <div class="clearfix"></div>
                      </div>
                   </div>
                </div>
             </div>
             <div class="clearfix"></div>
-            <div class="htmlwrap clearfix">
-               <div id="lightout"></div>
+            <!--Bình luận phim-->
+            <div class="section-bar clearfix">
+               <h2 class="section-title"><span style="color:#ffed4d">Bình luận</span></h2>
+            </div>
+            <div class="entry-content htmlwrap clearfix">
+               <div class="video-item halim-entry-box">
+                  @php
+                  $current_url = Request::url();
+                  @endphp
+                  <article id="post-38424" class="item-content" style="text-align: justify; background-color:rgba(255, 255, 255, 0.955)">
+                     <div class="fb-comments" data-colorscheme="light" data-href="{{$current_url}}" data-width="100%"
+                        data-numposts="10"></div>
+                  </article>
+               </div>
             </div>
       </section>
       <section class="related-movies">
@@ -166,7 +203,7 @@
                         <span class="episode"></i>
                            {{$hot->episode_count}}/{{$hot->episode_movie}} -
                            @if($hot->subtitle==0)
-                           Phụ đề
+                           Vietsub 
                            @else
                            Thuyết Minh
                            @endif

@@ -4,7 +4,10 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <table class="table table-responsive" id="tablephim">
+            <div class="card-header d-flex justify-content-between align-items-center"
+                style="font-size:20px; text-align:center; font-weight:700; margin-bottom:20px">DANH SÁCH TẬP PHIM</span>
+            </div>
+            <table class="table table-responsive" id="tablephim" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding-top: 5px">
                 <thead>
                     <tr>
                         <th scope="col">#</th>

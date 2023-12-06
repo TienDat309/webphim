@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $phimhot_trailer = Movie::where('resolution',5)->where('status',1)->orderBy('updateday', 'DESC')->take(10)->get();
-        $category = Category::orderBy('position','DESC')->where('status',1)->get();
+        $category = Category::orderBy('position','ASC')->where('status',1)->get();
         $genre = Genre::orderBy('id','ASC')->get();   
         $country = Country::orderBy('id','ASC')->get();   
         //total admin

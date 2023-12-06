@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding-top: 5px">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header" style="font-size:20px; text-align:center; font-weight:700">THÊM PHIM</div>
+                <div class="card-header" style="margin-bottom: 15px; font-size:20px; text-align:center; font-weight:700">THÊM PHIM</div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -61,6 +61,21 @@
                         ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
                         'id'=>'convert_slug']) !!}
                     </div>
+
+                    <div class="form-group">
+                        {!! Form::label('director', 'Đạo diễn', []) !!}
+                        {!! Form::text('director', isset($movie) ? $movie->director : '',
+                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...','id'=>'director'
+                        ]) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('actor', 'Diễn viên', []) !!}
+                        {!! Form::text('actor', isset($movie) ? $movie->actor : '',
+                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...','id'=>'actor'
+                        ]) !!}
+                    </div>
+
                     <div class="form-group">
                         {!! Form::label('description', 'Mô tả', []) !!}
                         {!! Form::textarea('description', isset($movie) ? $movie->description :
@@ -85,7 +100,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('subtitle', 'Phụ đề', []) !!}
-                        {!! Form::select('subtitle', ['0'=>'Phụ đề', '1'=>'Thuyết minh'], isset($movie) ?
+                        {!! Form::select('subtitle', ['0'=>'Vietsub', '1'=>'Thuyết minh'], isset($movie) ?
                         $movie->subtitle : '',
                         ['class'=>'form-control']) !!}
                     </div>
@@ -123,7 +138,7 @@
                         {!! Form::label('Image', 'Hình ảnh', []) !!}
                         {!! Form::file('image', ['class'=>'form-control-file']) !!}
                         @if(isset($movie))
-                        <img width="15%" src="{{asset('uploads/movie/'.$movie->image)}}">
+                        <img width="15%" style="margin-top: 10px" src="{{asset('uploads/movie/'.$movie->image)}}">
                         @endif
                     </div>
                     @if (!isset($movie))

@@ -49,7 +49,7 @@
                      </span><span class="episode"></i>
                         {{$mov->episode_count}}/{{$mov->episode_movie}} -
                        @if($mov->subtitle==0)
-                           Phụ đề
+                           Vietsub
                        @else
                            Thuyết Minh
                        @endif

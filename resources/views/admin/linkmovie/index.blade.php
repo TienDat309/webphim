@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card" >
                 <div class="card-header " style="margin-bottom:10px;font-size:20px; text-align:center; font-weight:700">QUẢN LÝ LINK PHIM</div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -16,7 +16,7 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <table class="table" id="tablephim">
+                    <table class="table" id="tablephim" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding-top: 5px;">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -40,8 +40,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {!! Form::open(['method'=>'DELETE','route'=>['linkmovie.destroy',$movielink->id],'onsubmit'=>'return
-                                    confirm("Bạn có chắc chắn xóa")']) !!}
+                                    {!! Form::open(['method'=>'DELETE','route'=>['linkmovie.destroy',$movielink->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
                                     {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                                     {!! Form::close() !!}
                                     <a href="{{route('linkmovie.edit', $movielink->id)}}" class="btn btn-warning"

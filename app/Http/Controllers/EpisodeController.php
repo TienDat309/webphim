@@ -43,6 +43,7 @@ class EpisodeController extends Controller
         $data = $request->all();
         $episode_check = Episode::where('episode',$data['episode'])->where('movie_id',$data['movie_id'])->count();
         if($episode_check>0){
+            toastr()->warning('Tập phim đã trùng.');
             return redirect()->back();
         }else{
             $ep = new Episode();
@@ -123,7 +124,7 @@ class EpisodeController extends Controller
     {
         $episode = Episode::find($id)->delete();
         toastr()->success('Xóa tập phim thành công.');
-        return redirect()->to('episode');
+        return redirect()->back();
 
     }
     public function select_movie(){

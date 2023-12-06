@@ -40,14 +40,13 @@
                      <img src="{{ asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->tilte}}">
                      @if ($movie->resolution!=5)
                         @if($episode_current_list_count>0)
-                        <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_first->episode)}}" style="width:48%; height:35px; font-size:15px"
+                        <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_first->episode.'/server-'.$episode_first->server)}}" style="width:100%; height:35px; font-size:15px"
                            class="btn btn-danger">Xem Phim</a>
-                        <a href="#watch_trailer" style="height:35px; width:48%; font-size:14.5px"
-                           class="btn btn-primary watch_trailer">Xem Trailer</a>
+                        @else
+                        <a style="width:100%; height:35px; font-size:15px" class="btn btn-success">Đang Cập Nhật</a>
                         @endif
                      @else
-                        <a href="#watch_trailer" style="display:block" class="btn btn-primary watch_trailer">Xem
-                           Trailer</a>
+                        <a href="#watch_trailer" style="display:block" class="btn btn-primary watch_trailer">Xem Trailer</a>
                      @endif
                   </div>
                   <div class="film-poster col-md-9">
@@ -75,7 +74,7 @@
                               @if ($movie->resolution!=5)
                               <span class="episode">
                                  @if($movie->subtitle==0)
-                                 Phụ đề
+                                 Vietsub
                                  @else
                                  Thuyết Minh
                                  @endif
@@ -116,13 +115,39 @@
                            <li class="list-info-group-item"><span>Năm phim</span> :
                               {{$movie->year}}
                      
+                              <?php
+                              function displayDirector($director) {
+                                  if ($director) {
+                                      echo "<li class='list-info-group-item'><span>Đạo diễn</span>: $director</li>";
+                                  } else {
+                                      echo "<li class='list-info-group-item'><span>Đạo diễn</span>: Đang cập nhật</li>";
+                                  }
+                              }
+                              
+                              // Sử dụng hàm
+                              displayDirector($movie->director);
+                              ?>
+                     
+                              <?php
+                              function displayActor($actor) {
+                                 if ($actor) {
+                                    echo "<li class='list-info-group-item'><span>Diễn viên</span>: $actor</li>";
+                                 } else {
+                                    echo "<li class='list-info-group-item'><span>Diễn viên</span>: Đang cập nhật</li>";
+                                 }
+                              }
+                              
+                              // Sử dụng hàm
+                              displayActor($movie->actor);
+                              ?>
+                     
                            </li>
                            <li class="list-info-group-item"><span>Tập phim mới nhất</span> :
 
                               @if($episode_current_list_count>0)
                                  @if($movie->belongmovie=='phimbo')
                                     @foreach ($episode as $key => $ep)
-                                       <a href="{{url('xem-phim/'.$ep->movie->slug.'/tap-'.$ep->episode)}}"
+                                       <a href="{{url('xem-phim/'.$ep->movie->slug.'/tap-'.$ep->episode.'/server-'.$ep->server)}}"
                                           rel="tag">Tập {{$ep->episode}}</a>
                                     @endforeach
                                  @elseif($movie->belongmovie=='phimle')
@@ -205,7 +230,7 @@
                   </article>
                </div>
             </div>
-            <!--Bình luận phim-->
+            {{-- <!--Bình luận phim-->
             <div class="section-bar clearfix">
                <h2 class="section-title"><span style="color:#ffed4d">Bình luận</span></h2>
             </div>
@@ -219,7 +244,7 @@
                         data-numposts="10"></div>
                   </article>
                </div>
-            </div>
+            </div> --}}
             <!--Trailer phim-->
             <div class="section-bar clearfix">
                <h2 class="section-title"><span style="color:#ffed4d">Trailer phim</span></h2>
@@ -266,7 +291,7 @@
                         <span class="episode"></i>
                            {{$hot->episode_count}}/{{$hot->episode_movie}} -
                            @if($hot->subtitle==0)
-                           Phụ đề
+                           Vietsub
                            @else
                            Thuyết Minh
                            @endif

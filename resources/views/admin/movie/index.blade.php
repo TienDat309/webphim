@@ -17,33 +17,33 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
+
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        {{-- <div class="col-md-12"> --}}
             <a href="{{route('movie.create')}}" class="btn btn-info" style="margin-bottom: 15px">Thêm phim</a>
             <div class="table-responsive">
-                <table class="table" id="tablephim">
+                <table class="table" id="tablephim" style=" border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding: 5px 10px 0 10px; ">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Tên phim (English)</th>
-                            <th scope="col">Số tập phim</th>
+                            <th scope="col">Số tập</th>
                             <th scope="col">Tập phim</th>
                             {{-- <th scope="col">Từ khóa</th> --}}
-                            <th scope="col">Độ phân giải</th>
-                            <th scope="col">Phụ đề</th>
+                            {{-- <th scope="col">Độ phân giải</th> --}}
+                            {{-- <th scope="col">Phụ đề</th> --}}
                             <th scope="col">Hình ảnh</th>
-                            <th scope="col">Phim hot</th>
+                            {{-- <th scope="col">Phim hot</th> --}}
                             <th scope="col">Thời lượng</th>
-                            <th scope="col">Slug</th>
+                            {{-- <th scope="col">Slug</th> --}}
                             {{-- <th scope="col">Mô tả</th> --}}
-                            <th scope="col">Hiển thị</th>
+                            {{-- <th scope="col">Hiển thị</th> --}}
 
-                            <th scope="col">Danh mục</th>
+                            {{-- <th scope="col">Danh mục</th> --}}
                             <th scope="col">Thể loại</th>
-                            <th scope="col">Quốc gia</th>
+                            {{-- <th scope="col">Quốc gia</th>
 
-                            <th scope="col">Thuộc phim</th>
+                            <th scope="col">Thuộc phim</th> --}}
                             <th scope="col">Ngày tạo</th>
                             <th scope="col">Ngày cập nhật</th>
                             <th scope="col">Lượt xem</th>
@@ -83,7 +83,7 @@
                                     @endif
                                 </td> --}}
 
-                                <td>
+                                {{-- <td> --}}
                                     {{-- @if($cate->resolution==0)
                                     HD
                                     @elseif($cate->resolution==1)
@@ -97,44 +97,44 @@
                                     @else
                                     Trailer
                                     @endif --}}
-                                    @php
+                                    {{-- @php
                                         $option = array('0'=>'HD','1'=>'SD','2'=>'HDCam','3'=>'Cam','4'=>'FullHD','5'=>'Trailer')
                                     @endphp
                                     <select id="{{$cate->id}}" class="resolution_choose">
                                         @foreach ($option as $key => $resolution)
                                             <option {{$cate->resolution==$key ? 'selected' : ''}} value="{{$key}}">{{$resolution}}</option>
                                         @endforeach
-                                    </select>
-                                </td>
+                                    </select> --}}
+                                {{-- </td> --}}
 
-                                <td>
+                                {{-- <td> --}}
                                     {{-- @if($cate->subtitle==0)
-                                    Phụ đề
+                                    Vietsub
                                     @else
                                     Thuyết minh
                                     @endif --}}
-                                    <select id="{{$cate->id}}" class="subtitle_choose">
+                                    {{-- <select id="{{$cate->id}}" class="subtitle_choose">
                                         @if($cate->subtitle==0)
                                         <option value="1">Thuyết minh</option>
-                                        <option selected value="0">Phụ đề</option>
+                                        <option selected value="0">Vietsub</option>
                                         @else
                                         <option selected value="1">Thuyết minh</option>
-                                        <option value="0">Phụ đề</option>
+                                        <option value="0">Vietsub</option>
                                         @endif
-                                    </select>
-                                </td>
+                                    </select> --}}
+                                {{-- </td> --}}
 
                                 <td>
                                     <img width="100" src="{{asset('uploads/movie/'.$cate->image)}}">
                                 </td>
 
-                                <td>
+                                {{-- <td> --}}
                                     {{-- @if($cate->phim_hot==0)
                                     Không
                                     @else
                                     Có
                                     @endif --}}
-                                    <select id="{{$cate->id}}" class="phim_hot_choose">
+                                    {{-- <select id="{{$cate->id}}" class="phim_hot_choose">
                                         @if($cate->phim_hot==0)
                                         <option value="1">Có</option>
                                         <option selected value="0">Không</option>
@@ -143,11 +143,11 @@
                                         <option value="0">Không</option>
                                         @endif
                                     </select>
-                                </td>
+                                </td> --}}
 
                                 <td>{{$cate->time_movie}}</td>
 
-                                <td>{{$cate->slug}}</td>
+                                {{-- <td>{{$cate->slug}}</td> --}}
 
                                 {{-- <td>
                                     @if($cate->description!=NULL)
@@ -157,13 +157,13 @@
                                     @endif
                                 </td> --}}
 
-                                <td>
+                                {{-- <td> --}}
                                     {{-- @if($cate->status)
                                     Có
                                     @else
                                     Không
                                     @endif --}}
-                                    <select id="{{$cate->id}}" class="status_choose">
+                                    {{-- <select id="{{$cate->id}}" class="status_choose">
                                         @if($cate->status==0)
                                         <option value="1">Có</option>
                                         <option selected value="0">Không</option>
@@ -172,13 +172,13 @@
                                         <option value="0">Không</option>
                                         @endif
                                     </select>
-                                </td>
+                                </td> --}}
 
                                 {{-- <td>{{$cate->category->title}}</td> --}}
-                                <td>
+                                {{-- <td>
                                     {!! Form::select('category_id', $category , isset($cate) ? $cate->category->id : '',
                                     ['class'=>'category_choose','id'=>$cate->id,'style'=>'width:150px']) !!}
-                                </td>
+                                </td> --}}
 
                                 <td>
                                     @foreach ($cate->movie_genre as $gen)
@@ -186,19 +186,19 @@
                                     @endforeach
                                 </td>
 
-                                <td>
+                                {{-- <td> --}}
                                     {{-- {{$cate->country->title}} --}}
-                                    {!! Form::select('country_id', $country, isset($cate) ? $cate->country->id : '',
+                                    {{-- {!! Form::select('country_id', $country, isset($cate) ? $cate->country->id : '',
                                     ['class'=>'country_choose','id'=>$cate->id,'style'=>'width:160px']) !!}
-                                </td>
+                                </td> --}}
 
-                                <td>
+                                {{-- <td> --}}
                                     {{-- @if($cate->belongmovie=='phimle')
                                     Phim lẻ
                                     @else
                                     Phim bộ
                                     @endif --}}
-                                    <select id="{{$cate->id}}" class="belongmovie_choose">
+                                    {{-- <select id="{{$cate->id}}" class="belongmovie_choose">
                                         @if($cate->belongmovie=='phimle')
                                         <option value="phimbo">Phim bộ</option>
                                         <option selected value="phimle">Phim lẻ</option>
@@ -207,7 +207,7 @@
                                         <option value="phimle">Phim lẻ</option>
                                         @endif
                                     </select>
-                                </td>
+                                </td> --}}
 
                                 <td>{{$cate->datecreated}}</td>
                                 <td>{{$cate->updateday}}</td>
@@ -225,8 +225,7 @@
                                     '',['class'=>'select-season','id'=>$cate->id])!!}
                                 </td>
                                 <td>
-                                    {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return
-                                    confirm("Bạn có chắc chắn xóa")']) !!}
+                                    {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
                                     {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                                     {!! Form::close() !!}
                                     <a href="{{route('movie.edit', $cate->id)}}" style="margin-top: 5px; width:56px"
@@ -237,7 +236,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        {{-- </div> --}}
     </div>
-</div>
+
 @endsection

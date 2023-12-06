@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" >
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-12" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding-top: 5px">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center"
                     style="font-size:20px; text-align:center; font-weight:700">Quản lý tập phim</span>
@@ -60,8 +60,8 @@
             </div>
         </div>
         <!--Liệt kê phim-->
-        <div class="col-md-12">
-            <table class="table table-responsive" id="tablephim">
+        <div class="col-md-12" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding: 5px; margin-top:20px">
+            <table class="table table-responsive" id="tablephim" >
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -99,7 +99,7 @@
                         </td> --}}
                         <td>
                             {!! Form::open(['method'=>'DELETE','route'=>['episode.destroy',$episode->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
-                                {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
+                            {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                             {!! Form::close() !!}
                             <a href="{{route('episode.edit', $episode->id)}}" class="btn btn-warning" style="margin-top: 5px; width:56px">Sửa</a>
                         </td>

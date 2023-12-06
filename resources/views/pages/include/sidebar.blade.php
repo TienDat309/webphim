@@ -91,7 +91,7 @@
                         {{$hot_sidebar->count_views}} lượt quan tâm
                      @else
                         @php
-                          echo rand(10,50000);
+                          echo rand(1,7000);
                         @endphp
                         lượt quan tâm
                      @endif

@@ -51,7 +51,7 @@
         {!! Form::close() !!}
     </div>
 </div>
-<table class="table" id="tablephim">
+<table class="table" id="tablephim" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding-top: 5px">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -67,7 +67,7 @@
         <tr id="{{$cate->id}}">
             <th scope="row">{{$key}}</th>
             <td>{{$cate->title}}</td>
-            <td>{{$cate->description}}</td>
+            {{-- <td>{{$cate->description}}</td> --}}
             <td>{{$cate->slug}}</td>
             <td>
                 @if($cate->status)
@@ -77,8 +77,7 @@
                 @endif
             </td>
             <td>
-                {!! Form::open(['method'=>'DELETE','route'=>['category.destroy',$cate->id],'onsubmit'=>'return
-                confirm("Bạn có chắc chắn xóa")']) !!}
+                {!! Form::open(['method'=>'DELETE','route'=>['category.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
                 {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                 {!! Form::close() !!}
                 <a href="{{route('category.edit', $cate->id)}}" class="btn btn-warning"

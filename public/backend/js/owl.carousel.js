@@ -400,19 +400,19 @@ if ( typeof Object.create !== "function" ) {
 			var buttonsWrapper = $("<div class=\"owl-buttons\"/>")
 			base.owlControls.append(buttonsWrapper);
 
-			base.buttonPrev = $("<div/>",{
-				"class" : "owl-prev",
-				"html" : base.options.navigationText[0] || ""
-				});
+			// base.buttonPrev = $("<div/>",{
+			// 	"class" : "owl-prev",
+			// 	"html" : base.options.navigationText[0] || ""
+			// 	});
 
-			base.buttonNext = $("<div/>",{
-				"class" : "owl-next",
-				"html" : base.options.navigationText[1] || ""
-				});
+			// base.buttonNext = $("<div/>",{
+			// 	"class" : "owl-next",
+			// 	"html" : base.options.navigationText[1] || ""
+			// 	});
 
-			buttonsWrapper
-			.append(base.buttonPrev)
-			.append(base.buttonNext);
+			// buttonsWrapper
+			// .append(base.buttonPrev)
+			// .append(base.buttonNext);
 
 			buttonsWrapper.on("touchstart.owlControls mousedown.owlControls", "div[class^=\"owl\"]", function(event){
 				event.preventDefault();

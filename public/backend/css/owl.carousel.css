@@ -26,18 +26,18 @@
 	width: 33px;
 	height: 54px;
 }
-.owl-next{
-	background: url(../images/divice-pagenations.png) no-repeat -35px 0px;
+/* .owl-next{
+	background: url(../images/go-back.png) no-repeat -35px 0px;
 	position: absolute;
 	right: -8%;
 	top: 30%;
 }
 .owl-prev{
-	background: url(../images/divice-pagenations.png) no-repeat 0px 0px;
+	background: url(https://cdn-icons-png.flaticon.com/512/8045/8045249.png) no-repeat 0px 0px;
 	position: absolute;
 	left: -16.5%;
 	top: 30%;
-}
+} */
 /* Clickable class fix problem with hover on touch devices */
 /* Use it for non-touch hover action */
 .owl-theme .owl-controls.clickable .owl-buttons div:hover{

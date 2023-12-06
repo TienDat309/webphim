@@ -52,7 +52,7 @@
         {!! Form::close() !!}
     </div>
 </div>
-<table class="table" id="tablephim">
+<table class="table" id="tablephim" style="border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; padding-top: 5px;">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -78,8 +78,7 @@
                 @endif
             </td>
             <td>
-                {!! Form::open(['method'=>'DELETE','route'=>['country.destroy',$cate->id],'onsubmit'=>'return
-                confirm("Bạn có chắc chắn xóa")']) !!}
+                {!! Form::open(['method'=>'DELETE','route'=>['country.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
                 {!! Form::submit('Xóa', ['class'=>'btn btn-danger']) !!}
                 {!! Form::close() !!}
                 <a href="{{route('country.edit', $cate->id)}}" class="btn btn-warning" style="margin-top: 5px; width:56px">Sửa</a>

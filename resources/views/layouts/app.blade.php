@@ -148,10 +148,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               </button>
               <h1>
                 <a class="navbar-brand" href="{{url('/home')}}"
-                  ><span class="fa fa-area-chart"></span> Glance<span
-                    class="dashboard_text"
-                    >Design dashboard</span
-                  ></a
+                  ><img src="/imgs/motphimtv.png" style="width:165px; height:50px;"></a
                 >
               </h1>
             </div>
@@ -160,7 +157,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               id="bs-example-navbar-collapse-1"
             >
               <ul class="sidebar-menu">
-                <li class="header">Quản lý Webphim</li>
+                <li class="header" style="text-align: center; font-size:15px">Quản lý Webphim</li>
                 <li class="treeview">
                   <a href="{{url('/home')}}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -268,10 +265,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                   </ul>
               </li>
             </ul>
-            <div class="clearfix"></div>
+            {{-- <div class="clearfix"></div> --}}
           </div>
           <!--notification menu end -->
-          <div class="clearfix"></div>
+          {{-- <div class="clearfix"></div> --}}
         </div>
         <div class="header-right">
           {{-- <!--search-box-->
