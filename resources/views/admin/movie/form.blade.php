@@ -104,11 +104,7 @@
                         $movie->subtitle : '',
                         ['class'=>'form-control']) !!}
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('Category', 'Danh mục', []) !!}
-                        {!! Form::select('category_id', $category , isset($movie) ? $movie->category_id: '',
-                        ['class'=>'form-control']) !!}
-                    </div>
+                    
                     <div class="form-group">
                         {!! Form::label('belongmovie', 'Thuộc phim', []) !!}
                         {!! Form::select('belongmovie', ['phimle'=>'Phim lẻ', 'phimbo'=>'Phim bộ'] , isset($movie) ? $movie->belongmovie: '',
@@ -120,14 +116,62 @@
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        @foreach ($list_genre as $key => $gen)
-                            @if (isset($movie))
-                                {!! Form::checkbox('genre[]', $gen->id, isset($movie_genre) && $movie_genre->contains($gen->id) ? true : false) !!}
-                            @else
-                                {!! Form::checkbox('genre[]', $gen->id, '') !!}
+                        {!! Form::label('Category', 'Danh mục', []) !!}<br>
+                        @php $count = 0; @endphp
+                        @foreach ($list_category as $key => $cate)
+                            @if ($count % 6 == 0)
+                                <div class="row">
                             @endif
-                                {!! Form::label('genre', $gen->title) !!}
+
+                            <div class="col-md-2">
+                                @if (isset($movie))
+                                    {!! Form::checkbox('category[]', $cate->id, isset($movie_category) && $movie_category->contains($cate->id) ? true : false) !!}
+                                @else
+                                    {!! Form::checkbox('category[]', $cate->id, '') !!}
+                                @endif
+                                {!! Form::label('category', $cate->title) !!}
+                            </div>
+
+                            @php $count++; @endphp
+
+                            @if ($count % 6 == 0)
+                                </div>
+                            @endif
                         @endforeach
+
+                        {{-- Close the last row if the total number of genres is not a multiple of 6 --}}
+                        @if ($count % 6 !== 0)
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('Genre', 'Thể loại', []) !!}<br>
+                        @php $count = 0; @endphp
+                        @foreach ($list_genre as $key => $gen)
+                            @if ($count % 6 == 0)
+                                <div class="row">
+                            @endif
+
+                            <div class="col-md-2">
+                                @if (isset($movie))
+                                    {!! Form::checkbox('genre[]', $gen->id, isset($movie_genre) && $movie_genre->contains($gen->id) ? true : false) !!}
+                                @else
+                                    {!! Form::checkbox('genre[]', $gen->id, '') !!}
+                                @endif
+                                {!! Form::label('genre', $gen->title) !!}
+                            </div>
+
+                            @php $count++; @endphp
+
+                            @if ($count % 6 == 0)
+                                </div>
+                            @endif
+                        @endforeach
+
+                        {{-- Close the last row if the total number of genres is not a multiple of 6 --}}
+                        @if ($count % 6 !== 0)
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group">
                         {!! Form::label('Hot', 'Phim hot', []) !!}

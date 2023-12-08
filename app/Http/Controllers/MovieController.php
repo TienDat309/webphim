@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Movie_Genre;
+use App\Models\Movie_Category;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Genre;
@@ -162,7 +163,14 @@ class MovieController extends Controller
                             </div>
                             <p class="title">'.$mov->title.'</p>
                             </a>
-                            <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
+                            <div class="viewsCount" style="color: #9d9d9d;">';
+                            if ($mov->count_views > 0) {
+                                $output .= $mov->count_views . ' lượt quan tâm';
+                            } 
+                            else {
+                                $output .= rand(1, 7000) . ' lượt quan tâm';
+                            }
+                            $output .= '</div>
                             <div class="viewsCount" style="color: #9d9d9d;">'.$mov->year.'</div>
                             <div style="float: left;">
                             <ul class="list-inline rating" title="Average Rating">
@@ -205,7 +213,14 @@ class MovieController extends Controller
                             </div>
                             <p class="title">'.$mov->title.'</p>
                             </a>
-                            <div class="viewsCount" style="color: #9d9d9d;">3.2K lượt xem</div>
+                            <div class="viewsCount" style="color: #9d9d9d;">';
+                            if ($mov->count_views > 0) {
+                                $output .= $mov->count_views . ' lượt quan tâm';
+                            } 
+                            else {
+                                $output .= rand(1, 7000) . ' lượt quan tâm';
+                            }
+                            $output .= '</div>
                             <div class="viewsCount" style="color: #9d9d9d;">'.$mov->year.'</div>
                             <div style="float: left;">
                             <ul class="list-inline rating" title="Average Rating">
@@ -230,8 +245,9 @@ class MovieController extends Controller
         $category = Category::pluck('title','id');
         $genre = Genre::pluck('title','id');
         $list_genre = Genre::all();
+        $list_category = Category::all();
         $country = Country::pluck('title','id');
-        return view('admin.movie.form',compact('genre','country','category','list_genre'));
+        return view('admin.movie.form',compact('genre','country','category','list_genre','list_category'));
     }
 
     /**
@@ -296,7 +312,6 @@ class MovieController extends Controller
         $movie->slug = $data['slug'];
         $movie->description = $data['description'];
         $movie->status = $data['status'];
-        $movie->category_id = $data['category_id'];
         $movie->belongmovie = $data['belongmovie'];
         $movie->country_id = $data['country_id'];
         $movie->count_views = rand(1,7000);
@@ -306,7 +321,8 @@ class MovieController extends Controller
         //thêm nhìu thể loại phim
         foreach ($data['genre'] as $key => $gen)
             $movie->genre_id = $gen[0];
-            
+        foreach ($data['category'] as $key => $cate)
+            $movie->category_id = $cate[0];
         
 
         //them hinh ảnh
@@ -321,6 +337,7 @@ class MovieController extends Controller
         $movie->save();
         //thêm nhiều thể loại cho phim
         $movie->movie_genre()->sync($data['genre']);
+        $movie->movie_category()->sync($data['category']);
         toastr()->success('Thêm phim thành công.');
         return redirect()->route('movie.index');
     }
@@ -348,9 +365,11 @@ class MovieController extends Controller
         $genre = Genre::pluck('title','id');
         $country = Country::pluck('title','id');
         $list_genre = Genre::all();
+        $list_category = Category::all();
         $movie = Movie::find($id);
         $movie_genre = $movie->movie_genre;
-        return view('admin.movie.form',compact('genre','country','category','movie','list_genre','movie_genre'));
+        $movie_category = $movie->movie_category;
+        return view('admin.movie.form',compact('genre','country','category','movie','list_genre','movie_genre','list_category','movie_category'));
     }
 
     /**
@@ -379,12 +398,13 @@ class MovieController extends Controller
         $movie->slug = $data['slug'];
         $movie->description = $data['description'];
         $movie->status = $data['status'];
-        $movie->category_id = $data['category_id'];
         $movie->belongmovie = $data['belongmovie'];
         $movie->country_id = $data['country_id'];
         $movie->updateday = Carbon::now('Asia/Ho_Chi_Minh');
         foreach ($data['genre'] as $key => $gen)
             $movie->genre_id = $gen[0];
+        foreach ($data['category'] as $key => $cate)
+            $movie->category_id = $cate[0];
 
         //them hinh ảnh
         $get_image = $request->file('image');
@@ -402,6 +422,7 @@ class MovieController extends Controller
         $movie->save();
 
         $movie->movie_genre()->sync($data['genre']);
+        $movie->movie_category()->sync($data['category']);
         toastr()->success('Cập nhật phim thành công.');
 
         return redirect()->route('movie.index');

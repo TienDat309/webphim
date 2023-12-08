@@ -242,10 +242,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                           ><i class="fa fa-angle-right"></i>Liệt kê danh sách phim</a>
                       </li>
                       <li>
-                        <a href="{{route('episode.index')}}"
-                          ><i class="fa fa-angle-right"></i>Liệt kê danh sách tập phim</a>
-                      </li>
-                      <li>
                         <a href="{{route('sort_movie')}}"
                           ><i class="fa fa-angle-right"></i>Sắp xếp phim</a>
                       </li>

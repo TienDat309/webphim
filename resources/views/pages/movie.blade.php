@@ -118,13 +118,19 @@
                               @foreach ($movie->movie_genre as $gen)
                               <a href="{{route('genre',[$gen->slug])}}" rel="category tag">{{$gen->title}}</a>
                               @endforeach
-                           <li class="list-info-group-item"><span>Danh mục phim</span> :
-                              <a href="{{route('category',$movie->category->slug)}}"
-                                 rel="category tag">{{$movie->category->title}}</a>
+                           </li>
+
+                           <li class="list-info-group-item"><span>Danh mục</span> :
+                              @foreach ($movie->movie_category as $catego)
+                              <a href="{{route('category',[$catego->slug])}}" rel="category tag">{{$catego->title}}</a>
+                              @endforeach
+                           </li>
+                              
                            <li class="list-info-group-item"><span>Quốc gia</span> :
                               <a href="{{route('country',$movie->country->slug)}}"
                                  rel="tag">{{$movie->country->title}}</a>
                            </li>
+
                            <li class="list-info-group-item"><span>Năm phim</span> :
                               {{$movie->year}}
                      
@@ -165,7 +171,7 @@
                                     @endforeach
                                  @elseif($movie->belongmovie=='phimle')
                                     @foreach ($episode as $key => $ep_le)
-                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode)}}" rel="tag">{{$ep_le->episode}} Tập</a>
+                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode)}}" rel="tag">Tập {{$ep_le->episode}}</a>
                                     @endforeach
                                  @endif
                               @else

@@ -41,14 +41,16 @@
 
                             {{-- <th scope="col">Danh mục</th> --}}
                             <th scope="col">Thể loại</th>
+                            <th scope="col">Danh mục</th>
                             {{-- <th scope="col">Quốc gia</th>
 
                             <th scope="col">Thuộc phim</th> --}}
                             <th scope="col">Ngày tạo</th>
                             <th scope="col">Ngày cập nhật</th>
-                            <th scope="col">Lượt xem</th>
+                            <th scope="col">Tùy chỉnh</th>
+                            {{-- <th scope="col">TopView</th>
                             <th scope="col">Năm</th>
-                            <th scope="col">Season</th>
+                            <th scope="col">Season</th> --}}
                             <th scope="col">Quản lý</th>
                         </tr>
                 </thead>
@@ -185,6 +187,11 @@
                                     <span class="badge badge-info">{{$gen->title}}</span>
                                     @endforeach
                                 </td>
+                                <td>
+                                    @foreach ($cate->movie_category as $catego)
+                                    <span class="badge badge-info">{{$catego->title}}</span>
+                                    @endforeach
+                                </td>
 
                                 {{-- <td> --}}
                                     {{-- {{$cate->country->title}} --}}
@@ -211,18 +218,18 @@
 
                                 <td>{{$cate->datecreated}}</td>
                                 <td>{{$cate->updateday}}</td>
+                                
                                 <td>
+                                    {!! Form::label('Topview', 'Topview', []) !!}<br>
                                     {!! Form::select('topview', ['0'=>'Ngày', '1'=>'Tuần','2'=>'Tháng'], isset($cate->topview) ?
                                     $cate->topview :
-                                    '',['class'=>'select-topview','id'=>$cate->id,'placeholder'=>'View']) !!}
-                                </td>
-                                <td>
+                                    '',['class'=>'select-topview','id'=>$cate->id,'placeholder'=>'View','style'=>'width:70px']) !!}
+                                    {!! Form::label('year', 'Năm phim', []) !!}<br>
                                     {!! Form::selectYear('year', 1995, 2025, isset($cate->year) ? $cate->year :
-                                    '',['class'=>'select-year','id'=>$cate->id,'placeholder'=>'Năm'])!!}
-                                </td>
-                                <td>
+                                    '',['class'=>'select-year','id'=>$cate->id,'placeholder'=>'Năm','style'=>'width:70px'])!!}
+                                    {!! Form::label('season', 'Season', []) !!}<br>
                                     {!! Form::selectRange('season', 0, 20, isset($cate->season) ? $cate->season :
-                                    '',['class'=>'select-season','id'=>$cate->id])!!}
+                                    '',['class'=>'select-season','id'=>$cate->id,'style'=>'width:70px'])!!}
                                 </td>
                                 <td>
                                     {!! Form::open(['method'=>'DELETE','route'=>['movie.destroy',$cate->id],'onsubmit'=>'return confirm("Bạn có chắc chắn xóa")']) !!}
