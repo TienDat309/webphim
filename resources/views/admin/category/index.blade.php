@@ -62,12 +62,12 @@
             <th scope="col">Quản lý</th>
         </tr>
     </thead>
-    <tbody class="order_position">
+    <tbody>
         @foreach ($list as $key => $cate)
         <tr id="{{$cate->id}}">
             <th scope="row">{{$key}}</th>
             <td>{{$cate->title}}</td>
-            {{-- <td>{{$cate->description}}</td> --}}
+            <td>{{$cate->description}}</td>
             <td>{{$cate->slug}}</td>
             <td>
                 @if($cate->status)

@@ -20,6 +20,7 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function category_choose(Request $request){
         $data = $request->all();
         $movie = Movie::find($data['movie_id']);
@@ -83,6 +84,32 @@ class MovieController extends Controller
         File::put($path.'movie.json',json_encode($list));//lấy tất cả film trong data
 
         return view('admin.movie.index',compact('list','category','country'));
+    }
+
+    public function sort_movie(){
+        $category = Category::orderBy('id','ASC')->get();
+        $category_home = Category::with(['movie'=>function($q)
+        {
+            $q->withCount('episode')->where('status',1);
+        }
+        ])->orderBy('position','ASC')->where('status',1)->get();//nested trong laaravel
+        return view('admin.movie.sort_movie', compact('category','category_home'));
+    }
+    public function resorting_nav(Request $request){
+        $data = $request->all();
+        foreach ($data['array_id'] as $key => $value){
+            $category = Category::find($value);
+            $category->position = $key;
+            $category->save();
+        }
+    }
+    public function resorting_moive(Request $request){
+        $data = $request->all();
+        foreach ($data['movie_array'] as $key => $value){
+            $movie = Movie::find($value);
+            $movie->position = $key;
+            $movie->save();
+        }
     }
     public function update_year(Request $request)
     {

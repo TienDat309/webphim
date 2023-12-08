@@ -29,6 +29,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- font-awesome icons CSS -->
     <link href="{{asset('backend/css/font-awesome.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- //font-awesome icons CSS-->
     <!-- side nav css file -->
     <link
@@ -147,17 +148,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <span class="icon-bar"></span>
               </button>
               <h1>
-                <a class="navbar-brand" href="{{url('/home')}}"
-                  ><img src="/imgs/motphimtv.png" style="width:165px; height:50px;"></a
-                >
-              </h1>
+                <a class="navbar-brand" href="{{url('/home')}}">
+                    <img src="/imgs/motphimAZ_logo.png" style="width:165px; height:50px;" alt="MotphimAZ">
+                </a>
+            </h1>
             </div>
             <div
               class="collapse navbar-collapse"
               id="bs-example-navbar-collapse-1"
             >
               <ul class="sidebar-menu">
-                <li class="header" style="text-align: center; font-size:15px">Quản lý Webphim</li>
+                <li class="header" style="text-align: center; font-size:13px">Quản lý Xem Phim</li>
                 <li class="treeview">
                   <a href="{{url('/home')}}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -243,6 +244,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                       <li>
                         <a href="{{route('episode.index')}}"
                           ><i class="fa fa-angle-right"></i>Liệt kê danh sách tập phim</a>
+                      </li>
+                      <li>
+                        <a href="{{route('sort_movie')}}"
+                          ><i class="fa fa-angle-right"></i>Sắp xếp phim</a>
                       </li>
                     </ul>
                 </li>
@@ -609,6 +614,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- //side nav js -->
     <!-- for index page weekly sales java script -->
     <script src="{{asset('backend/js/SimpleChart.js')}}"></script>
+  
     <script>
       var graphdata1 = {
         linecolor: '#CCA300',
@@ -869,6 +875,56 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <script>
+      $( function() {
+        $( ".sortable_movie" ).sortable({
+          update: function(event, ui){
+              var movie_array = [];
+              $('.movie_position .box_phim').each(function(){
+                  movie_array.push($(this).attr('id'));
+              })
+              $.ajax({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  url: "{{route('resorting_moive')}}",
+                  method: "POST",
+                  data:{movie_array:movie_array},
+                  success: function(data){
+                      alert('Thứ tự đã được sắp xếp');
+                  }
+              })
+            }
+        });
+        $( ".sortable_movie" ).disableSelection();
+      } );
+    </script>
+
+    <script>
+      $( function() {
+        $( "#sortable_nav" ).sortable({
+          update: function(event, ui){
+              var array_id = [];
+              $('.category_position li').each(function(){
+                  array_id.push($(this).attr('id'));
+              })
+              $.ajax({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  url: "{{route('resorting_nav')}}",
+                  method: "POST",
+                  data:{array_id:array_id},
+                  success: function(data){
+                      alert('Thứ tự đã được sắp xếp');
+                  }
+              })
+            }
+        });
+        $( "#sortable" ).disableSelection();
+      } );
+    </script>
     <script type="text/javascript">
       $('.category_choose').change(function(){
           var category_id = $(this).val();

@@ -58,13 +58,13 @@ class IndexController extends Controller
         {
             $q->withCount('episode')->where('status',1);
         }
-        ])->orderBy('id','ASC')->where('status',1)->get();//nested trong laaravel
+        ])->orderBy('position','ASC')->where('status',1)->get();//nested trong laaravel
         return view('pages.home', compact('category_home','phimhot'));
     }
 
     public function category($slug){
         $cate_slug = Category::where('slug',$slug)->first();  
-        $movie = Movie::withCount('episode')->where('category_id',$cate_slug->id)->orderBy('updateday', 'DESC')->paginate(24);
+        $movie = Movie::withCount('episode')->where('category_id',$cate_slug->id)->orderBy('position', 'ASC')->paginate(24);
         return view('pages.category', compact('cate_slug','movie'));
     }
 

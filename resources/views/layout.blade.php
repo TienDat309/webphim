@@ -16,7 +16,7 @@
         type="image/x-icon" />
     <meta name="revisit-after" content="1 days" />
     <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'>
-    <title>MotPhimTV</title>
+    <title>motphim AZ</title>
     <meta name="description"
         content="Phim hay 2021 - Xem phim hay nhất, xem phim online miễn phí, phim hot , phim nhanh" />
     <link rel="canonical" href="">
@@ -46,7 +46,7 @@
     </style>
     <style>
     #header .site-title {
-        background: url(https://motphimtv.vip/motphimtv.png ) no-repeat top left ;
+        background: url(/imgs/motphimAZ_logo.png) no-repeat top left ;
         background-size: contain;
         text-indent: -9999px;
     }
@@ -181,7 +181,7 @@
                 <div class="widget about col-xs-12 col-sm-4 col-md-4 mx-auto">
                     <div class="footer-logo">
                         <img class="img-responsive"
-                            src="/imgs/motphimtv.png" style="height:50px;" alt="Phim hay 2023- Xem phim hay nhất" />
+                            src="/imgs/motphimAZ_logo.png" style="height:50px;" alt="Phim hay 2023- Xem phim hay nhất" />
                     </div>
                 </div>
                 <div class="widget about col-xs-12 col-sm-4 col-md-8 mx-auto">

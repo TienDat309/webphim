@@ -81,7 +81,20 @@
                               </span>
                               @endif
                            </li>
-                           <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->time_movie}}</li>
+                           {{-- <li class="list-info-group-item"><span>Thời lượng</span> : {{$movie->time_movie}}</li> --}}
+
+                           <?php
+                              function displayTime_movie($time_movie) {
+                                  if ($time_movie) {
+                                      echo "<li class='list-info-group-item'><span>Thời lượng</span>: $time_movie</li>";
+                                  } else {
+                                      echo "<li class='list-info-group-item'><span>Thời lượng</span>: Đang cập nhật</li>";
+                                  }
+                              }
+                              
+                              // Sử dụng hàm
+                              displayTime_movie($movie->time_movie);
+                           ?> 
 
                            <li class="list-info-group-item"><span>Tập phim</span> : 
                               @if($movie->belongmovie=='phimbo')
@@ -152,7 +165,7 @@
                                     @endforeach
                                  @elseif($movie->belongmovie=='phimle')
                                     @foreach ($episode as $key => $ep_le)
-                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode)}}" rel="tag">{{$ep_le->episode}}</a>
+                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode)}}" rel="tag">{{$ep_le->episode}} Tập</a>
                                     @endforeach
                                  @endif
                               @else

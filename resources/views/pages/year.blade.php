@@ -8,7 +8,7 @@
                <div class="yoast_breadcrumb hidden-xs">
                 <span>
                     <span>Năm phim » 
-                        @for($year_bread=2000; $year_bread <= 2023; $year_bread++)
+                        @for($year_bread=1995; $year_bread <= 2025; $year_bread++)
                         <span class="breadcrumb_last" aria-current="page"><a title="{{$year_bread}}" href="{{url('nam/'.$year_bread)}}">{{$year_bread}}</a></span> »     
                         @endfor
                     </span>

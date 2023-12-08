@@ -217,7 +217,7 @@
                                     '',['class'=>'select-topview','id'=>$cate->id,'placeholder'=>'View']) !!}
                                 </td>
                                 <td>
-                                    {!! Form::selectYear('year', 2000, 2023, isset($cate->year) ? $cate->year :
+                                    {!! Form::selectYear('year', 1995, 2025, isset($cate->year) ? $cate->year :
                                     '',['class'=>'select-year','id'=>$cate->id,'placeholder'=>'Năm'])!!}
                                 </td>
                                 <td>
