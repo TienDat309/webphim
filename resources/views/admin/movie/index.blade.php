@@ -27,7 +27,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Tên phim (English)</th>
-                            <th scope="col">Số tập</th>
+                            {{-- <th scope="col">Số tập</th> --}}
                             <th scope="col">Tập phim</th>
                             {{-- <th scope="col">Từ khóa</th> --}}
                             {{-- <th scope="col">Độ phân giải</th> --}}
@@ -39,12 +39,11 @@
                             {{-- <th scope="col">Mô tả</th> --}}
                             {{-- <th scope="col">Hiển thị</th> --}}
 
-                            {{-- <th scope="col">Danh mục</th> --}}
                             <th scope="col">Thể loại</th>
                             <th scope="col">Danh mục</th>
-                            {{-- <th scope="col">Quốc gia</th>
+                            <th scope="col">Quốc gia</th>
 
-                            <th scope="col">Thuộc phim</th> --}}
+                            {{-- <th scope="col">Thuộc phim</th> --}}
                             <th scope="col">Ngày tạo</th>
                             <th scope="col">Ngày cập nhật</th>
                             <th scope="col">Tùy chỉnh</th>
@@ -59,21 +58,27 @@
                             <tr>
                                 <th scope="row">{{$key}}</th>
 
-                                <td>{{$cate->title}} - ({{$cate->name_eng}})</td>
+                                <td style="width: 60px">{{$cate->title}} - ({{$cate->name_eng}})</td>
 
-                                <td>{{$cate->episode_count}}/{{$cate->episode_movie}} tập</td>
-
+                                
+                                {{-- <td>{{$cate->episode_count}}/{{$cate->episode_movie}} Tập</td> --}}
                                 <td>
-                                    <a href="{{route('add-episode',[$cate->id])}}" class="btn btn-info btn-sm">Thêm tập phim</a>
-                                    @foreach ($cate->episode as $key => $epi)
-                                        <a 
-                                            class="show_video" 
-                                            data-movie_video_id="{{$epi->movie_id}}" 
-                                            data-video_episode="{{$epi->episode}}" 
-                                            style="color:#fff; cursor:pointer">
-                                            <span class="badge badge-dark" style="color:#ffffff">{{$epi->episode}}</span>
-                                        </a>    
-                                    @endforeach
+                                    <a href="{{route('add-episode',[$cate->id])}}" class="btn btn-info btn-sm" style="padding:5px 25px">Thêm tập phim</a>
+                                    <span style="display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    height: 100%;">{{$cate->episode_count}}/{{$cate->episode_movie}} tập</span>
+                                    {{-- @foreach ($cate->episode as $key => $epi)
+                                        @if($key < 15)
+                                            <a 
+                                                class="show_video" 
+                                                data-movie_video_id="{{$epi->movie_id}}" 
+                                                data-video_episode="{{$epi->episode}}" 
+                                                style="color:#fff; cursor:pointer">
+                                                <span class="badge badge-dark" style="color:#ffffff">{{$epi->episode}}</span>
+                                            </a>
+                                        @endif 
+                                    @endforeach --}}
                                 </td>
 
 
@@ -127,7 +132,7 @@
                                 {{-- </td> --}}
 
                                 <td>
-                                    <img width="100" src="{{asset('uploads/movie/'.$cate->image)}}">
+                                    <img width="100" src="{{ strpos($cate->image, 'https') !== false ? $cate->image : asset('uploads/movie/' . $cate->image) }}" alt="Movie Image">
                                 </td>
 
                                 {{-- <td> --}}
@@ -147,13 +152,13 @@
                                     </select>
                                 </td> --}}
 
-                                <td>{{$cate->time_movie}}</td>
+                                <td style="width:90px">{{$cate->time_movie}}</td>
 
                                 {{-- <td>{{$cate->slug}}</td> --}}
 
                                 {{-- <td>
                                     @if($cate->description!=NULL)
-                                    {{substr($cate->description,0,100)}}...
+                                    {!! substr($cate->description,0,100) !!}...
                                     @else
                                     Chưa có mô tả cho phim
                                     @endif
@@ -184,20 +189,16 @@
 
                                 <td>
                                     @foreach ($cate->movie_genre as $gen)
-                                    <span class="badge badge-info">{{$gen->title}}</span>
+                                    <span class="badge badge-secondary">{{$gen->title}}</span>
                                     @endforeach
                                 </td>
                                 <td>
-                                    @foreach ($cate->movie_category as $catego)
-                                    <span class="badge badge-info">{{$catego->title}}</span>
-                                    @endforeach
+                                    <span  class="badge badge-secondary">{{$cate->category->title}}</span>
                                 </td>
 
-                                {{-- <td> --}}
-                                    {{-- {{$cate->country->title}} --}}
-                                    {{-- {!! Form::select('country_id', $country, isset($cate) ? $cate->country->id : '',
-                                    ['class'=>'country_choose','id'=>$cate->id,'style'=>'width:160px']) !!}
-                                </td> --}}
+                                <td> 
+                                    <span class="badge badge-secondary">{{$cate->country->title}}</span>        
+                                </td>
 
                                 {{-- <td> --}}
                                     {{-- @if($cate->belongmovie=='phimle')

@@ -12,7 +12,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tên phim</th>
-                        <th scope="col">Hình ảnh phim</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Tập phim</th>
                         <th scope="col">Link phim</th>
                         {{-- <th scope="col">Hiển thị</th> --}}
@@ -25,7 +25,7 @@
                     <tr>
                         <th scope="row">{{$key}}</th>
                         <td>{{$episode->movie->title}}</td>
-                        <td><img width="100" src="{{asset('uploads/movie/'.$episode->movie->image)}}"></td>
+                        <td><img width="100" src="{{ strpos($episode->movie->image, 'https') !== false ? $episode->movie->image : asset('uploads/movie/' . $episode->movie->image) }}"></td>
                         <td>{{$episode->episode}}</td>
                         <td style="width:5%">{{$episode->linkphim}}</td>
                         {{-- <td>

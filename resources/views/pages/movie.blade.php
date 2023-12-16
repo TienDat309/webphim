@@ -37,7 +37,7 @@
                </div> --}}
                <div class="movie_info col-xs-12">
                   <div class="movie-poster col-md-9"> 
-                     <img src="{{ asset('uploads/movie/'.$movie->image)}}" alt="{{$movie->tilte}}">
+                     <img src="{{strpos($movie->image, 'https') !== false ? $movie->image : asset('uploads/movie/' . $movie->image)}}" alt="{{$movie->tilte}}">
                      @if ($movie->resolution!=5)
                         @if($episode_current_list_count>0)
                         <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$episode_first->episode.'/server-'.$episode_first->server)}}" style="width:100%; height:35px; font-size:15px"
@@ -121,9 +121,8 @@
                            </li>
 
                            <li class="list-info-group-item"><span>Danh mục</span> :
-                              @foreach ($movie->movie_category as $catego)
-                              <a href="{{route('category',[$catego->slug])}}" rel="category tag">{{$catego->title}}</a>
-                              @endforeach
+                              <a href="{{route('category',[$movie->category->slug])}}" 
+                                 rel="category tag">{{$movie->category->title}}</a>
                            </li>
                               
                            <li class="list-info-group-item"><span>Quốc gia</span> :
@@ -142,7 +141,6 @@
                                       echo "<li class='list-info-group-item'><span>Đạo diễn</span>: Đang cập nhật</li>";
                                   }
                               }
-                              
                               // Sử dụng hàm
                               displayDirector($movie->director);
                               ?>
@@ -162,22 +160,36 @@
                      
                            </li>
                            <li class="list-info-group-item"><span>Tập phim mới nhất</span> :
-
-                              @if($episode_current_list_count>0)
-                                 @if($movie->belongmovie=='phimbo')
-                                    @foreach ($episode as $key => $ep)
-                                       <a href="{{url('xem-phim/'.$ep->movie->slug.'/tap-'.$ep->episode.'/server-'.$ep->server)}}"
-                                          rel="tag">Tập {{$ep->episode}}</a>
-                                    @endforeach
-                                 @elseif($movie->belongmovie=='phimle')
-                                    @foreach ($episode as $key => $ep_le)
-                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode)}}" rel="tag">Tập {{$ep_le->episode}}</a>
-                                    @endforeach
-                                 @endif
-                              @else
-                                 Đang cập nhật
+                           @if($episode_current_list_count > 0)
+                              @if($movie->belongmovie == 'phimbo')
+                                 <?php
+                                 $latest_episodes = \App\Models\Episode::where('movie_id', $movie->id)
+                                       ->orderBy('created_at', 'desc')
+                                       ->take(5)
+                                       ->get();
+                                 ?>
+                                 @foreach ($latest_episodes as $key => $ep)
+                                       <a href="{{url('xem-phim/'.$ep->movie->slug.'/tap-'.$ep->episode.'/server-'.$ep->server)}}" rel="tag">
+                                          Tập {{$ep->episode}}
+                                       </a>
+                                 @endforeach
+                              @elseif($movie->belongmovie == 'phimle')
+                                 <?php
+                                 $latest_episodes = \App\Models\Episode::where('movie_id', $movie->id)
+                                       ->orderBy('created_at', 'desc')
+                                       ->take(5)
+                                       ->get();
+                                 ?>
+                                 @foreach ($latest_episodes as $key => $ep_le)
+                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode.'/server-'.$ep_le->server)}}" rel="tag">
+                                          {{$ep_le->episode}} Tập
+                                       </a>
+                                 @endforeach
                               @endif
-                           </li>
+                           @else
+                              Đang cập nhật
+                           @endif
+                           
                         </ul>
                            <!--đánh giá-->
                         </div>
@@ -290,7 +302,7 @@
                <article class="thumb grid-item post-38498">
                   <div class="halim-item">
                      <a class="halim-thumb" href="{{route('movie',$hot->slug)}}" title="{{$hot->title}}">
-                        <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$hot->image)}}"
+                        <figure><img class="lazy img-responsive" src="{{strpos($hot->image, 'https') !== false ? $hot->image : asset('uploads/movie/' . $hot->image)}}"
                               title="{{$hot->title}}"></figure>
                         <span class="status">
                            @if($hot->resolution==0)

@@ -53,7 +53,7 @@
         </div>
         <button class="btn btn-info btn-block" type="submit"><i class="fas fa-sign-in-alt"></i>{{ __(' Đăng nhập')
             }}</button>
-        <a href="#" id="forgot_pswd">Forgot password?</a>
+        <a href="email.blade.php" id="forgot_pswd">Forgot password?</a>
     </form>
 
     {{-- <form action="/reset/password/" class="form-reset">

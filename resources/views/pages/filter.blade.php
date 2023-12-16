@@ -29,7 +29,7 @@
             <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                <div class="halim-item">
                   <a class="halim-thumb" href="{{route('movie',$mov->slug)}}">
-                     <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$mov->image)}}"
+                     <figure><img class="lazy img-responsive" src="{{strpos($mov->image, 'https') !== false ? $mov->image : asset('uploads/movie/' . $mov->image)}}"
                            title="{{$mov->title}}">
                      </figure>
                      <span class="status">
@@ -69,14 +69,6 @@
          </div>
          <div class="clearfix"></div>
          <div class="text-center">
-            {{-- <ul class='page-numbers'>
-               <li><span aria-current="page" class="page-numbers current">1</span></li>
-               <li><a class="page-numbers" href="">2</a></li>
-               <li><a class="page-numbers" href="">3</a></li>
-               <li><span class="page-numbers dots">&hellip;</span></li>
-               <li><a class="page-numbers" href="">55</a></li>
-               <li><a class="next page-numbers" href=""><i class="hl-down-open rotate-right"></i></a></li>
-            </ul> --}}
             {!! $movie->links("pagination::bootstrap-4")!!}
          </div>
       </section>

@@ -31,7 +31,7 @@
             <select class="form-control stylish_filter" name="genre" id="exampleFormControlSelect1">
                 <option value="">-- Thể loại --</option>
                 @foreach ($genre_home as $key => $gen_filter)
-                <option {{(isset($_GET['genre']) && $_GET['genre']==$gen_filter->id) ? 'selected' : ''}} value="{{$gen_filter->id}}">{{$gen_filter->title}}</option>
+                    <option {{ (isset($_GET['genre']) && $_GET['genre'] == $gen_filter->id) ? 'selected' : '' }} value="{{ $gen_filter->id }}">{{ $gen_filter->title }}</option>
                 @endforeach
             </select>
         </div>

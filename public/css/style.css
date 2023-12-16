@@ -847,7 +847,7 @@ button.navbar-toggle.collapsed {
 .popular-post .post-thumb {
     float: left;
     width: 75px;
-    height: 95px;
+    height: 115px;
     transition: all 0.3s ease-in-out;
 }
 .popular-post .is_trailer {

@@ -66,12 +66,8 @@
 
             <div class="clearfix"></div>
             <div class="clearfix"></div>
+            
             <div class="title-block">
-               {{-- <a href="javascript:;" data-toggle="tooltip" title="Add to bookmark">
-                  <div id="bookmark" class="bookmark-img-animation primary_ribbon" data-id="37976">
-                     <div class="halim-pulse-ring"></div>
-                  </div>
-               </a> --}}
                <div class="title-wrapper-xem full">
                   <h4 class="entry-title"><a href="#" title="{{$movie->title}}" class="tl">{{$movie->title}}</a></h4>
                </div>
@@ -130,21 +126,36 @@
                                        </span>
                                     </li>
                                     <!--Tập phim-->
-                                    <ul class="halim-list-eps">
-                                       @foreach ($episode_list as $key => $epi)
-                                          @if($epi->server == $ser->id)
-                                             <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$epi->episode.'/server-'.$epi->server)}}">
-                                                <li class="halim-episode">
-                                                   <span
-                                                      class="halim-btn halim-btn-2 {{$tapphim==$epi->episode && $server_active=='server-'.$ser->id ? 'active' : ''}} halim-info-1-1 box-shadow"
-                                                      title="Xem phim {{$movie->title}} - Tập {{$epi->episode}} - {{$movie->name_eng}} - Vietsub + Thuyết Minh"
-                                                      data-h1="{{$movie->title}} - tập {{$epi->episode}}">{{$epi->episode}}
+                                    <style>
+                                       .halim-list-eps {
+                                          list-style: none;
+                                          padding: 0;
+                                          white-space: nowrap; /* Prevent line breaks */
+                                          overflow-x: auto; /* Enable horizontal scrolling if needed */
+                                       }
+
+                                       .halim-episode {
+                                          display: inline-block; /* Display episodes in a horizontal row */
+                                          margin-right: 10px; /* Adjust the right margin as needed */
+                                       }
+
+                                       /* Optional: Style for the active episode */
+                                       .halim-btn.active {
+                                          background-color: #e83e8c; /* Example background color for the active episode */
+                                       }
+                                    </style> 
+                                    <ul class="halim-list-eps" style="text-align: justify;">
+                                       @foreach ($episode_list->sortBy('episode') as $epi)
+                                           <a href="{{ url('xem-phim/'.$movie->slug.'/tap-'.$epi->episode.'/server-'.$epi->server) }}">
+                                               <li class="halim-episode">
+                                                   <span class="halim-btn halim-btn-2 {{$tapphim==$epi->episode && $server_active=='server-'.$ser->id ? 'active' : ''}} halim-info-1-1 box-shadow"
+                                                         title="Xem phim {{$movie->title}} - Tập {{$epi->episode}} - {{$movie->name_eng}} - Vietsub + Thuyết Minh"
+                                                         data-h1="{{$movie->title}} - tập {{$epi->episode}}">{{$epi->episode}}
                                                    </span>
-                                                </li>
-                                             </a> 
-                                          @endif
+                                               </li>
+                                           </a>
                                        @endforeach
-                                    </ul>
+                                   </ul>
                                  @endif
                               @endforeach
                            @endforeach
@@ -157,6 +168,15 @@
                </div>
             </div>
             <div class="clearfix"></div>
+            <!--Nội dung phim-->
+            
+            <div class="entry-content htmlwrap clearfix">
+               <div class="video-item halim-entry-box">
+                  <article id="post-38424" class="item-content" style="text-align: justify">
+                     {{$movie->description}}
+                  </article>
+               </div>
+            </div>
             <!--Bình luận phim-->
             <div class="section-bar clearfix">
                <h2 class="section-title"><span style="color:#ffed4d">Bình luận</span></h2>
@@ -183,7 +203,7 @@
                <article class="thumb grid-item post-38498">
                   <div class="halim-item">
                      <a class="halim-thumb" href="{{route('movie',$hot->slug)}}" title="{{$hot->title}}">
-                        <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$hot->image)}}"
+                        <figure><img class="lazy img-responsive" src="{{strpos($hot->image, 'https') !== false ? $hot->image : asset('uploads/movie/' . $hot->image)}}"
                               title="{{$hot->title}}"></figure>
                         <span class="status">
                            @if($hot->resolution==0)

@@ -80,7 +80,7 @@
                     <tr>
                         <th scope="row">{{$key}}</th>
                         <td>{{$episode->movie->title}}</td>
-                        <td><img width="100" src="{{asset('uploads/movie/'.$episode->movie->image)}}"></td>
+                        <td><img width="100" src="{{ strpos($episode->movie->image, 'https') !== false ? $episode->movie->image : asset('uploads/movie/' . $episode->movie->image) }}"></td>
                         <td>{{$episode->episode}}</td>
                         <td style="width:5%">{{$episode->linkphim}}</td>
                         <td>

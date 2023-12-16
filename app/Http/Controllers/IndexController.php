@@ -9,7 +9,6 @@ use App\Models\Country;
 use App\Models\Movie;
 use App\Models\Episode;
 use App\Models\Movie_Genre;
-use App\Models\Movie_Category;
 use App\Models\Rating;
 use App\Models\Info;
 use App\Models\LinkMovie;
@@ -18,36 +17,44 @@ use DB;
 
 class IndexController extends Controller
 {
-    public function filter(){
-            $order = $_GET['order'];
-            $genre_get = $_GET['genre'];
-            $country_get = $_GET['country'];
-            $year_get = $_GET['year'];
-        if($order==''&& $genre_get==''&& $country_get==''&& $year_get==''){
+    public function filter() {
+        $order = isset($_GET['order']) ? $_GET['order'] : null;
+        $genres_get = isset($_GET['genre']) ? $_GET['genre'] : [];
+        $country_get = isset($_GET['country']) ? $_GET['country'] : null;
+        $year_get = isset($_GET['year']) ? $_GET['year'] : null;
+    
+        if ($order === null && empty($genres_get) && $country_get === null && $year_get === null) {
             return redirect()->back();
-        }
-        else
-        {
-            //lấy dữ liệu
+        } else {
+            // Lấy dữ liệu
             $movie_array = Movie::withCount('episode');
-            if($country_get){
-                $movie_array = $movie_array->where('country_id',$country_get);
+    
+            if ($country_get) {
+                $movie_array = $movie_array->where('country_id', $country_get);
             }
-            if($year_get){
-                $movie_array = $movie_array->where('year',$year_get);
+    
+            if (!empty($genres_get)) {
+                if (!is_array($genres_get)) {
+                    $genres_get = [$genres_get];
+                }
+    
+                foreach ($genres_get as $genre) {
+                    $movie_array = $movie_array->whereHas('movie_genre', function ($query) use ($genre) {
+                        $query->where('genre_id', $genre);
+                    });
+                }
             }
-            if($order){
-                $movie_array = $movie_array->orderBy($order,'DESC');
+    
+            if ($year_get) {
+                $movie_array = $movie_array->where('year', $year_get);
             }
-
-            $movie_array = $movie_array->with('movie_genre'); 
-            $movie = array(); 
-            foreach($movie_array as $mov){// dùng liệt kê tất cả các phim
-                foreach($mov->movie_genre as $mov_gen){// liệt kê tất cả genre thuộc id phim đó 
-                    $movie = $movie_array->whereIn('genre_id',[$mov_gen->genre_id]);
-                } 
-            } 
-            $movie = $movie_array->paginate(32);
+    
+            if ($order) {
+                $movie_array = $movie_array->orderBy($order, 'DESC');
+            }
+    
+            $movie = $movie_array->paginate(24)->withQueryString();
+    
             return view('pages.filter', compact('movie'));
         }
     }
@@ -74,13 +81,7 @@ class IndexController extends Controller
 
     public function category($slug){
         $cate_slug = Category::where('slug',$slug)->first();  
-        //nhìu danh mục
-        $movie_category = Movie_Category::where('category_id',$cate_slug->id)->get();
-        $many_category = [];
-        foreach($movie_category as $key => $movi){
-            $many_category[]= $movi->movie_id;
-        }
-        $movie = Movie::withCount('episode')->whereIn('id',$many_category)->orderBy('updateday', 'DESC')->paginate(24);
+        $movie = Movie::withCount('episode')->where('category_id',$cate_slug->id)->orderBy('position', 'ASC')->paginate(24);
         return view('pages.category', compact('cate_slug','movie'));
     }
 
@@ -153,7 +154,7 @@ class IndexController extends Controller
     }
 
     public function watch($slug,$tap,$server_active){
-        $movie = Movie::with('category','genre','country','movie_genre','movie_category','episode')->where('slug',$slug)->where('status',1)->first();
+        $movie = Movie::with('category','genre','country','movie_genre','episode')->where('slug',$slug)->where('status',1)->first();
         $related = Movie::withCount('category','genre','country','episode')->where('category_id',$movie->category->id)->orderby(DB::raw('RAND()'))->whereNotIn('slug',[$slug])->get();//phim liên quan 
         //lấy tập 1 tap-fullhd
         if(isset($tap)){
@@ -168,7 +169,7 @@ class IndexController extends Controller
         }
         $server = LinkMovie::orderBy('id','DESC')->get();
         $episode_movie = Episode::where('movie_id',$movie->id)->get()->unique('server');
-        $episode_list = Episode::where('movie_id',$movie->id)->orderBy('episode','ASC')->get();
+        $episode_list = Episode::where('movie_id', $movie->id)->orderBy('episode', 'ASC')->get();
         
         return view('pages.watch', compact('movie','episode','tapphim','related','server','episode_movie','episode_list','server_active'));
     }

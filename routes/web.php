@@ -10,8 +10,7 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\LinkMovieController;
-
-
+use App\Http\Controllers\LeechMovieController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,8 +34,6 @@ Route::get('/tag/{tag}', [IndexController::class, 'tag']);
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 Route::get('/filter', [IndexController::class, 'filter'])->name('filter');
 Route::post('/add-rating', [IndexController::class,'add_rating'])->name('add-rating');
-
-
 
 
 Auth::routes();
@@ -63,7 +60,6 @@ Route::get('/sort_movie', [MovieController::class, 'sort_movie'])->name('sort_mo
 Route::post('/resorting_nav', [MovieController::class, 'resorting_nav'])->name('resorting_nav');
 Route::post('/resorting_moive', [MovieController::class, 'resorting_moive'])->name('resorting_moive');
 
-
 //thay đổi dữ liệu movie bằng ajax
 Route::get('/category-choose', [MovieController::class, 'category_choose'])->name('category-choose');
 Route::get('/country-choose', [MovieController::class, 'country_choose'])->name('country-choose');
@@ -75,6 +71,9 @@ Route::get('/resolution-choose', [MovieController::class, 'resolution_choose'])-
 Route::post('/watch-video', [MovieController::class, 'watch_video'])->name('watch-video');
 
 
-
-
-
+//rotue leech movie
+Route::get('leech-movie', [LeechMovieController::class, 'leech_movie'])->name('leech-movie');
+Route::get('leech-detail/{slug}', [LeechMovieController::class, 'leech_detail'])->name('leech-detail');
+Route::get('leech-episode/{slug}', [LeechMovieController::class, 'leech_episode'])->name('leech-episode');
+Route::post('leech-store/{slug}', [LeechMovieController::class, 'leech_store'])->name('leech-store');
+Route::post('leech-episode-store/{slug}', [LeechMovieController::class, 'leech_episode_store'])->name('leech-episode-store');

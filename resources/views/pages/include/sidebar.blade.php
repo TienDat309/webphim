@@ -66,7 +66,7 @@
                <div class="item post-37176">
                   <a href="{{route('movie',$hot_sidebar->slug)}}" title="{{$hot_sidebar->title}}">
                      <div class="item-link">
-                        <img src="{{asset('uploads/movie/'.$hot_sidebar->image)}}" class="lazy post-thumb"
+                        <img src="{{strpos($hot_sidebar->image, 'https') !== false ? $hot_sidebar->image : asset('uploads/movie/' . $hot_sidebar->image)}}" class="lazy post-thumb"
                            alt="{{$hot_sidebar->title}}" />
                         <span class="is_trailer">
                            @if($hot_sidebar->resolution==0)
@@ -112,8 +112,7 @@
       <div class="clearfix"></div>
    </div>
 </aside>
-
-<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4">
+<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4" style=" float: right;">
    <div id="halim_tab_popular_videos-widget-7" class="widget halim_tab_popular_videos-widget">
       <div class="section-bar clearfix">
          <div class="section-title">
@@ -145,7 +144,15 @@
                <span id="show_data"></span>
             </div>
          </div>
-     
+         <style>
+            .beautiful-box {
+               background-color: #fff;
+               padding: 20px;
+               border-radius: 10px;
+               box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+               text-align: center;
+            }
+         </style>
       <div class="clearfix"></div>
    </div>
 </aside>

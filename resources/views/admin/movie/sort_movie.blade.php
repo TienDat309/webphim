@@ -33,9 +33,9 @@
                             margin: 0 37px;
                         }
                         .box_phim{
-                            height: 200px;
+                            height: 190px;
                             border: 1px solid #d1d1d1;
-                            margin: 5px;
+                            /* margin: 5px; */
                             font-size: 12px;
                             font-weight: bold;
                             padding: 0px;
@@ -43,23 +43,35 @@
                             background-color: #5bc0de;
                         }
                     </style>
-                    <nav class="navbar navbar-inverse">
-                        <div class="container-fluid" >
-                          <ul class="nav navbar-nav category_position" id="sortable_nav">
-                            @foreach ($category->sortBy('position') as $key => $cate)
-                                <li id="{{$cate->id}}" class="ui-state-default" style="background-color:#ffb22b;"><a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a></li>
-                            @endforeach
-                          </ul>
+                   <nav class="navbar navbar-inverse">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
                         </div>
-                    </nav>
+                
+                        <div class="collapse navbar-collapse" id="navbar-collapse">
+                            <ul class="nav navbar-nav category_position" id="sortable_nav">
+                                @foreach ($category->sortBy('position') as $key => $cate)
+                                    <li id="{{$cate->id}}" class="ui-state-default" style="background-color:#ffb22b">
+                                        <a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                     @foreach ($category_home as $key => $cate_home)
                         <p class="title_movie" style="margin-bottom: 5px ">{{$cate_home->title}}</p>
                         <div class="row movie_position sortable_movie">
-                            @foreach ($cate_home->movie->sortBy('position')->take(16) as $key => $mov)
-                            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 box_phim" id="{{$mov->id}}">
-                                <figure><img class="img-responsive" width="100%" style="height:135px; margin-bottom:3px" src="{{asset('uploads/movie/'.$mov->image)}}" title="{{$mov->title}}"></figure>
-                                <p class="entry-title">{{$mov->title}}</p>
-                            </div>
+                            @foreach ($cate_home->movie->sortBy('position')->take(12) as $key => $mov)
+                                <div class="col-lg-1 col-md-2 col-sm-4 col-xs-6 box_phim" id="{{$mov->id}}">
+                                    <figure><img class="img-responsive" width="100%" style="height:135px; margin-bottom:3px; text-align:center" src="{{strpos($mov->image, 'https') !== false ? $mov->image : asset('uploads/movie/' . $mov->image)}}" title="{{$mov->title}}" title="{{$mov->title}}"></figure>
+                                    <p class="entry-title">{{$mov->title}}</p>
+                                </div>
                             @endforeach
                         </div>
                     @endforeach

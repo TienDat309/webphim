@@ -60,11 +60,15 @@ class EpisodeController extends Controller
     }
 
     public function add_episode($id){
-        $linkmovie = LinkMovie::orderBy('id','DESC')->pluck('title','id');
-        $list_server = LinkMovie::orderBy('id','DESC')->get();
+        $linkmovie = LinkMovie::orderBy('id', 'DESC')->pluck('title', 'id');
+        $list_server = LinkMovie::orderBy('id', 'DESC')->get();
         $movie = Movie::find($id);
-        $list_episode = Episode::with('movie')->where('movie_id',$id)->orderBy('episode','DESC')->get();
-        return view('admin.episode.add_episode',compact('list_episode','movie','linkmovie','list_server'));
+        $list_episode = Episode::with('movie')
+            ->where('movie_id', $id)
+            ->orderByRaw('CAST(episode AS UNSIGNED) DESC')
+            ->get();
+        
+        return view('admin.episode.add_episode', compact('list_episode', 'movie', 'linkmovie', 'list_server'));;
     }
 
     /**

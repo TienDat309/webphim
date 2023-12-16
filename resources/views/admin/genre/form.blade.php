@@ -28,7 +28,7 @@
                         @endif
                             <div class="form-group">
                                 {!! Form::label('title', 'Tên thể loại', []) !!}
-                                {!! Form::text('title', isset($genre) ? $genre->title : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
+                                {!! Form::text('title', isset($genre) ? mb_convert_case($genre->title, MB_CASE_TITLE, 'UTF-8') : '', ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
                                 'id'=>'slug','onkeyup'=>'ChangeToSlug()']) !!}
                             </div>
                             <div class="form-group">

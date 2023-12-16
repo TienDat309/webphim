@@ -29,11 +29,9 @@
                     @endif
                     <div class="form-group">
                         {!! Form::label('title', 'Tên phim', []) !!}
-                        {!! Form::text('title', isset($movie) ? $movie->title : '',
-                        ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
-                        'id'=>'slug','onkeyup'=>'ChangeToSlug()']) !!}
-                    </div> 
-                    <div class="form-group">
+                        {!! Form::text('title', isset($movie) ? mb_convert_case($movie->title, MB_CASE_TITLE, 'UTF-8') : '',
+                        ['class' => 'form-control', 'placeholder' => 'Nhập vào dữ liệu...', 'id' => 'slug', 'onkeyup' => 'ChangeToSlug()']) !!}
+                    <div class="form-group" style="margin-top:15px">
                         {!! Form::label('episode_movie', 'Số tập phim', []) !!}
                         {!! Form::text('episode_movie', isset($movie) ? $movie->episode_movie : '',
                         ['class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...'
@@ -78,9 +76,9 @@
 
                     <div class="form-group">
                         {!! Form::label('description', 'Mô tả', []) !!}
-                        {!! Form::textarea('description', isset($movie) ? $movie->description :
-                        '',['style'=>'resize:none','class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
-                        'id'=>'description' ,'style'=>'text-align:justify']) !!}
+                        {!! Form::textarea('description', isset($movie) ? strip_tags($movie->description) : '',
+                            ['style'=>'resize:none','class'=>'form-control','placeholder'=>'Nhập vào dữ liệu...',
+                            'id'=>'description' ,'style'=>'text-align:justify']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('tags', 'Tags phim', []) !!}
@@ -116,33 +114,8 @@
                         ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('Category', 'Danh mục', []) !!}<br>
-                        @php $count = 0; @endphp
-                        @foreach ($list_category as $key => $cate)
-                            @if ($count % 6 == 0)
-                                <div class="row">
-                            @endif
-
-                            <div class="col-md-2">
-                                @if (isset($movie))
-                                    {!! Form::checkbox('category[]', $cate->id, isset($movie_category) && $movie_category->contains($cate->id) ? true : false) !!}
-                                @else
-                                    {!! Form::checkbox('category[]', $cate->id, '') !!}
-                                @endif
-                                {!! Form::label('category', $cate->title) !!}
-                            </div>
-
-                            @php $count++; @endphp
-
-                            @if ($count % 6 == 0)
-                                </div>
-                            @endif
-                        @endforeach
-
-                        {{-- Close the last row if the total number of genres is not a multiple of 6 --}}
-                        @if ($count % 6 !== 0)
-                            </div>
-                        @endif
+                        {!! Form::label('Category', 'Danh mục', []) !!}
+                        {!! Form::select('category_id',$category, isset($movie) ? $movie->category_id : '',['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('Genre', 'Thể loại', []) !!}<br>
@@ -152,7 +125,7 @@
                                 <div class="row">
                             @endif
 
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-sm-4 col-xs-6">
                                 @if (isset($movie))
                                     {!! Form::checkbox('genre[]', $gen->id, isset($movie_genre) && $movie_genre->contains($gen->id) ? true : false) !!}
                                 @else
@@ -182,7 +155,7 @@
                         {!! Form::label('Image', 'Hình ảnh', []) !!}
                         {!! Form::file('image', ['class'=>'form-control-file']) !!}
                         @if(isset($movie))
-                        <img width="15%" style="margin-top: 10px" src="{{asset('uploads/movie/'.$movie->image)}}">
+                        <img width="15%" style="margin-top: 10px" src="{{ strpos($movie->image, 'https') !== false ? $movie->image : asset('uploads/movie/' . $movie->image) }}" alt="Movie Image">
                         @endif
                     </div>
                     @if (!isset($movie))

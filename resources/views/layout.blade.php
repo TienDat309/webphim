@@ -71,19 +71,13 @@
                                             placeholder="Tìm kiếm..." autocomplete="off" required>
                                     </form>
                                 </div>
+                                
                                 <ul class="list-group" id="result" style="position: absolute; z-index: 9999; background: #1b2d3c; width:94%; padding:5px">   
                                 </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                {{-- <div class="col-md-4 hidden-xs">
-                    <div id="get-bookmark" class="box-shadow"><i class="hl-bookmark"></i><span> Bookmarks</span><span
-                            class="count">0</span></div>
-                    <div id="bookmark-list" class="hidden bookmark-list-on-pc">
-                        <ul style="margin: 0;"></ul>
-                    </div>
-                </div> --}}
+                
             </div>
         </div>
     </header>
@@ -102,14 +96,6 @@
                         data-toggle="collapse" data-target="#search-form" aria-expanded="false">
                         <span class="hl-search" aria-hidden="true"></span>
                     </button>
-                    {{-- <button type="button" class="navbar-toggle collapsed pull-right get-bookmark-on-mobile">
-                        Bookmarks<i class="hl-bookmark" aria-hidden="true"></i>
-                        <span class="count">0</span>
-                    </button> --}}
-                    {{-- <button type="button" class="navbar-toggle collapsed pull-right get-locphim-on-mobile">
-                        <a href="javascript:;" id="expand-ajax-filter" style="color: #ffed4d;">Lọc Phim<i
-                                class="fas fa-filter"></i></a>
-                    </button> --}}
 
                 </div>
                 <div class="collapse navbar-collapse" id="halim">
@@ -138,7 +124,7 @@
                                 <a title="Năm Phim" href="#" data-toggle="dropdown" class="dropdown-toggle"
                                     aria-haspopup="true">Năm<span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
-                                    @for($year=2000; $year <= 2023; $year++)
+                                    @for($year=1995; $year <= 2025; $year++)
                                     <li><a title="{{$year}}" href="{{url('nam/'.$year)}}">{{$year}}</a></li>   
                                     @endfor
                                 </ul>
@@ -149,9 +135,6 @@
                             
                         </ul>
                     </div>
-                    {{-- <ul class="nav navbar-nav navbar-left" style="background:#000;">
-                        <li><a href="{{route('filter')}}" style="color: #ffed4d;">Lọc Phim</a></li>
-                    </ul> --}}
 
                     
                 </div>
@@ -202,7 +185,7 @@
     <script type='text/javascript' src='{{asset('js/owl.carousel.min.js?ver=5.7.2')}}' id='carousel-js'></script>
 
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="C7pW92mB"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="3eZymJOS"></script>
     
     <script type='text/javascript' src='{{asset('js/halimtheme-core.min.js?ver=1626273138')}}' id='halim-init-js'></script>
 
@@ -281,18 +264,15 @@
                     var expression = new RegExp(search, "i");
                     $.getJSON('/json/movie.json',function(data){
                         $.each(data, function(key, value){
-                            if(value.title.search(expression) != -1){
-                                $('#result').append('<li class="list-group-item" style="cursor:pointer; padding:5px; border-bottom:1px dashed #363636 "><img width="50" height="50" src="uploads/movie/'+value.image+'"><span style="margin-left: 10px;">'+value.title+'</span></li>');
-                            }
+                            if (value.title.search(expression) !== -1) {
+                                var imageUrl = value.image.indexOf('https') !== -1 ? value.image : 'uploads/movie/' + value.image;
+
+                                $('#result').append('<li class="list-group-item" style="cursor:pointer; padding:5px; border-bottom:1px dashed #363636 "><img width="50" height="50" src="' + imageUrl + '"><span style="margin-left: 10px;">' + value.title + '</span></li>');
+}
                         });
                     })
                 }
             })
-            // $('#result').on('click','li', function(){
-            //     var click_text = $(this).text().split('');
-            //     $('#timkiem').val($.trim(click_text.join('')));
-            //     $("#result").html('');
-            // });
         })
     </script>
 

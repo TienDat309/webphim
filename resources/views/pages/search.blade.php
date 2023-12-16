@@ -25,7 +25,7 @@
             <article class="col-md-3 col-sm-3 col-xs-6 thumb grid-item post-37606">
                <div class="halim-item">
                   <a class="halim-thumb" href="{{route('movie',$mov->slug)}}">
-                     <figure><img class="lazy img-responsive" src="{{asset('uploads/movie/'.$mov->image)}}" title="{{$mov->title}}">
+                     <figure><img class="lazy img-responsive" src="{{strpos($mov->image, 'https') !== false ? $mov->image : asset('uploads/movie/' . $mov->image)}}" title="{{$mov->title}}">
                      </figure>
                      <span class="status">
                         @if($mov->resolution==0)
