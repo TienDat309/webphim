@@ -53,7 +53,7 @@ class IndexController extends Controller
                 $movie_array = $movie_array->orderBy($order, 'DESC');
             }
     
-            $movie = $movie_array->paginate(20)->withQueryString();
+            $movie = $movie_array->paginate(24)->withQueryString();
     
             return view('pages.filter', compact('movie'));
         }
