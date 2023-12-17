@@ -148,7 +148,7 @@
                                        @foreach ($episode_list->sortBy('episode') as $epi)
                                            <a href="{{ url('xem-phim/'.$movie->slug.'/tap-'.$epi->episode.'/server-'.$epi->server) }}">
                                                <li class="halim-episode">
-                                                   <span class="halim-btn halim-btn-2 {{$tapphim==$epi->episode && $server_active=='server-'.$ser->id ? 'active' : ''}} halim-info-1-1 box-shadow"
+                                                   <span style="padding: 10px 20px; font-size:14px" class="halim-btn halim-btn-2 {{$tapphim==$epi->episode && $server_active=='server-'.$ser->id ? 'active' : ''}} halim-info-1-1 box-shadow"
                                                          title="Xem phim {{$movie->title}} - Tập {{$epi->episode}} - {{$movie->name_eng}} - Vietsub + Thuyết Minh"
                                                          data-h1="{{$movie->title}} - tập {{$epi->episode}}">{{$epi->episode}}
                                                    </span>

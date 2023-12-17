@@ -119,8 +119,8 @@ class IndexController extends Controller
         $movie = Movie::with('category','genre','country','movie_genre')->where('slug',$slug)->where('status',1)->first();
         $episode_first = Episode::with('movie')->where('movie_id',$movie->id)->orderBy('episode','ASC')->take(1)->first();
         $related = Movie::withCount('category','genre','country','episode')->where('category_id',$movie->category->id)->orderby(DB::raw('RAND()'))->whereNotIn('slug',[$slug])->get();//phim liên quan 
-        //lấy 3 tập gần nhất
-        $episode = Episode::with('movie')->where('movie_id',$movie->id)->orderBy('episode','DESC')->take(5)->get();
+        //lấy 5 tập gần nhất
+        $episode = Episode::with('movie')->where('movie_id', $movie->id)->orderByRaw('CAST(episode AS SIGNED) DESC')->take(5)->get();
         //lấy tổng tập phim đã thêm
         $episode_current_list = Episode::with('movie')->where('movie_id',$movie->id)->get();
         $episode_current_list_count = $episode_current_list->count();

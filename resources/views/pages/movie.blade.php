@@ -158,38 +158,23 @@
                               displayActor($movie->actor);
                               ?>
                      
-                           </li>
+                           </li>   
                            <li class="list-info-group-item"><span>Tập phim mới nhất</span> :
-                           @if($episode_current_list_count > 0)
-                              @if($movie->belongmovie == 'phimbo')
-                                 <?php
-                                 $latest_episodes = \App\Models\Episode::where('movie_id', $movie->id)
-                                       ->orderBy('created_at', 'desc')
-                                       ->take(5)
-                                       ->get();
-                                 ?>
-                                 @foreach ($latest_episodes as $key => $ep)
-                                       <a href="{{url('xem-phim/'.$ep->movie->slug.'/tap-'.$ep->episode.'/server-'.$ep->server)}}" rel="tag">
-                                          Tập {{$ep->episode}}
-                                       </a>
-                                 @endforeach
-                              @elseif($movie->belongmovie == 'phimle')
-                                 <?php
-                                 $latest_episodes = \App\Models\Episode::where('movie_id', $movie->id)
-                                       ->orderBy('created_at', 'desc')
-                                       ->take(5)
-                                       ->get();
-                                 ?>
-                                 @foreach ($latest_episodes as $key => $ep_le)
-                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode.'/server-'.$ep_le->server)}}" rel="tag">
-                                          {{$ep_le->episode}} Tập
-                                       </a>
-                                 @endforeach
+                              @if($episode_current_list_count>0)
+                                 @if($movie->belongmovie=='phimbo')
+                                    @foreach ($episode as $key => $ep)
+                                       <a href="{{url('xem-phim/'.$ep->movie->slug.'/tap-'.$ep->episode.'/server-'.$ep->server)}}"
+                                          rel="tag">Tập {{$ep->episode}}</a>
+                                    @endforeach
+                                 @elseif($movie->belongmovie=='phimle')
+                                    @foreach ($episode as $key => $ep_le)
+                                       <a href="{{url('xem-phim/'.$movie->slug.'/tap-'.$ep_le->episode.'/server-'.$ep_le->server)}}" rel="tag">{{$ep_le->episode}} Tập</a>
+                                    @endforeach
+                                 @endif
+                              @else
+                                 Đang cập nhật
                               @endif
-                           @else
-                              Đang cập nhật
-                           @endif
-                           
+                           </li>
                         </ul>
                            <!--đánh giá-->
                         </div>

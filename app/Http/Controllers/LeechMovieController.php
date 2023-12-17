@@ -15,7 +15,7 @@ use Carbon\Carbon;
 class LeechMovieController extends Controller
 {
     public function leech_movie(){
-        $resp = Http::get("https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=1")->json();
+        $resp = Http::get("https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=15")->json();
         return view('admin/leech.index', compact('resp'));
     }
 
@@ -46,7 +46,7 @@ class LeechMovieController extends Controller
                     $ep->server = $linkmovie->id;
                 }
                 else{
-                    $linkmovie = LinkMovie::orderBy('id','DESC')->first();
+                    $linkmovie = LinkMovie::orderBy('id','ASC')->first();
                     $ep->server = $linkmovie->id;
                 }
                 $ep->created_at = Carbon::now('Asia/Ho_Chi_Minh');

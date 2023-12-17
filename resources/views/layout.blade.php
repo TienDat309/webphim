@@ -169,8 +169,8 @@
                 </div>
                 <div class="widget about col-xs-12 col-sm-4 col-md-8 mx-auto">
                     <div class="footer-logo" style="padding-top:5px;">
-                        MotPhimTV - Xem phim hay miễn phí chất lượng cao với phụ đề tiếng việt - thuyết minh!</br>
-                        MotPhimTV có nhiều thể loại phim phong phú, đặc sắc, nhiều bộ phim hay nhất - mới nhất!
+                        motphim AZ - Xem phim hay miễn phí chất lượng cao với phụ đề tiếng việt - thuyết minh!</br>
+                        motphim AZ có nhiều thể loại phim phong phú, đặc sắc, nhiều bộ phim hay nhất - mới nhất!
                     </div>
                 </div>
             </div>
