@@ -27,7 +27,7 @@
                 <th scope="col">Lượt xem</th>
                 <th scope="col">Diễn viên</th>
                 <th scope="col">Đạo diễn</th>
-                <th scope="col">Danh mục</th>
+                <th scope="col">Thể loại</th>
                 <th scope="col">Quốc gia</th>
                 {{-- <th scope="col">chieurap</th> --}}
                 {{-- <th scope="col">sub_docquyen</th> --}}

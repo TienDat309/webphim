@@ -67,8 +67,8 @@
                     @foreach ($category_home as $key => $cate_home)
                         <p class="title_movie" style="margin-bottom: 5px ">{{$cate_home->title}}</p>
                         <div class="row movie_position sortable_movie">
-                            @foreach ($cate_home->movie->sortBy('position')->take(12) as $key => $mov)
-                                <div class="col-lg-1 col-md-2 col-sm-4 col-xs-6 box_phim" id="{{$mov->id}}">
+                            @foreach ($cate_home->movie->sortBy('position')->take(22) as $key => $mov)
+                                <div style="width:97px ;margin-right:4px; margin-bottom:5px" class="col-lg-1 col-md-2 col-sm-4 col-xs-6 box_phim" id="{{$mov->id}}">
                                     <figure><img class="img-responsive" width="100%" style="height:135px; margin-bottom:3px; text-align:center" src="{{strpos($mov->image, 'https') !== false ? $mov->image : asset('uploads/movie/' . $mov->image)}}" title="{{$mov->title}}" title="{{$mov->title}}"></figure>
                                     <p class="entry-title">{{$mov->title}}</p>
                                 </div>

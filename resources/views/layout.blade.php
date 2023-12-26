@@ -77,7 +77,25 @@
                             </div>
                         </div>
                     </div>
-                
+                    {{-- <div class="mega dropdown" style="float:right">
+                        <div title="Tài khoản" href="#" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true">Đăng nhập
+                            @if(Auth::check())
+                                Tài khoản : {{ Auth::user()->name }}
+                            @else
+                                Đăng nhập
+                            @endif
+                            <span class="caret"></span>
+                        </div>
+                        <ul role="menu" class="dropdown-menu" style="width:175px">
+                            @if(!Auth::check())
+                                <li><a title="đăng nhập bằng google" href="{{ route('login-by-google') }}">Đăng nhập google</a></li>
+                                <li><a title="đăng nhập bằng facebook" href="">Đăng nhập facebook</a></li>
+                            @else
+                                <li><a title="Đăng xuất" href="">Đăng xuất</a></li>
+                            @endif
+                        </ul>
+                    </div> --}}
+                </div>
             </div>
         </div>
     </header>
@@ -131,12 +149,7 @@
                             </li>
                             @foreach ($category_home as $key => $cate)
                                 <li class="mega"><a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a></li>
-                            @endforeach
-                            
-                        </ul>
-                    </div>
-
-                    
+                            @endforeach                    
                 </div>
             </nav>
             <div class="collapse navbar-collapse" id="search-form">
@@ -185,7 +198,7 @@
     <script type='text/javascript' src='{{asset('js/owl.carousel.min.js?ver=5.7.2')}}' id='carousel-js'></script>
 
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="3eZymJOS"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0" nonce="CYnna5Ry"></script>
     
     <script type='text/javascript' src='{{asset('js/halimtheme-core.min.js?ver=1626273138')}}' id='halim-init-js'></script>
 

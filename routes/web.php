@@ -11,6 +11,8 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\LinkMovieController;
 use App\Http\Controllers\LeechMovieController;
+use App\Http\Controllers\LoginGoogleController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,3 +79,8 @@ Route::get('leech-detail/{slug}', [LeechMovieController::class, 'leech_detail'])
 Route::get('leech-episode/{slug}', [LeechMovieController::class, 'leech_episode'])->name('leech-episode');
 Route::post('leech-store/{slug}', [LeechMovieController::class, 'leech_store'])->name('leech-store');
 Route::post('leech-episode-store/{slug}', [LeechMovieController::class, 'leech_episode_store'])->name('leech-episode-store');
+
+
+//đăng nhập
+Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('login-by-google');
+Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);

@@ -200,14 +200,6 @@
                            </ul>
                         
                            <div class="total_rating" style="float:left; padding-top:7px; padding-left:15px; font-weight:700; font-size:14px;"> ({{$rating}} / {{$count_total}} lượt)</div>
-                           <span class="movie-trailer">
-                              @php
-                                 $current_url = Request::url();
-                              @endphp
-                              <div style="float:right; width:140px; padding-top: 7px">
-                                 <div class="fb-like" data-href="{{$current_url}}"  data-share="true"></div>
-                              </div>
-                           </span>
                        </div>
                   </div>
                </div>

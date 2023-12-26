@@ -132,7 +132,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         id="cbp-spmenu-s1"
       >
         <!--left-fixed -navigation-->
-        <aside class="sidebar-left">
+        <aside class="sidebar-left" style="background-image: url('https://images2.thanhnien.vn/528068263637045248/2023/6/6/milky-4-1686042792532312477730.jpg')">
           <nav class="navbar navbar-inverse">
             <div class="navbar-header">
               <button
@@ -149,7 +149,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               </button>
               <h1>
                 <a class="navbar-brand" href="{{url('/home')}}">
-                    <img src="/imgs/motphimAZ_logo.png" style="width:165px; height:50px;" alt="MotphimAZ">
+                    <img src="/imgs/motphimAZ_logo.png" style="width:165px; height:60px;" alt="MotphimAZ">
                 </a>
             </h1>
             </div>
@@ -158,8 +158,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               id="bs-example-navbar-collapse-1"
             >
               <ul class="sidebar-menu">
-                <li class="header" style="text-align: center; font-size:13px">Quản lý Xem Phim</li>
-                <li class="treeview">
+                {{-- <li class="header" style="text-align: center; font-size:13px"></li> --}}
+                <li class="treeview" style="margin-top:20px">
                   <a href="{{url('/home')}}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                   </a>
@@ -234,8 +234,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <ul class="treeview-menu">
                       <li>
                         <a href="{{route('movie.create')}}"
-                          ><i class="fa fa-angle-right"></i>Thêm phim</a
-                        >
+                          ><i class="fa fa-angle-right"></i>Thêm phim</a>
                       </li>
                       <li>
                         <a href="{{route('movie.index')}}"

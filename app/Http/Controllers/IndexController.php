@@ -169,7 +169,7 @@ class IndexController extends Controller
         }
         $server = LinkMovie::orderBy('id','DESC')->get();
         $episode_movie = Episode::where('movie_id',$movie->id)->get()->unique('server');
-        $episode_list = Episode::where('movie_id', $movie->id)->orderBy('episode', 'ASC')->get();
+        $episode_list = Episode::where('movie_id', $movie->id)->orderByRaw('CAST(episode AS SIGNED) ASC')->get();
         
         return view('pages.watch', compact('movie','episode','tapphim','related','server','episode_movie','episode_list','server_active'));
     }

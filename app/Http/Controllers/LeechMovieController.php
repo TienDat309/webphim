@@ -15,7 +15,7 @@ use Carbon\Carbon;
 class LeechMovieController extends Controller
 {
     public function leech_movie(){
-        $resp = Http::get("https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=15")->json();
+        $resp = Http::get("https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=23")->json();
         return view('admin/leech.index', compact('resp'));
     }
 
@@ -65,7 +65,7 @@ class LeechMovieController extends Controller
             $movie->title = $res['name'];
             $movie->trailer = $res['trailer_url'];
             $movie->episode_movie = $res['episode_total'];
-            $movie->tags = $res['name'].', '.$res['slug'];
+            $movie->tags = $res['name'].', '.$res['slug'].', '.$res['origin_name'];
             $movie->time_movie = $res['time'];
             $movie->resolution = 0;
             $movie->subtitle = 0;
