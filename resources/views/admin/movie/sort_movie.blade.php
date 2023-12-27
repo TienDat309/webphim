@@ -30,7 +30,19 @@
                             text-transform: uppercase;
                         }
                         #sortable_nav li{
+                            width:158px;
                             margin: 0 37px;
+                            justify-content: center;
+                            text-align: center;
+                            align-items: center;
+                            margin-bottom:5px;
+                        }
+                        @media only screen and (max-width:600px)
+                        {
+                        #sortable_nav li
+                            {
+                                width:auto;
+                            }
                         }
                         .box_phim{
                             height: 190px;
@@ -53,19 +65,18 @@
                                 <span class="icon-bar"></span>
                             </button>
                         </div>
-                
+                        
                         <div class="collapse navbar-collapse" id="navbar-collapse">
                             <ul class="nav navbar-nav category_position" id="sortable_nav">
                                 @foreach ($category->sortBy('position') as $key => $cate)
-                                    <li id="{{$cate->id}}" class="ui-state-default" style="background-color:#ffb22b">
+                                    <li id="{{$cate->id}}" class="ui-state-default" style="background-color:#ffb22b;">
                                         <a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
                     </nav>
-                    </div>
-
+                </div>
                     @foreach ($category_home as $key => $cate_home)
                         <p class="title_movie" style="margin-bottom: 5px ">{{$cate_home->title}}</p>
                         <div class="row movie_position sortable_movie">

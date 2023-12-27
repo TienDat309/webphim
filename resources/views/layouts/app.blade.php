@@ -149,7 +149,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <span class="icon-bar"></span>
               </button>
               <h1>
-                <a class="navbar-brand" href="{{url('/home')}}">
+                <a class="navbar-brand" href="{{route('sort_movie')}}" href="{{url('/home')}}">
                     <img src="/imgs/motphimAZ_logo.png" style="width:153px; height:45px" alt="MotphimAZ">
                 </a>
             </h1>
@@ -159,11 +159,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               id="bs-example-navbar-collapse-1"
             >
               <ul class="sidebar-menu">
-                {{-- <li class="header" style="text-align: center; font-size:13px"></li> --}}
                 <li class="treeview" style="margin-top:20px">
-                  <a href="{{url('/home')}}">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                  </a>
+                    <li>
+                      <a href="{{route('sort_movie')}}" href="{{url('/home')}}">
+                        <i class="fa fa-dashboard"></i>Dashboard</a>
+                    </li>
                 </li>
                 @php
                     $segment = Request::segment(1);
@@ -245,10 +245,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <a href="{{route('leech-movie')}}"
                           ><i class="fa fa-angle-right"></i>Leech phim</a>
                       </li>
-                      <li>
-                        <a href="{{route('sort_movie')}}"
-                          ><i class="fa fa-angle-right"></i>Sắp xếp phim</a>
-                      </li>
                     </ul>
                 </li>
                 <li class="treeview {{($segment == 'linkmovie') ? 'active' : ''}}">
@@ -277,7 +273,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <div class="header-left">
           <!--toggle button start-->
-          <button id="showLeftPush" class=""><i class="fa fa-bars"></i></button>
+          <button id="showLeftPush" style="margin-left:20px;"><i class="fa fa-bars"></i></button>
           <!--toggle button end-->
           <div class="profile_details_left">
             <!--notifications of menu start -->
@@ -289,30 +285,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           <div class="clearfix"></div>
         </div>
         <div class="header-right">
-          
-          <!--search-box-->
-          <div class="search-box">
-            <form class="input">
-              <input
-                class="sb-search-input input__field--madoka"
-                placeholder="Search..."
-                type="search"
-                id="input-31"
-              />
-              <label class="input__label" for="input-31">
-                <svg
-                  class="graphic"
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 404 77"
-                  preserveAspectRatio="none"
-                >
-                  <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
-                </svg>
-              </label>
-            </form>
-          </div>
-          <!--//end-search-box-->
           <div class="profile_details">
             <ul>
               <li class="dropdown profile_details_drop">
@@ -322,25 +294,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                   data-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <div class="profile_img">
-                    <span class="prfil-img"
-                      ><img src="images/2.jpg" alt="" />
-                    </span>
-                    <div class="user-name">
-                      <p>Admin</p>
+                <div class="profile_img">
+                  <span class="prfil-img">
+                      <img style=" width: 50px; height: 46px; margin-top: 4px; border-radius: 50%; overflow: hidden;" src="/imgs/avatar.jpg" alt="Default Avatar" />
+                  </span>
+                  <div class="user-name">
+                      <p>{{ Auth::user()->name }}</p>
                       <span>Administrator</span>
-                    </div>
-                    <i class="fa fa-angle-down lnr"></i>
-                    <i class="fa fa-angle-up lnr"></i>
-                    <div class="clearfix"></div>
                   </div>
+                  <i class="fa fa-angle-down lnr"></i>
+                  <i class="fa fa-angle-up lnr"></i>
+                  <div class="clearfix"></div>
+              </div>
                 </a>
-                <ul class="dropdown-menu drp-mnu">
+                <ul class="dropdown-menu drp-mnu" style="text-align:center;padding: 0em; min-width: 112px; top: 122%; left: 0%; margin-left: 61px;">
                   <li>
-                    <a href="#"><i class="fa fa-suitcase"></i> Profile</a>
-                  </li> --}}
-                  <li>
-                    {{-- <a href="#"><i class="fa fa-sign-out"></i> Logout</a> --}}
                     <form action="{{route('logout')}}" method="POST">
                       @csrf
                       <i class="fa fa-sign-out"></i><input type="submit" class="btn btn-info btn-sm" value=" Logout"/>
@@ -408,7 +376,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="clearfix"></div>
           </div>
           <div class="row-one widgettable">
-            
             <div class="clearfix"></div>
           </div>
           
