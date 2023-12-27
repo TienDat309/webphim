@@ -42,32 +42,38 @@
 
             $prevEpisode = $prevEpisodeIndex >= 0 ? $episode_list[$prevEpisodeIndex] : null;
             $nextEpisode = $nextEpisodeIndex < count($episode_list) ? $episode_list[$nextEpisodeIndex] : null; @endphp
-               <div class="halim-episode" style="float:right; margin-bottom:5px; ">
+               <div class="halim-episode mx-auto mb-3 text-center res" style="float:right; margin-right:25.5%; margin-top:5px">
                   @if ($prevEpisode)
-                  <a href="{{ url('xem-phim/'.$movie->slug.'/tap-'.$prevEpisode->episode.'/server-'.$prevEpisode->server) }}"
-                     class="box-shadow custom-link">Tập trước</a>
+                     <a href="{{ url('xem-phim/'.$movie->slug.'/tap-'.$prevEpisode->episode.'/server-'.$prevEpisode->server) }}" class="box-shadow custom-link mr-3">Tập trước</a>
                   @endif
-
+               
                   @if ($nextEpisode)
-                  <a href="{{ url('xem-phim/'.$movie->slug.'/tap-'.$nextEpisode->episode.'/server-'.$nextEpisode->server) }}"
-                     class="custom-link box-shadow">Tập tiếp theo</a>
+                     <a href="{{ url('xem-phim/'.$movie->slug.'/tap-'.$nextEpisode->episode.'/server-'.$nextEpisode->server) }}" class="custom-link box-shadow mr-3">Tập tiếp theo</a>
                   @endif
-
-                  <span id="viewCountButton"
-                     style="background-color:#171f27; color:#fff;padding:2px 16px 2px 5px;">
+               
+                  <span id="viewCountButton" class="d-inline-block mr-3" style="background-color: #171f27; color: #fff; padding: 2px 16px 2px 5px;">
                      <img src="/imgs/eye.svg" style="filter: invert(1);">
-                     <span id="randomViewCount"></span>
+                     <span class="viewsCount" style="color: #9d9d9d;">
+                        @if($movie->count_views > 0)
+                           {{$movie->count_views}}
+                        @else
+                           @php
+                              echo rand(1,7000);
+                           @endphp
+                        @endif
+                     </span>
                   </span>
-
-                  <!--Chia sẻ fb-->
+               
+                  <!-- Chia sẻ fb -->
                   <button class="custom-s" onclick="shareMovieOnFacebook()">Chia sẻ</button>
                </div>
+               
          @endif
          @endforeach
          @endforeach
          <div class="clearfix"></div>
          <div class="clearfix"></div>
-         <div class="title-block">
+         <div class="title-block" style="margin-top:8px">
             <div class="title-wrapper-xem full">
                <h4 class="entry-title"><a href="#" title="{{$movie->title}}" class="tl">{{$movie->title}}</a></h4>
             </div>
@@ -263,26 +269,6 @@
                    window.open(facebookShareUrl, 'Chia sẻ phim', 'width=600,height=400');
                }
            </script>
-
-            <script>
-               function generateRandomViewCount() {
-                   return Math.floor(Math.random() * 10000) + 1;
-               }
-           
-               var viewCountButton = document.getElementById('viewCountButton');
-               var randomViewCountSpan = document.getElementById('randomViewCount');
-           
-               // Tạo số lượt xem ngẫu nhiên khi trang được tải
-               var initialRandomViewCount = generateRandomViewCount();
-               randomViewCountSpan.textContent = initialRandomViewCount;
-           
-               // Gán sự kiện onclick cho button
-               viewCountButton.onclick = function () {
-                   // Tạo số lượt xem ngẫu nhiên và cập nhật nội dung
-                   var randomViewCount = generateRandomViewCount();
-                   randomViewCountSpan.textContent = randomViewCount;
-               };
-            </script>
 
             <script>
                $(document).ready(function($) {				

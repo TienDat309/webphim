@@ -131,6 +131,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
         id="cbp-spmenu-s1"
       >
+      
         <!--left-fixed -navigation-->
         <aside class="sidebar-left" style="background-image: url('https://images2.thanhnien.vn/528068263637045248/2023/6/6/milky-4-1686042792532312477730.jpg')">
           <nav class="navbar navbar-inverse">
@@ -149,7 +150,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               </button>
               <h1>
                 <a class="navbar-brand" href="{{url('/home')}}">
-                    <img src="/imgs/motphimAZ_logo.png" style="width:165px; height:60px;" alt="MotphimAZ">
+                    <img src="/imgs/motphimAZ_logo.png" style="width:153px; height:45px" alt="MotphimAZ">
                 </a>
             </h1>
             </div>
@@ -274,8 +275,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           <!--notification menu end -->
           {{-- <div class="clearfix"></div> --}}
         </div>
+        <div class="header-left">
+          <!--toggle button start-->
+          <button id="showLeftPush" class=""><i class="fa fa-bars"></i></button>
+          <!--toggle button end-->
+          <div class="profile_details_left">
+            <!--notifications of menu start -->
+            <ul class="nofitications-dropdown">
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <!--notification menu end -->
+          <div class="clearfix"></div>
+        </div>
         <div class="header-right">
-          {{-- <!--search-box-->
+          
+          <!--search-box-->
           <div class="search-box">
             <form class="input">
               <input
@@ -296,7 +311,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </svg>
               </label>
             </form>
-          </div> --}}
+          </div>
           <!--//end-search-box-->
           <div class="profile_details">
             <ul>
@@ -322,14 +337,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </a>
                 <ul class="dropdown-menu drp-mnu">
                   <li>
-                    <a href="#"><i class="fa fa-cog"></i> Settings</a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-user"></i> My Account</a>
-                  </li>
-                  <li>
                     <a href="#"><i class="fa fa-suitcase"></i> Profile</a>
-                  </li>
+                  </li> --}}
                   <li>
                     {{-- <a href="#"><i class="fa fa-sign-out"></i> Logout</a> --}}
                     <form action="{{route('logout')}}" method="POST">
@@ -341,6 +350,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               </li>
             </ul>
           </div>
+          
           <div class="clearfix"></div>
 
         </div>

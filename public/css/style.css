@@ -2669,6 +2669,8 @@ tr.title {
     color:#fff;
     border-radius: 3px;
     border-color: #3366FF;
+    float: right;
+    margin-top:-3px;
 }
 .custom-l{
     background-color: #1f2c3e;
@@ -2680,7 +2682,7 @@ tr.title {
     background-color: #1f2c3e;
     color:#fff;
     padding:6px 8px 6px 8px;
-    margin-right:10px;
+    margin-right:5px;
     border-radius:3px;
 }
 .custom-link:hover{

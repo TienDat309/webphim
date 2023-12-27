@@ -116,18 +116,18 @@
 
                            <li class="list-info-group-item"><span>Thể loại</span> :
                               @foreach ($movie->movie_genre as $gen)
-                              <a href="{{route('genre',[$gen->slug])}}" rel="category tag">{{$gen->title}}</a>
+                              <a href="{{route('genre',[$gen->slug])}}" rel="category tag" style="border-radius: 10px; padding: 2px 11px;background-color:#224361; color:#ffffff">{{$gen->title}}</a>
                               @endforeach
                            </li>
 
                            <li class="list-info-group-item"><span>Danh mục</span> :
                               <a href="{{route('category',[$movie->category->slug])}}" 
-                                 rel="category tag">{{$movie->category->title}}</a>
+                                 rel="category tag" style="border-radius: 10px; padding: 2px 11px;background-color:#224361; color:#ffffff">{{$movie->category->title}}</a>
                            </li>
                               
                            <li class="list-info-group-item"><span>Quốc gia</span> :
                               <a href="{{route('country',$movie->country->slug)}}"
-                                 rel="tag">{{$movie->country->title}}</a>
+                                 rel="tag" style="border-radius: 10px; padding: 2px 11px;background-color:#224361; color:#ffffff">{{$movie->country->title}}</a>
                            </li>
 
                            <li class="list-info-group-item"><span>Năm phim</span> :
