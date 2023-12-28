@@ -10,12 +10,12 @@ use App\Models\Genre;
 use App\Models\Episode;
 use App\Models\LinkMovie;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Session;
 
 class LeechMovieController extends Controller
 {
     public function leech_movie(){
-        $resp = Http::get("https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=23")->json();
+        $resp = Http::get("https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=26")->json();
         return view('admin/leech.index', compact('resp'));
     }
 
@@ -54,7 +54,8 @@ class LeechMovieController extends Controller
                 $ep->save();
             }
         }
-        return redirect()->back();
+        toastr()->success('Thêm tập phim thành công.');
+        return redirect()->route('leech-movie');
     }
 
     public function leech_store(Request $request, $slug){
@@ -95,6 +96,8 @@ class LeechMovieController extends Controller
             $movie->save();
             $movie->movie_genre()->attach($genre);
         }
+        toastr()->success('Thêm phim thành công.');
+
         return redirect()->back();
     }
 

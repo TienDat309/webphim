@@ -40,7 +40,7 @@
                     <input type="submit" value="Thêm tập phim" class="btn btn-success btn-sm">
                 </form>
             </td>
-           
+            
         </tr>
         @endforeach
     </tbody>
